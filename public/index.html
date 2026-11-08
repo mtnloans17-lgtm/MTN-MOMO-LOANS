@@ -3,143 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTN MoMo Layout - Part 1</title>
-    <style>
-        :root {
-            --mtn-yellow: #FFCC00;
-            --mtn-blue: #004F71;
-            --bg-dark: #00334e;
-            --text-dark: #333333;
-            --gray-light: #f4f7f9;
-            --border-color: #d1dbe5;
-        }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-        body { background-color: #0c0c0c; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 10px; }
-        .phone-container { width: 100%; max-width: 410px; background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--bg-dark) 100%); border-radius: 30px; overflow: hidden; display: flex; flex-direction: column; position: relative; }
-        .demo-banner { background-color: var(--mtn-yellow); color: #000; font-weight: bold; font-size: 11px; text-align: center; padding: 6px 4px; }
-        .header-brand { display: flex; justify-content: center; align-items: center; padding: 20px 10px 10px; color: white; }
-        .logo-box { background-color: var(--mtn-yellow); color: #000; font-weight: 900; padding: 5px 12px; border-radius: 20px; }
-        .brand-divider { width: 1px; height: 25px; background-color: rgba(255,255,255,0.4); margin: 0 15px; }
-        .momo-box { font-size: 16px; font-weight: bold; }
-        .momo-sub { font-size: 10px; display: block; font-weight: normal; opacity: 0.8; }
-        .page-title { color: white; text-align: center; font-size: 26px; font-weight: bold; }
-        .page-subtitle { color: rgba(255, 255, 255, 0.9); text-align: center; font-size: 13px; margin-bottom: 20px; }
-        .step-tracker { display: flex; justify-content: space-between; padding: 0 25px; margin-bottom: 20px; position: relative; }
-        .step-tracker::before { content: ''; position: absolute; top: 12px; left: 40px; right: 40px; height: 2px; background-color: rgba(255,255,255,0.3); z-index: 1; }
-        .step-node { display: flex; flex-direction: column; align-items: center; z-index: 2; width: 50px; }
-        .circle { width: 26px; height: 26px; border-radius: 50%; background-color: #666; color: white; display: flex; justify-content: center; align-items: center; font-size: 11px; font-weight: bold; }
-        .step-label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 5px; text-align: center; }
-        .step-node.active .circle { background-color: var(--mtn-yellow); color: #000; }
-        .step-node.active .step-label { color: var(--mtn-yellow); font-weight: bold; }
-        .step-node.completed .circle { background-color: var(--mtn-yellow); color: #000; }
-        .step-node.completed .circle::before { content: '✓'; }
-        .content-card { background-color: white; border-radius: 24px; margin: 0 12px 20px; padding: 24px 20px; min-height: 340px; color: var(--text-dark); }
-        .step-view { display: none; }
-        .step-view.active-view { display: block; }
-        .form-group { margin-bottom: 18px; }
-        .form-label { display: flex; align-items: center; font-weight: bold; font-size: 14px; color: var(--mtn-blue); margin-bottom: 8px; }
-        .form-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border-color); border-radius: 12px; font-size: 14px; }
-        .summary-header-block { display: flex; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 12px; margin-bottom: 15px; }
-        .summary-title { font-size: 18px; font-weight: bold; color: var(--mtn-blue); margin-left: 10px; }
-        .summary-subtitle { font-size: 12px; color: #666; }
-        .summary-row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; border-bottom: 1px dashed #f0f0f0; }
-        .summary-value { font-weight: bold; color: var(--mtn-blue); }
-        .info-box { background-color: #eaf3f8; border-radius: 12px; padding: 12px; font-size: 12px; color: var(--mtn-blue); margin-top: 15px; display: flex; }
-        .success-wrapper { text-align: center; padding: 20px 10px; }
-        .success-icon-circle { width: 80px; height: 80px; background-color: #2ecc71; color: white; border-radius: 50%; display: inline-flex; justify-content: center; align-items: center; font-size: 40px; margin-bottom: 20px; }
-        .success-headline { font-size: 22px; color: var(--mtn-blue); font-weight: bold; }
-        .btn-yellow { width: 100%; background-color: var(--mtn-yellow); color: #000; border: none; padding: 14px; font-weight: bold; border-radius: 25px; cursor: pointer; margin-top: 10px; }
-        .btn-outline { width: 100%; background-color: transparent; color: var(--mtn-blue); border: 2px solid var(--mtn-blue); padding: 12px; font-weight: bold; border-radius: 25px; cursor: pointer; margin-top: 10px; }
-        .secure-footer { display: flex; justify-content: center; align-items: center; color: white; font-size: 11px; padding-bottom: 25px; opacity: 0.9; }
-    </style>
+    <title>MTN MoMo Loan Application Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
-<div class="phone-container">
-    <div class="demo-banner">DEMO SAMPLE — NOT AN OFFICIAL MTN PAGE</div>
-    <div class="header-brand"><div class="logo-box">MTN</div><div class="brand-divider"></div><div class="momo-box">MoMo <span class="momo-sub">from MTN</span></div></div>
-    <div class="page-title" id="flowTitle">Loan Application</div>
-    <div class="page-subtitle" id="flowSubtitle">Explore sample layout state flows</div>
 
-    <div class="step-tracker">
-        <div class="step-node active" id="node1"><div class="circle">1</div><div class="step-label">1. Details</div></div>
-        <div class="step-node" id="node2"><div class="circle">2</div><div class="step-label">2. Verify</div></div>
-        <div class="step-node" id="node3"><div class="circle">3</div><div class="step-label">3. Confirm</div></div>
-        <div class="step-node" id="node4"><div class="circle">4</div><div class="step-label">4. Success</div></div>
-    </div>
+    <!-- SCREEN 1: WELCOME / LANDING PAGE -->
+    <section class="screen-container" id="screen-welcome">
+        <header class="app-header">
+            <div class="momo-brand">
+                <span class="momo-logo">Δ</span>
+                <div>
+                    <strong>MTN MoMo</strong>
+                    <small>from MTN</small>
+                </div>
+            </div>
+            <div class="demo-badge">DEMO – NOT AN OFFICIAL MTN PAGE</div>
+        </header>
 
-    <div class="content-card">
-        <!-- View Step 1 -->
-        <div class="step-view active-view" id="view1">
-            <div class="form-group"><label class="form-label">👤 Full Name</label><input type="text" class="form-input" id="fullName" value="John Doe"></div>
-            <div class="form-group"><label class="form-label">📱 MTN Number</label><input type="text" class="form-input" id="mobileNumber" value="0712345678"></div>
-            <div class="form-group"><label class="form-label">💰 Loan Amount (UGX)</label><select class="form-input" id="loanAmount"><option value="UGX 500,000">UGX 500,000</option></select></div>
-            <div class="form-group"><label class="form-label">📅 Repayment Period</label><select class="form-input" id="repaymentPeriod"><option value="6 Months">6 Months</option></select></div>
-            <button class="btn-yellow" onclick="goToStep(2)">Continue</button>
+        <main class="hero-section">
+            <!-- Visual Representative Image & Core Messaging Stack -->
+            <div class="hero-wrapper">
+                <div class="hero-image-container">
+                    <img src="https://unsplash.com" alt="MTN Representative" class="hero-model-img">
+                    <div class="brand-badge-overlay">
+                        <span class="badge-icon">Δ</span> MoMo
+                    </div>
+                </div>
+                
+                <div class="hero-content">
+                    <div class="mtn-logo-circle">MTN</div>
+                    <h1>Welcome to <br><span class="highlight-yellow">MTN MoMo Loan Application</span></h1>
+                    <p>Get loans easily, quickly and securely through MTN MoMo.</p>
+                </div>
+            </div>
+            
+            <!-- Features Row -->
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fas fa-bolt"></i></div>
+                    <p>Fast Approval</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fas fa-check-circle"></i></div>
+                    <p>Secure & Reliable</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fas fa-mobile-alt"></i></div>
+                    <p>Apply Anywhere</p>
+                </div>
+                <div class="feature-item">
+                    <div class="icon-circle"><i class="fas fa-handshake"></i></div>
+                    <p>Flexible Repayment</p>
+                </div>
+            </div>
+
+            <button class="btn-primary" onclick="showScreen('screen-form')">Apply Now <i class="fas fa-chevron-right"></i></button>
+        </main>
+
+        <section class="card highlights-card">
+            <h3><i class="fas fa-money-bill-wave icon-yellow"></i> Loan Highlights</h3>
+            <div class="highlights-grid">
+                <div class="highlight-box">
+                    <i class="fas fa-coins text-yellow"></i>
+                    <small>Up to</small>
+                    <strong>UGX 5,000,000</strong>
+                </div>
+                <div class="highlight-box">
+                    <i class="fas fa-calendar-alt text-yellow"></i>
+                    <small>Repayment Period</small>
+                    <strong>4 - 60 Months</strong>
+                </div>
+                <div class="highlight-box">
+                    <i class="fas fa-bolt text-yellow"></i>
+                    <small>Quick Disbursement</small>
+                    <strong>to Your MTN Account</strong>
+                </div>
+                <div class="highlight-box">
+                    <i class="fas fa-shield-alt text-yellow"></i>
+                    <small>Powered by</small>
+                    <strong>MTN MoMo</strong>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p><i class="fas fa-shield-check"></i> Your financial goals are within reach with <span class="highlight-yellow">MTN MoMo Loans!</span></p>
+        </footer>
+    </section>
+    <!-- SCREEN 2: APPLICATION FORM -->
+    <section class="screen-container hidden" id="screen-form">
+        <header class="app-header header-centered">
+            <div class="demo-badge">DEMO SAMPLE – NOT AN OFFICIAL MTN PAGE</div>
+            <div class="header-logo-row">
+                <div class="mtn-logo-circle inline-logo">MTN</div>
+                <div class="divider">|</div>
+                <div class="momo-text-brand"><strong>MoMo</strong><br><small>from MTN</small></div>
+            </div>
+            <h2>Loan Application</h2>
+            <p>Explore a sample loan application layout</p>
+        </header>
+
+        <main class="form-section">
+            <form id="loanForm">
+                <div class="card form-card">
+                    
+                    <div class="input-group">
+                        <label><i class="fas fa-user icon-blue"></i> Full Name</label>
+                        <input type="text" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fas fa-mobile-alt icon-blue"></i> MTN Number</label>
+                        <input type="tel" placeholder="07XXXXXXXX" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount (UGX)</label>
+                        <select required>
+                            <option value="" disabled selected>Select amount</option>
+                            <option value="1000000">UGX 1,000,000</option>
+                            <option value="2000000">UGX 2,000,000</option>
+                            <option value="5000000">UGX 5,000,000</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period</label>
+                        <select required>
+                            <option value="" disabled selected>Select period</option>
+                            <option value="12">12 Months</option>
+                            <option value="24">24 Months</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-wide">Continue <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </form>
+        </main>
+
+        <footer class="security-banner">
+            <p><i class="fas fa-check-shield"></i> Your information is secure with MTN</p>
+        </footer>
+
+        <div class="support-footer">
+            <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+                <strong>WhatsApp Customer Support</strong>
+                <p>+256 700 123 456</p>
+            </div>
+            <div class="support-tag">Chat with us for assistance</div>
         </div>
+    </section>
 
-        <!-- View Step 2 -->
-        <div class="step-view" id="view2">
-            <div class="summary-header-block"><div><div class="summary-title">Loan Summary</div></div></div>
-            <div class="summary-row"><span>Loan Amount</span><span class="summary-value" id="summaryAmount2">UGX 500,000</span></div>
-            <div class="summary-row"><span>Repayment Period</span><span class="summary-value" id="summaryPeriod2">6 Months</span></div>
-            <div class="summary-row"><span>Interest Rate</span><span class="summary-value">10% per annum</span></div>
-            <button class="btn-yellow" onclick="goToStep(3)">Next ></button>
+
+    <!-- SCREEN 3: SUCCESS OVERLAY -->
+    <section class="screen-container hidden" id="screen-success">
+        <header class="app-header header-centered">
+            <div class="demo-badge">DEMO – NOT AN OFFICIAL MTN PAGE</div>
+            <div class="header-logo-row">
+                <div class="mtn-logo-circle inline-logo">MTN</div>
+                <div class="divider">|</div>
+                <div class="momo-text-brand"><strong>MoMo</strong><br><small>from MTN</small></div>
+            </div>
+        </header>
+
+        <main class="success-section">
+            <div class="success-animation">
+                <div class="checkmark-circle">
+                    <i class="fas fa-check"></i>
+                </div>
+                <div class="confetti">🎉</div>
+            </div>
+
+            <div class="success-badge">Loan Application Successful!</div>
+            <h3>Your MTN MoMo loan application has been submitted successfully.</h3>
+
+            <div class="card receipt-card">
+                <!-- Populated dynamically via server API response handled inside app.js -->
+            </div>
+
+            <div class="info-alert">
+                <i class="fas fa-info-circle"></i>
+                <p>You will receive the loan confirmation shortly via SMS from MTN.</p>
+            </div>
+
+            <button class="btn-primary btn-wide" onclick="showScreen('screen-welcome')">
+                <i class="fas fa-home"></i> LOG IN WITH MTN NUMBER <i class="fas fa-arrow-right"></i>
+            </button>
+        </main>
+
+        <footer class="security-banner">
+            <p><i class="fas fa-check-shield"></i> Your information is secure with MTN</p>
+        </footer>
+
+        <div class="support-footer">
+            <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+                <strong>Need Help?</strong>
+                <p>Chat with us on WhatsApp: +256 700 123 456</p>
+            </div>
+            <div class="support-tag">Your trust. Our priority.</div>
         </div>
+    </section>
 
-        <!-- View Step 3 -->
-        <div class="step-view" id="view3">
-            <div class="summary-header-block"><div><div class="summary-title">Confirm Details</div></div></div>
-            <div class="summary-row"><span>Full Name</span><span class="summary-value" id="finalName">John Doe</span></div>
-            <div class="summary-row"><span>Mobile Number</span><span class="summary-value" id="finalPhone">+256 712 345678</span></div>
-            <div class="summary-row"><span>Loan Amount</span><span class="summary-value" id="summaryAmount3">UGX 500,000</span></div>
-            <button class="btn-yellow" onclick="submitApplicationData()">✓ Confirm Loan</button>
-            <button class="btn-outline" onclick="goToStep(2)">← Back</button>
-        </div>
-
-        <!-- View Step 4 -->
-        <div class="step-view" id="view4">
-            <div class="success-wrapper"><div class="success-icon-circle">✓</div><div class="success-headline">Verification Successful!</div><button class="btn-yellow" onclick="goToStep(1)">Back to Home</button></div>
-        </div>
-    </div>
-    <div class="secure-footer">🛡️ Your information is secure with MTN</div>
-</div>
-
-<script>
-    function goToStep(stepNumber) {
-        document.getElementById('flowTitle').innerText = (stepNumber >= 2 && stepNumber <= 3) ? "Loan Verification" : "Loan Application";
-        document.querySelectorAll('.step-view').forEach(view => view.classList.remove('active-view'));
-        document.querySelectorAll('.step-node').forEach(node => node.classList.remove('active', 'completed'));
-        document.getElementById(`view${stepNumber}`).classList.add('active-view');
-        
-        if (stepNumber === 2 || stepNumber === 3) {
-            const amt = document.getElementById('loanAmount').value;
-            const prd = document.getElementById('repaymentPeriod').value;
-            document.getElementById('summaryAmount2').innerText = amt; document.getElementById('summaryPeriod2').innerText = prd;
-            document.getElementById('summaryAmount3').innerText = amt; document.getElementById('finalName').innerText = document.getElementById('fullName').value;
-            document.getElementById('finalPhone').innerText = "+256 " + document.getElementById('mobileNumber').value;
-        }
-        for(let i = 1; i <= 4; i++) {
-            const node = document.getElementById(`node${i}`);
-            if (i < stepNumber) node.classList.add('completed');
-            else if (i === stepNumber) node.classList.add('active');
-        }
-    }
-
-    function submitApplicationData() {
-        const payload = {
-            fullName: document.getElementById('fullName').value,
-            mobileNumber: document.getElementById('mobileNumber').value,
-            loanAmount: document.getElementById('loanAmount').value,
-            repaymentPeriod: document.getElementById('repaymentPeriod').value,
-            submissionTimestamp: new Date().toISOString()
-        };
-        fetch('http://localhost:5000/submit-loan', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        }).then(() => goToStep(4)).catch(() => goToStep(4));
-    }
-</script>
+    <!-- External Script Integration Link -->
+    <script src="app.js"></script>
 </body>
 </html>
+/**
+ * Screen State Transition Manager
+ * Handles showing and hiding the single-page view panels
+ * @param {string} screenId - The ID of the HTML element container to show
+ */
+function showScreen(screenId) {
+    document.querySelectorAll('.screen-container').forEach(screen => {
+        screen.classList.add('hidden');
+    });
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.remove('hidden');
+    }
+    window.scrollTo(0, 0);
+}
+
+/**
+ * Form Submit Interceptor & API Event Handler
+ * Binds to the loan layout configuration form element
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    const loanForm = document.getElementById('loanForm');
+    
+    if (loanForm) {
+        loanForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            // Extract core actionable DOM items
+            const submitButton = this.querySelector('button[type="submit"]');
+            const fullNameInput = this.querySelector('input[placeholder="Enter your full name"]');
+            const phoneInput = this.querySelector('input[placeholder="07XXXXXXXX"]');
+            const amountSelect = this.querySelector('select:nth-of-type(1)');
+            const periodSelect = this.querySelector('select:nth-of-type(2)');
+
+            // Validate form field nodes exist before parsing metrics
+            if (!fullNameInput || !phoneInput || !amountSelect || !periodSelect) {
+                alert('Structural Error: Form input components could not be evaluated.');
+                return;
+            }
+
+            // Map data structure variables
+            const payload = {
+                fullName: fullNameInput.value,
+                phoneNumber: phoneInput.value,
+                amount: parseFloat(amountSelect.value),
+                periodMonths: parseInt(periodSelect.value)
+            };
+
+            try {
+                // UI Visual State Optimization - Disable double tap submittals
+                if (submitButton) {
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                }
+
+                // Dispatches asynchronous telemetry out to the Node Express server engine
+                const response = await fetch('http://localhost:3000/api/loans/apply', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const jsonResult = await response.json();
+
+                if (response.ok && jsonResult.success) {
+                    // Inject database/backend validated variables directly into confirmation fields
+                    const receiptCard = document.querySelector('.receipt-card');
+                    if (receiptCard) {
+                        receiptCard.innerHTML = `
+                            <div class="receipt-row">
+                                <span><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount:</span>
+                                <span class="value-highlight">UGX ${jsonResult.data.amount.toLocaleString()}</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period:</span>
+                                <span class="value-highlight">${jsonResult.data.periodMonths} Months</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span><i class="fas fa-mobile-alt icon-blue"></i> Mobile Number:</span>
+                                <span class="value-highlight">${jsonResult.data.phoneNumber}</span>
+                            </div>
+                            <div class="receipt-row">
+                                <span><i class="fas fa-check-circle icon-green"></i> Application Status:</span>
+                                <span class="status-badge text-green">${jsonResult.data.status}</span>
+                            </div>
+                        `;
+                    }
+                    
+                    // Route user to the final confirmation receipt wrap interface
+                    showScreen('screen-success');
+                } else {
+                    // Display validation context flags sent back from backend endpoints
+                    alert('Application Error: ' + (jsonResult.message || 'System validation rejected metrics parameters.'));
+                }
+
+            } catch (error) {
+                console.error('API Server connection state failed:', error);
+                alert('Communication Loss: Connection to local endpoint on port 3000 refused. Please ensure your backend engine is active.');
+            } finally {
+                // Revert visual configurations back to interactive default parameters
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = 'Continue <i class="fas fa-arrow-right"></i>';
+                }
+            }
+        });
+    }
+});
 
