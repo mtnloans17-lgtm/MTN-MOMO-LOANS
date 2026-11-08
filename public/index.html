@@ -4,9 +4,275 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTN MoMo Loan Application Demo</title>
-    <link rel="stylesheet" href="style.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cloudflare.com">
+    <style>
+        /* Color Palette Settings */
+        :root {
+            --mtn-yellow: #FFCC00;
+            --mtn-blue: #003366;
+            --mtn-dark-blue: #001F4D;
+            --light-blue: #F0F4F8;
+            --text-dark: #333333;
+            --text-light: #FFFFFF;
+            --green-success: #28A745;
+            --card-bg: #FFFFFF;
+        }
+
+        /* Reset and Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #E5E5E5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Device Frame Simulation Layout */
+        .screen-container {
+            width: 100%;
+            max-width: 450px;
+            background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--mtn-dark-blue) 100%);
+            color: var(--text-light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Header Styles */
+        .app-header {
+            padding: 15px 20px;
+            background-color: rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .header-centered { text-align: center; }
+
+        .momo-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .momo-logo {
+            background-color: var(--mtn-yellow);
+            color: var(--mtn-dark-blue);
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .demo-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: var(--mtn-yellow);
+            color: var(--mtn-dark-blue);
+            font-size: 10px;
+            font-weight: bold;
+            text-align: center;
+            padding: 2px 0;
+        }
+
+        .header-logo-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .mtn-logo-circle {
+            background-color: var(--mtn-yellow);
+            color: var(--mtn-dark-blue);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 900;
+            font-size: 18px;
+            border: 3px solid var(--text-light);
+        }
+
+        .inline-logo {
+            width: 45px;
+            height: 45px;
+            font-size: 14px;
+        }
+
+        .divider {
+            font-size: 24px;
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Hero Layout Viewports */
+        .hero-section {
+            padding: 30px 20px 20px;
+            text-align: center;
+        }
+
+        .hero-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-model-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+        }
+
+        .brand-badge-overlay {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #FFCC00;
+            color: #001F4D;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .brand-badge-overlay .badge-icon { font-weight: 900; }
+
+        .hero-content h1 {
+            font-size: 24px;
+            margin: 15px 0 10px;
+        }
+
+        .highlight-yellow { color: var(--mtn-yellow); }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .feature-item {
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .icon-circle {
+            background-color: rgba(255,255,255,0.1);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 8px;
+            font-size: 18px;
+            color: var(--mtn-yellow);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Shared Blocks */
+        .card {
+            background-color: var(--card-bg);
+            color: var(--text-dark);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 0 20px 20px;
+        }
+
+        .btn-primary {
+            background-color: var(--mtn-yellow);
+            color: var(--mtn-dark-blue);
+            border: none;
+            padding: 12px 30px;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover { transform: scale(1.03); }
+        .btn-wide { width: 100%; justify-content: center; }
+
+        /* Highlights */
+        .highlights-card h3 { margin-bottom: 15px; font-size: 16px; }
+        .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .highlight-box { border-left: 3px solid var(--mtn-blue); padding-left: 10px; display: flex; flex-direction: column; }
+        .highlight-box i { font-size: 18px; margin-bottom: 4px; }
+
+        /* Inputs */
+        .form-card { margin-top: 10px; }
+        .input-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
+        .input-group label { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+        .input-group input, .input-group select { padding: 12px; border: 1px solid #CCC; border-radius: 8px; font-size: 14px; outline: none; background-color: var(--light-blue); }
+
+        /* Confirmation Overlays */
+        .success-section { padding: 20px; text-align: center; }
+        .success-animation { position: relative; display: inline-block; margin-bottom: 15px; }
+        .checkmark-circle { background-color: var(--green-success); width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; border: 4px solid rgba(255,255,255,0.4); }
+        .success-badge { background-color: var(--green-success); padding: 8px 20px; border-radius: 20px; display: inline-block; font-weight: bold; margin-bottom: 15px; }
+        .receipt-card { text-align: left; display: flex; flex-direction: column; gap: 12px; }
+        .receipt-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #EEE; padding-bottom: 8px; }
+        .value-highlight { background-color: var(--mtn-yellow); padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+        .status-badge { background-color: rgba(40, 167, 69, 0.15); padding: 4px 15px; border-radius: 12px; font-weight: bold; }
+        .info-alert { background-color: rgba(255,255,255,0.15); border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: center; text-align: left; margin-bottom: 20px; font-size: 13px; }
+
+        /* Typography Footers */
+        .app-footer { text-align: center; padding: 15px; font-size: 12px; }
+        .security-banner { text-align: center; padding: 10px; background-color: rgba(0,0,0,0.2); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .support-footer { background-color: var(--mtn-dark-blue); padding: 15px 20px; display: flex; align-items: center; gap: 15px; font-size: 12px; border-top: 3px solid var(--mtn-yellow); }
+        .whatsapp-icon { color: #25D366; font-size: 32px; }
+        .support-tag { margin-left: auto; opacity: 0.7; }
+
+        /* Utilities */
+        .icon-blue { color: var(--mtn-blue); }
+        .icon-green { color: var(--green-success); }
+        .icon-yellow { color: var(--mtn-yellow); }
+        .text-green { color: var(--green-success); }
+        .text-yellow { color: var(--mtn-yellow); }
+    </style>
 </head>
 <body>
 
@@ -24,7 +290,6 @@
         </header>
 
         <main class="hero-section">
-            <!-- Visual Representative Image & Core Messaging Stack -->
             <div class="hero-wrapper">
                 <div class="hero-image-container">
                     <img src="https://unsplash.com" alt="MTN Representative" class="hero-model-img">
@@ -40,7 +305,6 @@
                 </div>
             </div>
             
-            <!-- Features Row -->
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="icon-circle"><i class="fas fa-bolt"></i></div>
@@ -93,6 +357,7 @@
             <p><i class="fas fa-shield-check"></i> Your financial goals are within reach with <span class="highlight-yellow">MTN MoMo Loans!</span></p>
         </footer>
     </section>
+
     <!-- SCREEN 2: APPLICATION FORM -->
     <section class="screen-container hidden" id="screen-form">
         <header class="app-header header-centered">
@@ -109,7 +374,6 @@
         <main class="form-section">
             <form id="loanForm">
                 <div class="card form-card">
-                    
                     <div class="input-group">
                         <label><i class="fas fa-user icon-blue"></i> Full Name</label>
                         <input type="text" placeholder="Enter your full name" required>
@@ -157,8 +421,6 @@
             <div class="support-tag">Chat with us for assistance</div>
         </div>
     </section>
-
-
     <!-- SCREEN 3: SUCCESS OVERLAY -->
     <section class="screen-container hidden" id="screen-success">
         <header class="app-header header-centered">
@@ -172,9 +434,7 @@
 
         <main class="success-section">
             <div class="success-animation">
-                <div class="checkmark-circle">
-                    <i class="fas fa-check"></i>
-                </div>
+                <div class="checkmark-circle"><i class="fas fa-check"></i></div>
                 <div class="confetti">🎉</div>
             </div>
 
@@ -182,7 +442,7 @@
             <h3>Your MTN MoMo loan application has been submitted successfully.</h3>
 
             <div class="card receipt-card">
-                <!-- Populated dynamically via server API response handled inside app.js -->
+                <!-- Dynamically populated rows generated by server API response -->
             </div>
 
             <div class="info-alert">
@@ -209,118 +469,78 @@
         </div>
     </section>
 
-    <!-- External Script Integration Link -->
-    <script src="app.js"></script>
-</body>
-</html>
-/**
- * Screen State Transition Manager
- * Handles showing and hiding the single-page view panels
- * @param {string} screenId - The ID of the HTML element container to show
- */
-function showScreen(screenId) {
-    document.querySelectorAll('.screen-container').forEach(screen => {
-        screen.classList.add('hidden');
-    });
-    const targetScreen = document.getElementById(screenId);
-    if (targetScreen) {
-        targetScreen.classList.remove('hidden');
-    }
-    window.scrollTo(0, 0);
-}
-
-/**
- * Form Submit Interceptor & API Event Handler
- * Binds to the loan layout configuration form element
- */
-document.addEventListener('DOMContentLoaded', () => {
-    const loanForm = document.getElementById('loanForm');
-    
-    if (loanForm) {
-        loanForm.addEventListener('submit', async function(event) {
-            event.preventDefault();
-            
-            // Extract core actionable DOM items
-            const submitButton = this.querySelector('button[type="submit"]');
-            const fullNameInput = this.querySelector('input[placeholder="Enter your full name"]');
-            const phoneInput = this.querySelector('input[placeholder="07XXXXXXXX"]');
-            const amountSelect = this.querySelector('select:nth-of-type(1)');
-            const periodSelect = this.querySelector('select:nth-of-type(2)');
-
-            // Validate form field nodes exist before parsing metrics
-            if (!fullNameInput || !phoneInput || !amountSelect || !periodSelect) {
-                alert('Structural Error: Form input components could not be evaluated.');
-                return;
+    <!-- Native JavaScript Controller Logic Section -->
+    <script>
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen-container').forEach(screen => {
+                screen.classList.add('hidden');
+            });
+            const targetScreen = document.getElementById(screenId);
+            if (targetScreen) {
+                targetScreen.classList.remove('hidden');
             }
+            window.scrollTo(0, 0);
+        }
 
-            // Map data structure variables
-            const payload = {
-                fullName: fullNameInput.value,
-                phoneNumber: phoneInput.value,
-                amount: parseFloat(amountSelect.value),
-                periodMonths: parseInt(periodSelect.value)
-            };
-
-            try {
-                // UI Visual State Optimization - Disable double tap submittals
-                if (submitButton) {
-                    submitButton.disabled = true;
-                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-                }
-
-                // Dispatches asynchronous telemetry out to the Node Express server engine
-                const response = await fetch('http://localhost:3000/api/loans/apply', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
-                });
-
-                const jsonResult = await response.json();
-
-                if (response.ok && jsonResult.success) {
-                    // Inject database/backend validated variables directly into confirmation fields
-                    const receiptCard = document.querySelector('.receipt-card');
-                    if (receiptCard) {
-                        receiptCard.innerHTML = `
-                            <div class="receipt-row">
-                                <span><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount:</span>
-                                <span class="value-highlight">UGX ${jsonResult.data.amount.toLocaleString()}</span>
-                            </div>
-                            <div class="receipt-row">
-                                <span><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period:</span>
-                                <span class="value-highlight">${jsonResult.data.periodMonths} Months</span>
-                            </div>
-                            <div class="receipt-row">
-                                <span><i class="fas fa-mobile-alt icon-blue"></i> Mobile Number:</span>
-                                <span class="value-highlight">${jsonResult.data.phoneNumber}</span>
-                            </div>
-                            <div class="receipt-row">
-                                <span><i class="fas fa-check-circle icon-green"></i> Application Status:</span>
-                                <span class="status-badge text-green">${jsonResult.data.status}</span>
-                            </div>
-                        `;
-                    }
+        document.addEventListener('DOMContentLoaded', () => {
+            const loanForm = document.getElementById('loanForm');
+            if (loanForm) {
+                loanForm.addEventListener('submit', async function(event) {
+                    event.preventDefault();
                     
-                    // Route user to the final confirmation receipt wrap interface
-                    showScreen('screen-success');
-                } else {
-                    // Display validation context flags sent back from backend endpoints
-                    alert('Application Error: ' + (jsonResult.message || 'System validation rejected metrics parameters.'));
-                }
+                    const submitButton = this.querySelector('button[type="submit"]');
+                    const payload = {
+                        fullName: this.querySelector('input[placeholder="Enter your full name"]').value,
+                        phoneNumber: this.querySelector('input[placeholder="07XXXXXXXX"]').value,
+                        amount: parseFloat(this.querySelector('select:nth-of-type(1)').value),
+                        periodMonths: parseInt(this.querySelector('select:nth-of-type(2)').value)
+                    };
 
-            } catch (error) {
-                console.error('API Server connection state failed:', error);
-                alert('Communication Loss: Connection to local endpoint on port 3000 refused. Please ensure your backend engine is active.');
-            } finally {
-                // Revert visual configurations back to interactive default parameters
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.innerHTML = 'Continue <i class="fas fa-arrow-right"></i>';
-                }
+                    try {
+                        submitButton.disabled = true;
+                        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+
+                        const response = await fetch('/api/loans/apply', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const jsonResult = await response.json();
+
+                        if (response.ok && jsonResult.success) {
+                            document.querySelector('.receipt-card').innerHTML = `
+                                <div class="receipt-row">
+                                    <span><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount:</span>
+                                    <span class="value-highlight">UGX ${jsonResult.data.amount.toLocaleString()}</span>
+                                </div>
+                                <div class="receipt-row">
+                                    <span><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period:</span>
+                                    <span class="value-highlight">${jsonResult.data.periodMonths} Months</span>
+                                </div>
+                                <div class="receipt-row">
+                                    <span><i class="fas fa-mobile-alt icon-blue"></i> Mobile Number:</span>
+                                    <span class="value-highlight">${jsonResult.data.phoneNumber}</span>
+                                </div>
+                                <div class="receipt-row">
+                                    <span><i class="fas fa-check-circle icon-green"></i> Application Status:</span>
+                                    <span class="status-badge text-green">${jsonResult.data.status}</span>
+                                </div>
+                            `;
+                            showScreen('screen-success');
+                        } else {
+                            alert('Application Error: ' + (jsonResult.message || 'System validation error.'));
+                        }
+                    } catch (error) {
+                        alert('Communication Loss: Backend connection failed. Ensure server.js is running.');
+                    } finally {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = 'Continue <i class="fas fa-arrow-right"></i>';
+                    }
+                });
             }
         });
-    }
-});
+    </script>
+</body>
+</html>
 
