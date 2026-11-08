@@ -26,27 +26,28 @@
         }
 
         body {
-            background-color: #E5E5E5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
+    background-color: var(--mtn-dark-blue); /* Fills the background with the dark theme color */
+    display: block; /* Removes flex center centering layout restrictions */
+    min-height: 100vh;
+    padding: 0; /* Removes outer browser padding */
+    margin: 0;
+}
 
-        /* Device Frame Simulation Layout */
-        .screen-container {
-            width: 100%;
-            max-width: 450px;
-            background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--mtn-dark-blue) 100%);
-            color: var(--text-light);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+/* Device Frame Simulation Layout Updated to Full Screen */
+.screen-container {
+    width: 100%;
+    max-width: 100%; /* Expands the card width to fill 100% of any display */
+    min-height: 100vh; /* Expands the height to stretch to the bottom of the screen */
+    background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--mtn-dark-blue) 100%);
+    color: var(--text-light);
+    border-radius: 0; /* Removes rounded corners to sit flush against screen edges */
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none; /* Removes shadow layer */
+}
+
 
         .hidden { display: none !important; }
 
