@@ -1,126 +1,138 @@
 const express = require('express');
-const path = require('path');
+const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Enable Cross-Origin Resource Sharing (CORS) for front-end connection
+app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'public')));
+// Parse incoming request payloads matching application/json format header structures
+app.use(bodyParser.json());
 
-// ⚠️ SYSTEM CONFIGURATION: Insert your secure credentials here
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE';
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ==========================================
+// 🤖 TELEGRAM BOT CONFIGURATION
+// Replace these placeholders with your live values from BotFather and user info lookups
+// ==========================================
+const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
+const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_OR_CHANNEL_HERE'; 
 
-app.use(express.static(path.join(__dirname, 'public')));
-
-
-// 1. Initial Application Form Endpoint (Triggered by Web Form)
-app.post('/api/apply-loan', async (req, res) => {
-    const { name, phone, amount, period, instalment } = req.body;
-
-    if (!name || !phone || !amount || !period) {
-        return res.status(400).json({ success: false, error: 'Missing required field parameters' });
+/**
+ * Helper function to dispatch interactive logs directly into your Telegram account
+ */
+async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, referenceId) {
+    // Prevent execution crashes if parameters are still using baseline strings
+    if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
+        console.warn('⚠️ Telegram Alert skipped: Provide a valid TELEGRAM_BOT_TOKEN to send notifications.');
+        return;
     }
-    const messageTemplate = `🔔 *New Loan Application Received*\n\n` +
-                             `👤 *Applicant Name:* ${name}\n` +
-                             `📱 *MTN Mobile ID:* ${phone}\n` +
-                             `💰 *Requested Amount:* ${amount}\n` +
-                             `📅 *Tenure Window:* ${period}\n` +
-                             `📊 *Monthly Installment:* ${instalment}`;
 
-    const telegramEndpoint = `https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`;
+    const telegramUrl = `https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    // Construct a cleanly formatted tracking payload banner
+    const textMessage = `🔔 *New Loan Application Received* 🔔\n\n` +
+                        `👤 *Applicant:* ${fullName}\n` +
+                        `📱 *Phone:* \`${phoneNumber}\`\n` +
+                        `💰 *Amount:* UGX ${amount.toLocaleString()}\n` +
+                        `📅 *Period:* ${periodMonths} Months\n` +
+                        `🆔 *Reference:* \`${referenceId}\``;
+
+    // Define the interactive inline keyboard markup array matrix
+    const inlineKeyboardGrid = {
+        inline_keyboard: [
+            [
+                { text: '✅ Approve Loan', callback_data: `approve_${referenceId}` },
+                { text: '❌ Reject Loan', callback_data: `reject_${referenceId}` }
+            ],
+            [
+                { text: '🔍 View Full Verification Logs', url: `http://localhost:3000/admin/review/${referenceId}` }
+            ]
+        ]
+    };
 
     try {
-        const response = await fetch(telegramEndpoint, {
+        const response = await fetch(telegramUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 chat_id: TELEGRAM_CHAT_ID,
-                text: messageTemplate,
+                text: textMessage,
                 parse_mode: 'Markdown',
-                reply_markup: {
-                    inline_keyboard: [
-                        [
-                            { text: '✅ Approve Loan', callback_data: `approve_${phone}` },
-                            { text: '❌ Reject Loan', callback_data: `reject_${phone}` }
-                        ]
-                    ]
-                }
+                reply_markup: inlineKeyboardGrid
             })
         });
 
         const outcome = await response.json();
-        if (outcome.ok) {
-            return res.status(200).json({ success: true });
+        if (!outcome.ok) {
+            console.error('❌ Telegram Bot API Error details:', outcome.description);
         } else {
-            return res.status(500).json({ success: false, error: outcome.description });
+            console.log(`📱 Telegram Notification Alert successfully routed for ${referenceId}`);
         }
     } catch (err) {
-        return res.status(500).json({ success: false, error: 'Internal pipeline error' });
+        console.error('❌ Failed to route telemetry handshake to Telegram endpoint servers:', err.message);
     }
-});
+}
 
-// 2. NEW: Telegram Webhook Callback Endpoint (Triggered by Button Clicks)
-app.post('/api/telegram-webhook', async (req, res) => {
-    // Check if the update contains a callback query execution
-    if (!req.body.callback_query) {
-        return res.sendStatus(200); 
-    }
+/**
+ * @route   POST /api/loans/apply
+ * @desc    Process incoming submissions, create telemetry metrics & fire Telegram triggers
+ */
+app.post('/api/loans/apply', async (req, res) => {
+    const { fullName, phoneNumber, amount, periodMonths } = req.body;
 
-    const callbackQuery = req.body.callback_query;
-    const actionData = callbackQuery.data; // e.g., "approve_0712345678"
-    const originalMessage = callbackQuery.message;
-    const callbackQueryId = callbackQuery.id;
-
-    let decisionStatus = "";
-    let finalEmoji = "";
-
-    if (actionData.startsWith('approve_')) {
-        decisionStatus = "APPROVED";
-        finalEmoji = "🟢";
-    } else if (actionData.startsWith('reject_')) {
-        decisionStatus = "REJECTED";
-        finalEmoji = "🔴";
-    }
-
-    // 1. Transform text layout to visually reflect decision state
-    const updatedText = `${originalMessage.text}\n\n🚨 *Decision Status:* ${finalEmoji} ${decisionStatus}`;
-
-    try {
-        // 2. Call editMessageText to overwrite original layout & dissolve active buttons
-        await fetch(`https://telegram.org{TELEGRAM_BOT_TOKEN}/editMessageText`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: originalMessage.chat.id,
-                message_id: originalMessage.message_id,
-                text: updatedText,
-                parse_mode: 'Markdown' // Preserves string formats
-            })
+    // Simple backend data validations
+    if (!fullName || !phoneNumber || !amount || !periodMonths) {
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid submission data. All application parameters are required fields.'
         });
-
-        // 3. Confirm back to Telegram client window interface to dim loading bar state
-        await fetch(`https://telegram.org{TELEGRAM_BOT_TOKEN}/answerCallbackQuery`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                callback_query_id: callbackQueryId,
-                text: `Application successfully marked as ${decisionStatus}!`,
-                show_alert: false
-            })
-        });
-
-    } catch (error) {
-        console.error("Error running webhook decision workflow loop:", error);
     }
 
-    return res.sendStatus(200);
+    const cleanPhone = phoneNumber.trim();
+    if (!/^(07|2567)\d{8}$/.test(cleanPhone)) {
+        return res.status(400).json({
+            success: false,
+            message: 'Invalid mobile network routing number format. Use standard active MTN sequence indicators.'
+        });
+    }
+
+    if (amount > 5000000) {
+        return res.status(422).json({
+            success: false,
+            message: 'Requested maximum amount upper limit ceiling threshold overflow. Cap is UGX 5,000,000.'
+        });
+    }
+
+    // Generate unique identification reference keys
+    const calculatedReferenceId = 'MOMO-LN-' + Math.floor(100000 + Math.random() * 900000);
+    
+    const operationalResponsePayload = {
+        referenceId: calculatedReferenceId,
+        fullName: fullName,
+        phoneNumber: cleanPhone,
+        amount: amount,
+        periodMonths: periodMonths,
+        status: 'Approved', 
+        processedTimestamp: new Date().toISOString()
+    };
+
+    // Fire-and-forget notification webhook trigger down the wire asynchronously
+    sendTelegramAlert(fullName, cleanPhone, amount, periodMonths, calculatedReferenceId);
+
+    // Return instant success acknowledgment frame packet to your browser UI view panel
+    return res.status(200).json({
+        success: true,
+        message: 'Loan application evaluation complete.',
+        data: operationalResponsePayload
+    });
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on port ${PORT}`);
+// Launch backend initialization runtime loops
+app.listen(PORT, () => {
+    console.log(`================================================================`);
+    console.log(` MTN MoMo Integration App initialized active on port: ${PORT}`);
+    console.log(` Web Frontend endpoint: http://localhost:${PORT}                   `);
+    console.log(`================================================================`);
 });
+
