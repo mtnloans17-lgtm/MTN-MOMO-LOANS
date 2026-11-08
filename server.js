@@ -1,32 +1,32 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const path = require('path'); // Added core path module to find your static folder files
+const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Updated to adapt to cloud deployment environments
+const PORT = process.env.PORT || 3000;
 
-// Enable Cross-Origin Resource Sharing (CORS) for front-end connections
+// Enable Cross-Origin Resource Sharing (CORS) for frontend connections
 app.use(cors());
 
-// Parse incoming request payloads matching application/json format header structures
+// Parse incoming request payloads matching application/json format structures
 app.use(bodyParser.json());
 
 // =========================================================================
-// 🌐 SERVE FRONT-END FILES (Fixes the "Cannot GET /" Issue)
-// Make sure index.html, style.css, and app.js are in the same directory as this file
+// 🌐 SERVE FRONT-END FILES FROM THE PUBLIC FOLDER
+// This explicitly instructs Express to expose files inside your /public directory
 // =========================================================================
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Fallback rule to route root traffic directly into the index web layout dashboard
+// Direct root traffic explicitly to the public index interface page 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// ==========================================
+// =========================================================================
 // 🤖 TELEGRAM BOT CONFIGURATION
 // Replace these placeholders with your live values from BotFather
-// ==========================================
+// =========================================================================
 const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
 const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_OR_CHANNEL_HERE'; 
 
