@@ -467,6 +467,7 @@
     </section>
 
     <!-- Native JavaScript Controller Logic Section -->
+       <!-- Native JavaScript Controller Logic Section -->
     <script>
         function showScreen(screenId) {
             document.querySelectorAll('.screen-container').forEach(screen => {
@@ -486,18 +487,29 @@
                     event.preventDefault();
                     
                     const submitButton = document.getElementById('submitBtn');
+                    
+                    // Capture input fields securely
+                    const fullNameInput = this.querySelector('input[placeholder="Enter your full name"]');
+                    const phoneInput = this.querySelector('input[placeholder="07XXXXXXXX"]');
+                    const amountSelect = this.querySelector('select');
+                    // Find the second select element specifically for the period
+                    const periodSelect = this.querySelectorAll('select')[1]; 
+
                     const payload = {
-                        fullName: this.querySelector('input[placeholder="Enter your full name"]').value,
-                        phoneNumber: this.querySelector('input[placeholder="07XXXXXXXX"]').value,
-                        amount: parseFloat(this.querySelector('select:nth-of-type(1)').value),
-                        periodMonths: parseInt(this.querySelector('select:nth-of-type(2)').value)
+                        fullName: fullNameInput.value,
+                        phoneNumber: phoneInput.value,
+                        amount: parseFloat(amountSelect.value),
+                        periodMonths: parseInt(periodSelect.value)
                     };
 
                     try {
                         submitButton.disabled = true;
                         submitButton.innerHTML = '🔄 Processing...';
 
-                        const response = await fetch('/api/loans/apply', {
+                        // Explicitly dynamically absolute paths to make it safe on Render domains
+                        const apiUrl = window.location.origin + '/api/loans/apply';
+
+                        const response = await fetch(apiUrl, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload)
@@ -526,10 +538,11 @@
                             `;
                             showScreen('screen-success');
                         } else {
-                            alert('Application Error: ' + (jsonResult.message || 'System validation error.'));
+                            alert('Application Refused by Server: ' + (jsonResult.message || 'Check form parameters.'));
                         }
                     } catch (error) {
-                        alert('Communication Loss: Backend connection failed. Check your Render logs.');
+                        console.error('Submission error context:', error);
+                        alert('Network Error: Cannot connect to the API backend server. Check your Render live service logs.');
                     } finally {
                         submitButton.disabled = false;
                         submitButton.innerHTML = 'Continue ➔';
@@ -538,6 +551,6 @@
             }
         });
     </script>
-</body>
-</html>
+ 
+
 
