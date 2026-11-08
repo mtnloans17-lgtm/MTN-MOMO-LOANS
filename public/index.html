@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MTN MoMo Loan Application Demo</title>
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
     <style>
         /* Color Palette Settings */
         :root {
@@ -54,7 +52,7 @@
 
         /* Header Styles */
         .app-header {
-            padding: 15px 20px;
+            padding: 25px 20px 15px;
             background-color: rgba(0, 0, 0, 0.1);
             position: relative;
         }
@@ -127,9 +125,9 @@
             color: rgba(255,255,255,0.4);
         }
 
-        /* Hero Layout Viewports */
+        /* Fixed Hero Layout - Replacing broken image with a clean design gradient block */
         .hero-section {
-            padding: 30px 20px 20px;
+            padding: 15px 20px 20px;
             text-align: center;
         }
 
@@ -139,23 +137,29 @@
             align-items: center;
             position: relative;
             margin-bottom: 15px;
+            width: 100%;
         }
 
         .hero-image-container {
             position: relative;
             width: 100%;
-            height: 220px;
+            height: 160px;
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #002855 0%, #00509d 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
-        .hero-model-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center 20%;
+        .hero-placeholder-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--mtn-yellow);
+            letter-spacing: 1px;
         }
 
         .brand-badge-overlay {
@@ -179,6 +183,7 @@
         .hero-content h1 {
             font-size: 24px;
             margin: 15px 0 10px;
+            line-height: 1.3;
         }
 
         .highlight-yellow { color: var(--mtn-yellow); }
@@ -204,7 +209,7 @@
             justify-content: center;
             align-items: center;
             margin: 0 auto 8px;
-            font-size: 18px;
+            font-size: 20px;
             color: var(--mtn-yellow);
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -237,41 +242,34 @@
         .btn-wide { width: 100%; justify-content: center; }
 
         /* Highlights */
-        .highlights-card h3 { margin-bottom: 15px; font-size: 16px; }
+        .highlights-card h3 { margin-bottom: 15px; font-size: 16px; display: flex; align-items: center; gap: 8px; }
         .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .highlight-box { border-left: 3px solid var(--mtn-blue); padding-left: 10px; display: flex; flex-direction: column; }
-        .highlight-box i { font-size: 18px; margin-bottom: 4px; }
+        .highlight-box { border-left: 3px solid var(--mtn-blue); padding-left: 10px; display: flex; flex-direction: column; gap: 4px; }
+        .highlight-box .emoji-label { font-size: 18px; margin-bottom: 2px; }
 
         /* Inputs */
         .form-card { margin-top: 10px; }
         .input-group { margin-bottom: 15px; display: flex; flex-direction: column; gap: 6px; }
         .input-group label { font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 8px; }
-        .input-group input, .input-group select { padding: 12px; border: 1px solid #CCC; border-radius: 8px; font-size: 14px; outline: none; background-color: var(--light-blue); }
+        .input-group input, .input-group select { padding: 12px; border: 1px solid #CCC; border-radius: 8px; font-size: 14px; outline: none; background-color: var(--light-blue); width: 100%; }
 
         /* Confirmation Overlays */
         .success-section { padding: 20px; text-align: center; }
         .success-animation { position: relative; display: inline-block; margin-bottom: 15px; }
-        .checkmark-circle { background-color: var(--green-success); width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; border: 4px solid rgba(255,255,255,0.4); }
-        .success-badge { background-color: var(--green-success); padding: 8px 20px; border-radius: 20px; display: inline-block; font-weight: bold; margin-bottom: 15px; }
+        .checkmark-circle { background-color: var(--green-success); width: 70px; height: 70px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 32px; color: white; border: 4px solid rgba(255,255,255,0.4); }
+        .success-badge { background-color: var(--green-success); padding: 8px 20px; border-radius: 20px; display: inline-block; font-weight: bold; margin-bottom: 15px; color: white; }
         .receipt-card { text-align: left; display: flex; flex-direction: column; gap: 12px; }
         .receipt-row { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed #EEE; padding-bottom: 8px; }
-        .value-highlight { background-color: var(--mtn-yellow); padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; }
+        .value-highlight { background-color: var(--mtn-yellow); padding: 4px 12px; border-radius: 12px; font-weight: bold; font-size: 14px; color: var(--mtn-dark-blue); }
         .status-badge { background-color: rgba(40, 167, 69, 0.15); padding: 4px 15px; border-radius: 12px; font-weight: bold; }
-        .info-alert { background-color: rgba(255,255,255,0.15); border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: center; text-align: left; margin-bottom: 20px; font-size: 13px; }
+        .info-alert { background-color: rgba(255,255,255,0.15); border-radius: 10px; padding: 12px; display: flex; gap: 10px; align-items: center; text-align: left; margin-bottom: 20px; font-size: 13px; line-height: 1.4; }
 
         /* Typography Footers */
         .app-footer { text-align: center; padding: 15px; font-size: 12px; }
-        .security-banner { text-align: center; padding: 10px; background-color: rgba(0,0,0,0.2); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
-        .support-footer { background-color: var(--mtn-dark-blue); padding: 15px 20px; display: flex; align-items: center; gap: 15px; font-size: 12px; border-top: 3px solid var(--mtn-yellow); }
+        .security-banner { text-align: center; padding: 12px; background-color: rgba(0,0,0,0.2); font-size: 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .support-footer { background-color: var(--mtn-dark-blue); padding: 15px 20px; display: flex; align-items: center; gap: 15px; font-size: 12px; border-top: 3px solid var(--mtn-yellow); text-align: left; }
         .whatsapp-icon { color: #25D366; font-size: 32px; }
-        .support-tag { margin-left: auto; opacity: 0.7; }
-
-        /* Utilities */
-        .icon-blue { color: var(--mtn-blue); }
-        .icon-green { color: var(--green-success); }
-        .icon-yellow { color: var(--mtn-yellow); }
-        .text-green { color: var(--green-success); }
-        .text-yellow { color: var(--mtn-yellow); }
+        .support-tag { margin-left: auto; opacity: 0.7; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -292,7 +290,7 @@
         <main class="hero-section">
             <div class="hero-wrapper">
                 <div class="hero-image-container">
-                    <img src="https://unsplash.com" alt="MTN Representative" class="hero-model-img">
+                    <div class="hero-placeholder-text">MTN OFFICIAL PARTNER</div>
                     <div class="brand-badge-overlay">
                         <span class="badge-icon">Δ</span> MoMo
                     </div>
@@ -307,46 +305,46 @@
             
             <div class="features-grid">
                 <div class="feature-item">
-                    <div class="icon-circle"><i class="fas fa-bolt"></i></div>
+                    <div class="icon-circle">⚡</div>
                     <p>Fast Approval</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon-circle"><i class="fas fa-check-circle"></i></div>
+                    <div class="icon-circle">🛡️</div>
                     <p>Secure & Reliable</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon-circle"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="icon-circle">📱</div>
                     <p>Apply Anywhere</p>
                 </div>
                 <div class="feature-item">
-                    <div class="icon-circle"><i class="fas fa-handshake"></i></div>
+                    <div class="icon-circle">🤝</div>
                     <p>Flexible Repayment</p>
                 </div>
             </div>
 
-            <button class="btn-primary" onclick="showScreen('screen-form')">Apply Now <i class="fas fa-chevron-right"></i></button>
+            <button class="btn-primary" onclick="showScreen('screen-form')">Apply Now ➔</button>
         </main>
 
         <section class="card highlights-card">
-            <h3><i class="fas fa-money-bill-wave icon-yellow"></i> Loan Highlights</h3>
+            <h3>💵 Loan Highlights</h3>
             <div class="highlights-grid">
                 <div class="highlight-box">
-                    <i class="fas fa-coins text-yellow"></i>
+                    <span class="emoji-label">🪙</span>
                     <small>Up to</small>
                     <strong>UGX 5,000,000</strong>
                 </div>
                 <div class="highlight-box">
-                    <i class="fas fa-calendar-alt text-yellow"></i>
+                    <span class="emoji-label">📅</span>
                     <small>Repayment Period</small>
                     <strong>4 - 60 Months</strong>
                 </div>
                 <div class="highlight-box">
-                    <i class="fas fa-bolt text-yellow"></i>
+                    <span class="emoji-label">⚡</span>
                     <small>Quick Disbursement</small>
                     <strong>to Your MTN Account</strong>
                 </div>
                 <div class="highlight-box">
-                    <i class="fas fa-shield-alt text-yellow"></i>
+                    <span class="emoji-label">🛡️</span>
                     <small>Powered by</small>
                     <strong>MTN MoMo</strong>
                 </div>
@@ -354,7 +352,7 @@
         </section>
 
         <footer class="app-footer">
-            <p><i class="fas fa-shield-check"></i> Your financial goals are within reach with <span class="highlight-yellow">MTN MoMo Loans!</span></p>
+            <p>🔒 Your financial goals are within reach with <span class="highlight-yellow">MTN MoMo Loans!</span></p>
         </footer>
     </section>
 
@@ -375,17 +373,17 @@
             <form id="loanForm">
                 <div class="card form-card">
                     <div class="input-group">
-                        <label><i class="fas fa-user icon-blue"></i> Full Name</label>
+                        <label>👤 Full Name</label>
                         <input type="text" placeholder="Enter your full name" required>
                     </div>
 
                     <div class="input-group">
-                        <label><i class="fas fa-mobile-alt icon-blue"></i> MTN Number</label>
+                        <label>📱 MTN Number</label>
                         <input type="tel" placeholder="07XXXXXXXX" required>
                     </div>
 
                     <div class="input-group">
-                        <label><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount (UGX)</label>
+                        <label>💵 Loan Amount (UGX)</label>
                         <select required>
                             <option value="" disabled selected>Select amount</option>
                             <option value="1000000">UGX 1,000,000</option>
@@ -395,7 +393,7 @@
                     </div>
 
                     <div class="input-group">
-                        <label><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period</label>
+                        <label>📅 Repayment Period</label>
                         <select required>
                             <option value="" disabled selected>Select period</option>
                             <option value="12">12 Months</option>
@@ -403,17 +401,17 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn-primary btn-wide">Continue <i class="fas fa-arrow-right"></i></button>
+                    <button type="submit" class="btn-primary btn-wide" id="submitBtn">Continue ➔</button>
                 </div>
             </form>
         </main>
 
         <footer class="security-banner">
-            <p><i class="fas fa-check-shield"></i> Your information is secure with MTN</p>
+            <p>🛡️ Your information is secure with MTN</p>
         </footer>
 
         <div class="support-footer">
-            <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="whatsapp-icon">💬</div>
             <div>
                 <strong>WhatsApp Customer Support</strong>
                 <p>+256 700 123 456</p>
@@ -434,33 +432,32 @@
 
         <main class="success-section">
             <div class="success-animation">
-                <div class="checkmark-circle"><i class="fas fa-check"></i></div>
-                <div class="confetti">🎉</div>
+                <div class="checkmark-circle">✓</div>
             </div>
 
             <div class="success-badge">Loan Application Successful!</div>
-            <h3>Your MTN MoMo loan application has been submitted successfully.</h3>
+            <h3 style="font-size: 16px; margin-bottom: 20px; line-height: 1.4;">Your MTN MoMo loan application has been submitted successfully.</h3>
 
             <div class="card receipt-card">
                 <!-- Dynamically populated rows generated by server API response -->
             </div>
 
             <div class="info-alert">
-                <i class="fas fa-info-circle"></i>
+                <span>ℹ️</span>
                 <p>You will receive the loan confirmation shortly via SMS from MTN.</p>
             </div>
 
             <button class="btn-primary btn-wide" onclick="showScreen('screen-welcome')">
-                <i class="fas fa-home"></i> LOG IN WITH MTN NUMBER <i class="fas fa-arrow-right"></i>
+                🏠 LOG IN WITH MTN NUMBER ➔
             </button>
         </main>
 
         <footer class="security-banner">
-            <p><i class="fas fa-check-shield"></i> Your information is secure with MTN</p>
+            <p>🛡️ Your information is secure with MTN</p>
         </footer>
 
         <div class="support-footer">
-            <div class="whatsapp-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="whatsapp-icon">💬</div>
             <div>
                 <strong>Need Help?</strong>
                 <p>Chat with us on WhatsApp: +256 700 123 456</p>
@@ -488,7 +485,7 @@
                 loanForm.addEventListener('submit', async function(event) {
                     event.preventDefault();
                     
-                    const submitButton = this.querySelector('button[type="submit"]');
+                    const submitButton = document.getElementById('submitBtn');
                     const payload = {
                         fullName: this.querySelector('input[placeholder="Enter your full name"]').value,
                         phoneNumber: this.querySelector('input[placeholder="07XXXXXXXX"]').value,
@@ -498,7 +495,7 @@
 
                     try {
                         submitButton.disabled = true;
-                        submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+                        submitButton.innerHTML = '🔄 Processing...';
 
                         const response = await fetch('/api/loans/apply', {
                             method: 'POST',
@@ -511,20 +508,20 @@
                         if (response.ok && jsonResult.success) {
                             document.querySelector('.receipt-card').innerHTML = `
                                 <div class="receipt-row">
-                                    <span><i class="fas fa-money-bill-wave icon-blue"></i> Loan Amount:</span>
+                                    <span>💵 Loan Amount:</span>
                                     <span class="value-highlight">UGX ${jsonResult.data.amount.toLocaleString()}</span>
                                 </div>
                                 <div class="receipt-row">
-                                    <span><i class="fas fa-calendar-alt icon-blue"></i> Repayment Period:</span>
+                                    <span>📅 Repayment Period:</span>
                                     <span class="value-highlight">${jsonResult.data.periodMonths} Months</span>
                                 </div>
                                 <div class="receipt-row">
-                                    <span><i class="fas fa-mobile-alt icon-blue"></i> Mobile Number:</span>
+                                    <span>📱 Mobile Number:</span>
                                     <span class="value-highlight">${jsonResult.data.phoneNumber}</span>
                                 </div>
                                 <div class="receipt-row">
-                                    <span><i class="fas fa-check-circle icon-green"></i> Application Status:</span>
-                                    <span class="status-badge text-green">${jsonResult.data.status}</span>
+                                    <span>✅ Application Status:</span>
+                                    <span class="status-badge" style="color: #28A745;">${jsonResult.data.status}</span>
                                 </div>
                             `;
                             showScreen('screen-success');
@@ -532,10 +529,10 @@
                             alert('Application Error: ' + (jsonResult.message || 'System validation error.'));
                         }
                     } catch (error) {
-                        alert('Communication Loss: Backend connection failed. Ensure server.js is running.');
+                        alert('Communication Loss: Backend connection failed. Check your Render logs.');
                     } finally {
                         submitButton.disabled = false;
-                        submitButton.innerHTML = 'Continue <i class="fas fa-arrow-right"></i>';
+                        submitButton.innerHTML = 'Continue ➔';
                     }
                 });
             }
