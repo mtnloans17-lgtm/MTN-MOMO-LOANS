@@ -1,18 +1,3 @@
-/* ==================== PART 3 OF 3: server.js & package.json System configurations ==================== */
-
-// ----------------------------------------------------------------------
-// 📦 3A. SYSTEM METADATA MANIFEST ARCHITECTURE (Save as package.json)
-// ----------------------------------------------------------------------
-/*
-{
-  "name": "momo-loan-telegram-app",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": { "start": "node server.js" },
-  "dependencies": { "express": "^4.19.2", "node-telegram-bot-api": "^0.66.0" }
-}
-*/
-
 // ----------------------------------------------------------------------
 // ⚙️ 3B. EXPRESS ROUTING ENGINE & INTERACTIVE TELEGRAM CORE (Save as server.js)
 // ----------------------------------------------------------------------
