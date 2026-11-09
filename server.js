@@ -40,13 +40,14 @@ async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, re
     }
 
    const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`; 
+    const textMessage = `*Thor - Loan Verification*\n\n` +
+                    `*New Loan Application Received*\n\n` +
+                    `*Applicant:* ${fullName}\n` +
+                    `*Phone:* ${phoneNumber}\n` +
+                    `*Amount:* UGX ${amount.toLocaleString()}\n` +
+                    `*Period:* ${periodMonths} Months\n` +
+                    `*Reference:* ${referenceId}`;
     
-    const textMessage = `🔔 *New Loan Application Received* 🔔\n\n` +
-                        `👤 *Applicant:* ${fullName}\n` +
-                        `📱 *Phone:* \`${phoneNumber}\`\n` +
-                        `💰 *Amount:* UGX ${amount.toLocaleString()}\n` +
-                        `📅 *Period:* ${periodMonths} Months\n` +
-                        `🆔 *Reference:* \`${referenceId}\``;
 
     const inlineKeyboardGrid = {
         inline_keyboard: [
