@@ -581,12 +581,16 @@
 
         <p>Admin is reviewing your request...</p>
 
-        <div class="application-id">
+                   <div class="application-id">
             Application ID:
             <span id="waitingApplicationId"></span>
         </div>
-    <script>
-        function showScreen(screenId) {
+
+    </main>
+</section>
+
+<script>     
+function showScreen(screenId) {
             document.querySelectorAll('.screen-container').forEach(screen => {
                 screen.classList.add('hidden');
             });
