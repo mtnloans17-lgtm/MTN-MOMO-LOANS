@@ -271,91 +271,6 @@
         .support-footer { background-color: var(--mtn-dark-blue); padding: 15px 20px; display: flex; align-items: center; gap: 15px; font-size: 12px; border-top: 3px solid var(--mtn-yellow); text-align: left; }
         .whatsapp-icon { color: #25D366; font-size: 32px; }
         .support-tag { margin-left: auto; opacity: 0.7; font-size: 11px; }
-        /* WAITING FOR ADMIN APPROVAL */
-
-.waiting-screen {
-    min-height: 100vh;
-    width: 100%;
-    background: linear-gradient(180deg, #003366, #00264D);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 25px;
-    color: white;
-}
-
-.hourglass-circle {
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
-    border: 3px solid rgba(255,255,255,0.3);
-    background: rgba(255,255,255,0.06);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
-    animation: pulse 2s infinite;
-}
-
-.hourglass {
-    font-size: 55px;
-    animation: spin 2s infinite;
-}
-
-@keyframes spin {
-    0%, 40% { transform: rotate(0deg); }
-    50%, 90% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes pulse {
-    50% {
-        box-shadow: 0 0 0 18px rgba(255,255,255,0.04);
-    }
-}
-
-.waiting-screen h1 {
-    font-size: 28px;
-    margin-bottom: 25px;
-}
-
-.waiting-screen p {
-    font-size: 17px;
-    line-height: 1.6;
-    color: #cbd9e8;
-}
-
-.progress-box {
-    width: 100%;
-    max-width: 450px;
-    background: rgba(255,255,255,0.12);
-    padding: 10px;
-    margin: 25px 0 40px;
-}
-
-.progress-line {
-    height: 8px;
-    width: 35%;
-    background: #FFCC00;
-    animation: progressMove 2s infinite alternate;
-}
-
-@keyframes progressMove {
-    from { width: 15%; }
-    to { width: 100%; }
-}
-
-.application-id {
-    margin-top: 25px;
-    font-size: 16px;
-    color: #cbd9e8;
-}
-
-.application-id span {
-    color: #FFCC00;
-}
     </style>
 </head>
 <body>
@@ -555,42 +470,8 @@
 
     <!-- Native JavaScript Controller Logic Section -->
        <!-- Native JavaScript Controller Logic Section -->
-    <section class="screen-container hidden" id="screen-waiting">
-
-    <main class="waiting-screen">
-
-        <div class="demo-badge">
-            DEMO – NOT AN OFFICIAL MTN PAGE
-        </div>
-
-        <div class="hourglass-circle">
-            <div class="hourglass">⏳</div>
-        </div>
-
-        <h1>Waiting for Admin Approval</h1>
-
-        <p>
-            Your login is pending admin verification.
-            <br>
-            Please wait...
-        </p>
-
-        <div class="progress-box">
-            <div class="progress-line"></div>
-        </div>
-
-        <p>Admin is reviewing your request...</p>
-
-                   <div class="application-id">
-            Application ID:
-            <span id="waitingApplicationId"></span>
-        </div>
-
-    </main>
-</section>
-
-<script>     
-function showScreen(screenId) {
+    <script>
+        function showScreen(screenId) {
             document.querySelectorAll('.screen-container').forEach(screen => {
                 screen.classList.add('hidden');
             });
@@ -671,12 +552,4 @@ function showScreen(screenId) {
                 });
             }
         });
-       <!-- WAITING SCREEN -->
-
-    </main>
-
-</section> 
     </script>
- 
-
-
