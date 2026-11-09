@@ -13,8 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set environment parameters string keys
-const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN';
-const MINI_APP_URL = process.env.MINI_APP_URL || 'https://YOUR_DEPLOYED_WEB_URL';
+const TELEGRAM_TOKEN = process.env.TELEGRAM_BOT_TOKEN;const MINI_APP_URL = process.env.MINI_APP_URL || 'https://YOUR_DEPLOYED_WEB_URL';
 
 // Configure live bot interface lifecycle instances
 const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
