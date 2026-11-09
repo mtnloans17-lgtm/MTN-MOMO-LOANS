@@ -27,8 +27,8 @@ app.get('/', (req, res) => {
 // 🤖 TELEGRAM BOT CONFIGURATION
 // Replace these placeholders with your live values from BotFather
 // =========================================================================
-const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
-const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_OR_CHANNEL_HERE'; 
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 /**
  * Helper function to dispatch interactive logs directly into your Telegram account
