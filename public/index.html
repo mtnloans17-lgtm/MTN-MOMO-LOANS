@@ -562,6 +562,9 @@
                         submitButton.disabled = true;
                         submitButton.innerHTML = '🔄 Processing...';
 
+                        // --- CHANGED HERE: Immediately push view to Page Two spinner screen ---
+                        showScreen('admin-approval-screen');
+
                         // Explicitly dynamically absolute paths to make it safe on Render domains
                         const apiUrl = window.location.origin + '/api/loans/apply';
 
