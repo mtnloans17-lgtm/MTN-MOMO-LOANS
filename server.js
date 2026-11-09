@@ -1,142 +1,103 @@
+/* ==================== PART 3 OF 3: server.js & package.json System configurations ==================== */
+
+// ----------------------------------------------------------------------
+// 📦 3A. SYSTEM METADATA MANIFEST ARCHITECTURE (Save as package.json)
+// ----------------------------------------------------------------------
+/*
+{
+  "name": "momo-loan-telegram-app",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": { "express": "^4.19.2", "node-telegram-bot-api": "^0.66.0" }
+}
+*/
+
+// ----------------------------------------------------------------------
+// ⚙️ 3B. EXPRESS ROUTING ENGINE & INTERACTIVE TELEGRAM CORE (Save as server.js)
+// ----------------------------------------------------------------------
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
 const path = require('path');
+const TelegramBot = require('node-telegram-bot-api');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable Cross-Origin Resource Sharing (CORS) for frontend connections
-app.use(cors());
-
-// Parse incoming request payloads matching application/json format structures
-app.use(bodyParser.json());
-
-// =========================================================================
-// 🌐 SERVE FRONT-END FILES FROM THE PUBLIC FOLDER
-// This explicitly instructs Express to expose files inside your /public directory
-// =========================================================================
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Direct root traffic explicitly to the public index interface page 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Set environment parameters string keys
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN || 'YOUR_TELEGRAM_BOT_TOKEN';
+const MINI_APP_URL = process.env.MINI_APP_URL || 'https://YOUR_DEPLOYED_WEB_URL';
+
+// Configure live bot interface lifecycle instances
+const bot = new TelegramBot(TELEGRAM_TOKEN, { polling: true });
+const activeApplicationsRegistry = {};
+
+// Handle chat entry launch points commands
+bot.onText(/\/start/, (msg) => {
+    bot.sendMessage(msg.chat.id, `✨ *MTN MoMo Loan Application Gateway*\n\nTap the button inline keyboard launcher row below to start your processing configuration forms wizard profile inside Telegram.`, {
+        reply_markup: { inline_keyboard: [[{ text: '🚀 Launch MoMo App', web_app: { url: MINI_APP_URL } }]] },
+        parse_mode: 'Markdown'
+    }).catch(err => console.error(err.message));
 });
 
-// =========================================================================
-// 🤖 TELEGRAM BOT CONFIGURATION
-// Replace these placeholders with your live values from BotFather
-// =========================================================================
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+// Capture and process inline verification keystroke triggers (Approve / Decline options mapping) from Admin chat
+bot.on('callback_query', (query) => {
+    const [action, appId] = query.data.split('_');
+    const record = activeApplicationsRegistry[appId];
+    if (!record) return bot.answerCallbackQuery(query.id, { text: "Error: Application expired or missing." });
 
-/**
- * Helper function to dispatch interactive logs directly into your Telegram account
- */
-async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, referenceId) {
-    if (TELEGRAM_BOT_TOKEN === 'YOUR_BOT_TOKEN_HERE') {
-        console.warn('⚠️ Telegram Alert skipped: Provide a valid TELEGRAM_BOT_TOKEN to send notifications.');
-        return;
-    }
+    record.status = (action === 'approve') ? 'APPROVED' : 'DECLINED';
+    const statusHeader = (action === 'approve') ? `✅ *REQUEST APPROVED*` : `❌ *REQUEST DECLINED*`;
 
-   const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`; 
-    const textMessage = `*Thor - Loan Verification*\n\n` +
-                    `*New Loan Application Received*\n\n` +
-                    `*Applicant:* ${fullName}\n` +
-                    `*Phone:* ${phoneNumber}\n` +
-                    `*Amount:* UGX ${amount.toLocaleString()}\n` +
-                    `*Period:* ${periodMonths} Months\n` +
-                    `*Reference:* ${referenceId}`;
-    
+    const editedTemplate = `${statusHeader}\n\n👤 *Applicant:* ${record.name}\n📱 *Phone:* ${record.phone}\n💰 *Amount:* ${record.amount}\n📅 *Period:* ${record.period}\n\n🏷️ *Review Status:* \`${record.status}\``;
 
-    const inlineKeyboardGrid = {
-        inline_keyboard: [
-            [
-                { text: '✅ Approve Loan', callback_data: `approve_${referenceId}` },
-                { text: '❌ Reject Loan', callback_data: `reject_${referenceId}` }
-            ]
-        ]
-    };
-
-    try {
-        const response = await fetch(telegramUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: TELEGRAM_CHAT_ID,
-                text: textMessage,
-                parse_mode: 'Markdown',
-                reply_markup: inlineKeyboardGrid
-            })
-        });
-
-        const outcome = await response.json();
-        if (!outcome.ok) {
-            console.error('❌ Telegram Bot API Error details:', outcome.description);
-        } else {
-            console.log(`📱 Telegram Notification Alert successfully routed for ${referenceId}`);
+    bot.editMessageText(editedTemplate, {
+        chat_id: query.message.chat.id, message_id: query.message.message_id, parse_mode: 'Markdown', reply_markup: { inline_keyboard: [] }
+    }).then(() => {
+        bot.answerCallbackQuery(query.id, { text: `Application updated to: ${record.status}` });
+        if (record.userChatId) {
+            const clientNotice = (action === 'approve') 
+                ? `🎉 Success! Your application for *${record.amount}* has been *APPROVED* by administration.`
+                : `⚠️ Notice: Your loan application profile request for *${record.amount}* was *DECLINED*.`;
+            bot.sendMessage(record.userChatId, clientNotice, { parse_mode: 'Markdown' }).catch(() => {});
         }
-    } catch (err) {
-        console.error('❌ Failed to route telemetry handshake to Telegram endpoint servers:', err.message);
-    }
-}
-
-/**
- * @route   POST /api/loans/apply
- * @desc    Process incoming submissions, create telemetry metrics & fire Telegram triggers
- */
-app.post('/api/loans/apply', async (req, res) => {
-    const { fullName, phoneNumber, amount, periodMonths } = req.body;
-
-    if (!fullName || !phoneNumber || !amount || !periodMonths) {
-        return res.status(400).json({
-            success: false,
-            message: 'Invalid submission data. All application parameters are required fields.'
-        });
-    }
-
-    const cleanPhone = phoneNumber.trim();
-    if (!/^(07|2567)\d{8}$/.test(cleanPhone)) {
-        return res.status(400).json({
-            success: false,
-            message: 'Invalid mobile network routing number format. Use standard active MTN sequence indicators.'
-        });
-    }
-
-    if (amount > 5000000) {
-        return res.status(422).json({
-            success: false,
-            message: 'Requested maximum amount upper limit ceiling threshold overflow. Cap is UGX 5,000,000.'
-        });
-    }
-
-    const calculatedReferenceId = 'MOMO-LN-' + Math.floor(100000 + Math.random() * 900000);
-    
-    const operationalResponsePayload = {
-        referenceId: calculatedReferenceId,
-        fullName: fullName,
-        phoneNumber: cleanPhone,
-        amount: amount,
-        periodMonths: periodMonths,
-        status: 'Approved', 
-        processedTimestamp: new Date().toISOString()
-    };
-
-    sendTelegramAlert(fullName, cleanPhone, amount, periodMonths, calculatedReferenceId);
-
-    return res.status(200).json({
-        success: true,
-        message: 'Loan application evaluation complete.',
-        data: operationalResponsePayload
-    });
+    }).catch(err => console.error(err.message));
 });
 
-// Launch backend initialization runtime loops
-app.listen(PORT, () => {
-    console.log(`================================================================`);
-    console.log(` MTN MoMo Integration App initialized active on port: ${PORT}`);
-    console.log(` Web Frontend UI available at: http://localhost:${PORT}        `);
-    console.log(` API Endpoint available at: http://localhost:${PORT}/api/loans/apply `);
-    console.log(`================================================================`);
+// REST Endpoint pipeline receiving payloads details from index.html form wizard submission
+app.post('/api/loans/submit', (req, res) => {
+    const { name, phone, amount, period, userChatId } = req.body;
+    if (!name || !phone || !amount || !period) return res.status(400).json({ success: false, error: "Missing criteria." });
+
+    const appId = 'MOMO-' + Date.now();
+    activeApplicationsRegistry[appId] = { id: appId, name, phone, amount, period, status: 'PENDING', userChatId, timestamp: new Date() };
+
+    // Set destination parameters channel mapping router. Fallback straight to user private conversation workspace thread if group id missing
+    const adminChatId = process.env.ADMIN_CHAT_ID || userChatId;
+
+    if (adminChatId) {
+        const messageBody = `🔔 *NEW LOAN APPLICATION ENTRY REVIEWS*\n\n👤 *Applicant:* ${name}\n📱 *Phone:* ${phone}\n💰 *Amount:* ${amount}\n📅 *Period:* ${period}\n\n⏳ *System Review Status:* \`PENDING ADMIN EVALUATION\``;
+        bot.sendMessage(adminChatId, messageBody, {
+            parse_mode: 'Markdown',
+            reply_markup: {
+                inline_keyboard: [[
+                    { text: '✅ Approve', callback_data: `approve_${appId}` },
+                    { text: '❌ Decline', callback_data: `decline_${appId}` }
+                ]]
+            }
+        }).catch(err => console.error(err.message));
+    }
+    return res.status(200).json({ success: true, applicationId: appId });
 });
+
+app.get('/api/loans/status/:id', (req, res) => {
+    const record = activeApplicationsRegistry[req.params.id];
+    return record ? res.status(200).json({ success: true, status: record.status }) : res.status(404).json({ success: false });
+});
+
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname, 'public', 'index.html')); });
+app.listen(PORT, () => { console.log(`🚀 System environment interface layer pipeline online on port ${PORT}`); });
 
