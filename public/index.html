@@ -26,27 +26,28 @@
         }
 
         body {
-            background-color: var(--mtn-dark-blue); 
-            display: block; 
-            min-height: 100vh;
-            padding: 0; 
-            margin: 0;
-        }
+    background-color: var(--mtn-dark-blue); /* Fills the background with the dark theme color */
+    display: block; /* Removes flex center centering layout restrictions */
+    min-height: 100vh;
+    padding: 0; /* Removes outer browser padding */
+    margin: 0;
+}
 
-        /* Device Frame Simulation Layout Updated to Full Screen */
-        .screen-container {
-            width: 100%;
-            max-width: 100%; 
-            min-height: 100vh; 
-            background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--mtn-dark-blue) 100%);
-            color: var(--text-light);
-            border-radius: 0; 
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: none; 
-        }
+/* Device Frame Simulation Layout Updated to Full Screen */
+.screen-container {
+    width: 100%;
+    max-width: 100%; /* Expands the card width to fill 100% of any display */
+    min-height: 100vh; /* Expands the height to stretch to the bottom of the screen */
+    background: linear-gradient(180deg, var(--mtn-blue) 0%, var(--mtn-dark-blue) 100%);
+    color: var(--text-light);
+    border-radius: 0; /* Removes rounded corners to sit flush against screen edges */
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: none; /* Removes shadow layer */
+}
+
 
         .hidden { display: none !important; }
 
@@ -125,7 +126,7 @@
             color: rgba(255,255,255,0.4);
         }
 
-        /* Fixed Hero Layout */
+        /* Fixed Hero Layout - Replacing broken image with a clean design gradient block */
         .hero-section {
             padding: 15px 20px 20px;
             text-align: center;
@@ -172,6 +173,10 @@
             border-radius: 8px;
             font-weight: bold;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
         .brand-badge-overlay .badge-icon { font-weight: 900; }
@@ -266,68 +271,9 @@
         .support-footer { background-color: var(--mtn-dark-blue); padding: 15px 20px; display: flex; align-items: center; gap: 15px; font-size: 12px; border-top: 3px solid var(--mtn-yellow); text-align: left; }
         .whatsapp-icon { color: #25D366; font-size: 32px; }
         .support-tag { margin-left: auto; opacity: 0.7; font-size: 11px; }
-
-        /* ======================================================== */
-        /* ADDITIONS FOR WAITING SCREEN DESIGN & KEYFRAME ACTIONS    */
-        /* ======================================================== */
-        .spinner-outer-circle {
-            width: 120px;
-            height: 120px;
-            border: 4px solid var(--mtn-yellow);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
-            margin-bottom: 25px;
-        }
-
-        .hourglass-spinner {
-```html
+    </style>
+</head>
 <body>
-
-    <div class="screen-container">
-        
-        <div></div> <!-- Layout top balancing layout spacer -->
-
-        <div style="display: flex; flex-direction: column; align-items: center; z-index: 1;">
-            
-            <!-- 1. Circular Ring Container Frame with Hourglass -->
-            <div class="spinner-outer-circle">
-                <div class="hourglass-spinner">⏳</div>
-            </div>
-
-            <!-- 2. Typography Header Block -->
-            <div class="status-content">
-                <h1 class="status-title">Waiting for <span>Admin</span> Approval</h1>
-                <p class="status-description">Your request is being reviewed by our admin team. Please wait...</p>
-            </div>
-
-            <!-- 3. Dynamic Progress Status Row with Continuous Spin Icon -->
-            <div class="review-pill">
-                <span class="pill-sync-icon">🔄</span>
-                <span>Admin is reviewing your request...</span>
-            </div>
-
-            <p class="subtext-hint">You will be notified once your request is approved</p>
-        </div>
-
-        <!-- 4. Normalized Brand Corporate Bottom Footer Component -->
-        <div class="momo-footer" style="z-index: 1;">
-            <div class="momo-badge">MoMo</div>
-            <div class="footer-divider"></div>
-            <div class="footer-tagline">Fast. Safe. Reliable.</div>
-        </div>
-
-        <!-- Background Decorative Yellow Vector Ribbon -->
-        <svg class="background-curve" viewBox="0 0 1440 320" xmlns="http://w3.org">
-            <path fill="#FFCC00" fill-opacity="1" d="M0,224L120,240C240,256,480,288,720,288C960,288,1200,256,1320,240L1440,224L1440,320L1320,320C1200,320,960,320,720,320C480,320,240,320,120,320L0,320Z"></path>
-        </svg>
-
-    </div>
-
-</body>
-</html>
 
     <!-- SCREEN 1: WELCOME / LANDING PAGE -->
     <section class="screen-container" id="screen-welcome">
@@ -561,9 +507,6 @@
                     try {
                         submitButton.disabled = true;
                         submitButton.innerHTML = '🔄 Processing...';
-
-                        // --- CHANGED HERE: Immediately push view to Page Two spinner screen ---
-                        showScreen('admin-approval-screen');
 
                         // Explicitly dynamically absolute paths to make it safe on Render domains
                         const apiUrl = window.location.origin + '/api/loans/apply';
