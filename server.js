@@ -39,7 +39,7 @@ async function sendTelegramAlert(fullName, phoneNumber, amount, periodMonths, re
         return;
     }
 
-    const telegramUrl = `https://telegram.org{TELEGRAM_BOT_TOKEN}/sendMessage`;
+   const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`; 
     
     const textMessage = `🔔 *New Loan Application Received* 🔔\n\n` +
                         `👤 *Applicant:* ${fullName}\n` +
