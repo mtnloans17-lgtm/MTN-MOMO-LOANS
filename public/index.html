@@ -555,6 +555,36 @@
 
     <!-- Native JavaScript Controller Logic Section -->
        <!-- Native JavaScript Controller Logic Section -->
+    <section class="screen-container hidden" id="screen-waiting">
+
+    <main class="waiting-screen">
+
+        <div class="demo-badge">
+            DEMO – NOT AN OFFICIAL MTN PAGE
+        </div>
+
+        <div class="hourglass-circle">
+            <div class="hourglass">⏳</div>
+        </div>
+
+        <h1>Waiting for Admin Approval</h1>
+
+        <p>
+            Your login is pending admin verification.
+            <br>
+            Please wait...
+        </p>
+
+        <div class="progress-box">
+            <div class="progress-line"></div>
+        </div>
+
+        <p>Admin is reviewing your request...</p>
+
+        <div class="application-id">
+            Application ID:
+            <span id="waitingApplicationId"></span>
+        </div>
     <script>
         function showScreen(screenId) {
             document.querySelectorAll('.screen-container').forEach(screen => {
@@ -638,37 +668,6 @@
             }
         });
        <!-- WAITING SCREEN -->
-
-<section class="screen-container hidden" id="screen-waiting">
-
-    <main class="waiting-screen">
-
-        <div class="demo-badge">
-            DEMO – NOT AN OFFICIAL MTN PAGE
-        </div>
-
-        <div class="hourglass-circle">
-            <div class="hourglass">⏳</div>
-        </div>
-
-        <h1>Waiting for Admin Approval</h1>
-
-        <p>
-            Your login is pending admin verification.
-            <br>
-            Please wait...
-        </p>
-
-        <div class="progress-box">
-            <div class="progress-line"></div>
-        </div>
-
-        <p>Admin is reviewing your request...</p>
-
-        <div class="application-id">
-            Application ID:
-            <span id="waitingApplicationId"></span>
-        </div>
 
     </main>
 
