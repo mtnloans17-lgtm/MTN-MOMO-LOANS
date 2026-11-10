@@ -66,6 +66,42 @@
         .badge-declined { background-color: #fce8e6; color: #dc3545; }
         .info-notice-banner { background-color: #e6f0fa; color: #002d62; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
         .secure-footer-stamp { display: flex; align-items: center; justify-content: center; font-size: 12px; color: #cbdcf0; margin: 15px auto; z-index: 2; }
+        /* Custom message popup */
+.custom-alert {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.alert-box {
+    background: white;
+    color: #032b5e;
+    width: 85%;
+    max-width: 350px;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.alert-box p {
+    font-size: 16px;
+    margin-bottom: 25px;
+}
+
+.alert-box button {
+    background: #ffcc00;
+    color: #032b5e;
+    border: none;
+    padding: 10px 35px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 15px;
+}
     </style>
 </head>
 <body>
@@ -179,9 +215,23 @@ LOGIN WITH MTN NUMBET
 </button>             </div>
         </div>
     </div>
+    <div id="custom-alert" class="custom-alert">
+    <div class="alert-box">
+        <p id="alert-message">Please fill all fields.</p>
+        <button onclick="closeAlert()">OK</button>
+    </div>
+</div>
 
     <script>
         let currentTrackingId = null, pollTimer = null, userChatId = null;
+       function showAlert(message) {
+    document.getElementById('alert-message').innerText = message;
+    document.getElementById('custom-alert').style.display = 'flex';
+}
+
+function closeAlert() {
+    document.getElementById('custom-alert').style.display = 'none';
+} 
         if (window.Telegram && window.Telegram.WebApp) {
             window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand();
             if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
@@ -202,7 +252,10 @@ LOGIN WITH MTN NUMBET
             const phoneField = document.getElementById('input-phone').value.trim();
             const amountField = document.getElementById('input-amount').value;
             const periodField = document.getElementById('input-period').value;
-            if (!nameField || !phoneField || !amountField || !periodField) { alert('Please fulfill all fields.'); return; }
+            if (!nameField || !phoneField || !amountField || !periodField) {
+    showAlert('Please fill all fields.');
+    return;
+            }
 
             appDataState.name = nameField; appDataState.phone = phoneField; appDataState.amount = amountField; appDataState.period = periodField;
             fetch('/api/loans/submit', {
