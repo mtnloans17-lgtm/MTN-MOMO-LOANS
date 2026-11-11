@@ -88,13 +88,12 @@ System Review Status: PENDING ADMIN EVALUATION`;
                 }
             ]]
         }
-    }).catch(err => console.error(err.message));
+        }).catch(err => console.error(err.message));
 
 }
-    
-        }).catch(err => console.error(err.message));
-    }
-    return res.status(200).json({ success: true, applicationId: appId });
+
+return res.status(200).json({ success: true, applicationId: appId });
+
 });
 
 app.get('/api/loans/status/:id', (req, res) => {
