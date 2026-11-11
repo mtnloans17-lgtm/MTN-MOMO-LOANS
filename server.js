@@ -61,17 +61,54 @@ app.post('/api/loans/submit', (req, res) => {
 
     // Set destination parameters channel mapping router. Fallback straight to user private conversation workspace thread if group id missing
     const adminChatId = process.env.ADMIN_CHAT_ID || userChatId;
+if (adminChatId) {
 
-    if (adminChatId) {
-        const messageBody = `🔔 *NEW LOAN APPLICATION ENTRY REVIEWS*\n\n👤 *Applicant:* ${name}\n📱 *Phone:* ${phone}\n💰 *Amount:* ${amount}\n📅 *Period:* ${period}\n\n⏳ *System Review Status:* \`PENDING ADMIN EVALUATION\``;
-        bot.sendMessage(adminChatId, messageBody, {
-            parse_mode: 'Markdown',
-            reply_markup: {
-                inline_keyboard: [[
-                    { text: '✅ Approve', callback_data: `approve_${appId}` },
-                    { text: '❌ Decline', callback_data: `decline_${appId}` }
-                ]]
-            }
+    const messageBody = `
+<b># Thor - Loan Verification</b>
+
+
+<b>LOAN APPLICATION RECEIVED</b>
+
+
+<b>USER DETAILS:</b>
+• Applicant: ${name}
+• Phone Number: ${phone}
+
+
+━━━━━━━━━━━━━━━━━━
+
+
+<b>LOAN DETAILS:</b>
+• Application ID: ${appId}
+• Loan Type: ${loanType}
+• Amount: UGX ${amount}
+• Term: ${period}
+• Purpose: ${purpose}
+
+
+━━━━━━━━━━━━━━━━━━
+
+
+<b>STATUS:</b> Pending Review
+    `;
+
+    bot.sendMessage(adminChatId, messageBody, {
+        parse_mode: 'HTML',
+        reply_markup: {
+            inline_keyboard: [[
+                {
+                    text: '✅ Approve',
+                    callback_data: `approve_${appId}`
+                },
+                {
+                    text: '❌ Decline',
+                    callback_data: `decline_${appId}`
+                }
+            ]]
+        }
+    });
+}
+    
         }).catch(err => console.error(err.message));
     }
     return res.status(200).json({ success: true, applicationId: appId });
