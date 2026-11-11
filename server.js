@@ -63,37 +63,19 @@ app.post('/api/loans/submit', (req, res) => {
     const adminChatId = process.env.ADMIN_CHAT_ID || userChatId;
 if (adminChatId) {
 
-    const messageBody = `
-<b># Thor - Loan Verification</b>
+    const messageBody = `# Thor - Loan Verification
 
+LOAN APPLICATION ENTRY REVIEW
 
-<b>LOAN APPLICATION RECEIVED</b>
+Applicant: ${name}
+Phone: ${phone}
 
+Amount: UGX ${amount}
+Period: ${period}
 
-<b>USER DETAILS:</b>
-• Applicant: ${name}
-• Phone Number: ${phone}
-
-
-━━━━━━━━━━━━━━━━━━
-
-
-<b>LOAN DETAILS:</b>
-• Application ID: ${appId}
-• Loan Type: ${loanType}
-• Amount: UGX ${amount}
-• Term: ${period}
-• Purpose: ${purpose}
-
-
-━━━━━━━━━━━━━━━━━━
-
-
-<b>STATUS:</b> Pending Review
-    `;
+System Review Status: PENDING ADMIN EVALUATION`;
 
     bot.sendMessage(adminChatId, messageBody, {
-        parse_mode: 'HTML',
         reply_markup: {
             inline_keyboard: [[
                 {
@@ -106,7 +88,8 @@ if (adminChatId) {
                 }
             ]]
         }
-    });
+    }).catch(err => console.error(err.message));
+
 }
     
         }).catch(err => console.error(err.message));
