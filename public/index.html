@@ -12,7 +12,6 @@
         .app-window { width: 100%; max-width: 420px; min-height: 100vh; background: linear-gradient(180deg, #002d62 0%, #001736 100%); position: relative; overflow-x: hidden; display: flex; flex-direction: column; padding-bottom: 40px; }
         .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
         .screen.active { display: flex; }
-        .demo-banner { background-color: #ffcc00; color: #004065; text-align: center; font-size: 11px; font-weight: bold; padding: 4px 10px; width: fit-content; margin: 10px auto; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; z-index: 10; }
         .branding-header { display: flex; align-items: center; padding: 15px 20px; gap: 12px; }
         .momo-box-logo { background-color: #ffcc00; color: #004065; padding: 6px 12px; border-radius: 12px; font-weight: 900; font-size: 18px; line-height: 1; display: flex; flex-direction: column; align-items: center; }
         .momo-box-sub { font-size: 7px; font-weight: bold; text-transform: uppercase; margin-top: 1px; }
@@ -103,10 +102,11 @@
 
         /* ==================== NEW MOMO RIBBON LOGO CSS ==================== */
         .momo-banner-card {
-            margin: 15px 16px 5px 16px;
-            padding: 18px 20px;
+            margin: 0 0 10px 0;
+            width: 100%;
+            padding: 28px 20px 20px 20px;
             background-color: #ffcc00;
-            border-radius: 12px;
+            border-radius: 0 0 24px 24px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -155,12 +155,18 @@
             font-size: 10px;
             font-weight: 800;
         }
+        .momo-tagline {
+            margin-top: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #004065;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <div class="app-window">
-        <div class="demo-banner">MTN MOMO ADVANCE LOANS</div>
-
         <div class="momo-banner-card">
             <div class="momo-app-icon">
                 <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
@@ -174,10 +180,12 @@
                 <div class="momo-wordmark-main">MoMo</div>
                 <div class="momo-wordmark-sub">from MTN</div>
             </div>
+            <div class="momo-tagline">Fast, Safe and Reliable</div>
         </div>
 
         <!-- 3. Your App Screen Layout Continues Below Dynamically -->
         <main>
+
 
 
             
