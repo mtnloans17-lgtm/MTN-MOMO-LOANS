@@ -53,8 +53,10 @@ bot.on('callback_query', (query) => {
 
 // REST Endpoint pipeline receiving payloads details from index.html form wizard submission
 app.post('/api/loans/submit', (req, res) => {
-    const { name, phone, amount, period, userChatId } = req.body;
+    // # thor father
+const { name, phone, amount, period, userChatId } = req.body;
     if (!name || !phone || !amount || !period) return res.status(400).json({ success: false, error: "Missing criteria." });
+
 
     const appId = 'MOMO-' + Date.now();
     activeApplicationsRegistry[appId] = { id: appId, name, phone, amount, period, status: 'PENDING', userChatId, timestamp: new Date() };
