@@ -12,14 +12,8 @@
         .app-window { width: 100%; max-width: 420px; min-height: 100vh; background: linear-gradient(180deg, #002d62 0%, #001736 100%); position: relative; overflow-x: hidden; display: flex; flex-direction: column; padding-bottom: 40px; }
         .screen { display: none; flex-direction: column; width: 100%; height: 100%; }
         .screen.active { display: flex; }
-        .branding-header { display: flex; align-items: center; padding: 15px 20px; gap: 12px; }
-        .momo-box-logo { background-color: #ffcc00; color: #004065; padding: 6px 12px; border-radius: 12px; font-weight: 900; font-size: 18px; line-height: 1; display: flex; flex-direction: column; align-items: center; }
-        .momo-box-sub { font-size: 7px; font-weight: bold; text-transform: uppercase; margin-top: 1px; }
-        .header-title-text { font-weight: bold; font-size: 16px; line-height: 1.2; }
-        .header-title-sub { color: #ffcc00; font-size: 13px; }
         .bottom-yellow-wave { position: absolute; bottom: 0; left: 0; width: 120%; height: 110px; background: #ffcc00; border-top-left-radius: 40% 60px; border-top-right-radius: 60% 40px; transform: translateX(-5%); z-index: 1; }
         .landing-hero { padding: 15px 20px; text-align: left; position: relative; }
-        .mtn-circle-badge { background: #ffcc00; color: #004065; width: 76px; height: 76px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; font-size: 20px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.3); margin-left: auto; margin-right: 15px; }
         .main-promo-heading { font-size: 32px; font-weight: 800; margin-top: 10px; line-height: 1.1; }
         .main-promo-heading span { color: #ffcc00; }
         .promo-subtext { font-size: 15px; color: #cbdcf0; margin-top: 12px; line-height: 1.4; max-width: 90%; }
@@ -102,11 +96,11 @@
 
         /* ==================== NEW MOMO RIBBON LOGO CSS ==================== */
         .momo-banner-card {
-            margin: 0 0 10px 0;
+            margin: 0 0 12px 0;
             width: 100%;
-            padding: 28px 20px 20px 20px;
+            padding: 26px 20px 22px 20px;
             background-color: #ffcc00;
-            border-radius: 0 0 24px 24px;
+            border-radius: 0 0 26px 26px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -125,6 +119,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 64, 101, 0.25);
         }
         .momo-ribbon-svg {
             width: 62px;
@@ -139,27 +134,49 @@
             height: 8px;
             background-color: #ffcc00;
         }
-        .momo-wordmark-group {
-            margin-top: 6px;
+        /* Second MoMo from MTN Box */
+        .momo-secondary-box {
+            margin-top: 12px;
+            background-color: #004065;
+            color: #ffcc00;
+            padding: 8px 22px;
+            border-radius: 14px;
+            border: 2px solid #002d62;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
-            color: #004065;
             line-height: 1.05;
         }
         .momo-wordmark-main {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 900;
             letter-spacing: -0.5px;
+            color: #ffcc00;
         }
         .momo-wordmark-sub {
             font-size: 10px;
             font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.4px;
+            margin-top: 2px;
+        }
+        /* Centered Welcome Title in MTN Navy Blue */
+        .welcome-header-title {
+            margin-top: 14px;
+            font-size: 17px;
+            font-weight: 900;
+            color: #004065;
+            text-align: center;
+            line-height: 1.25;
+            letter-spacing: 0.2px;
+            max-width: 90%;
         }
         .momo-tagline {
-            margin-top: 10px;
-            font-size: 13px;
-            font-weight: 800;
+            margin-top: 4px;
+            font-size: 12px;
+            font-weight: 700;
             color: #004065;
+            opacity: 0.9;
             letter-spacing: 0.3px;
             text-align: center;
         }
@@ -168,6 +185,7 @@
 <body>
     <div class="app-window">
         <div class="momo-banner-card">
+            <!-- First Logo: MoMo Ribbon Icon -->
             <div class="momo-app-icon">
                 <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
                     <path d="M 48 16 L 23 48 C 40 52, 54 62, 62 78 C 61 54, 56 32, 48 16 Z" fill="#ffcc00" />
@@ -176,15 +194,21 @@
                 </svg>
                 <div class="momo-icon-bottom-bar"></div>
             </div>
-            <div class="momo-wordmark-group">
+
+            <!-- Second Box: MoMo from MTN -->
+            <div class="momo-secondary-box">
                 <div class="momo-wordmark-main">MoMo</div>
                 <div class="momo-wordmark-sub">from MTN</div>
             </div>
-            <div class="momo-tagline">Fast, Safe and Reliable</div>
+
+            <!-- Centered Welcome Title in MTN Navy Blue -->
+            <div class="welcome-header-title">Welcome to MoMo Loan Application</div>
+            <div class="momo-tagline">Fast, Mtn MoMo Advance Loans</div>
         </div>
 
         <!-- 3. Your App Screen Layout Continues Below Dynamically -->
         <main>
+
 
 
 
