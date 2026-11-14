@@ -41,8 +41,33 @@
         .hl-label { font-size: 11px; color: #627d98; font-weight: bold; text-transform: uppercase; }
         .hl-value { font-size: 14px; font-weight: bold; margin-top: 2px; }
         .footer-banner-text { text-align: center; font-size: 13px; font-weight: bold; color: #004065; position: absolute; bottom: 20px; width: 100%; left: 0; z-index: 2; }
-        .pill-cta-btn { background-color: #ffcc00; color: #004065; border: none; padding: 14px 30px; border-radius: 30px; font-size: 17px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; margin: 15px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 5; position: relative; }
         
+        /* Deep MTN Navy Blue CTA Buttons (Apply Now & Continue) */
+        .pill-cta-btn {
+            background-color: #002447;
+            color: #ffcc00;
+            border: 2px solid #ffcc00;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: fit-content;
+            margin: 15px auto;
+            box-shadow: 0 5px 15px rgba(0, 36, 71, 0.4);
+            z-index: 5;
+            position: relative;
+            transition: transform 0.15s ease, background-color 0.15s ease;
+        }
+        .pill-cta-btn:active {
+            transform: scale(0.98);
+            background-color: #001830;
+        }
+
         .form-scaffold {
             width: 100%;
             background: #ffffff;
