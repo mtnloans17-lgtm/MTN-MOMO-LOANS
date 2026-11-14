@@ -14,20 +14,21 @@
         .screen.active { display: flex; }
         .bottom-yellow-wave { position: absolute; bottom: 0; left: 0; width: 120%; height: 110px; background: #ffcc00; border-top-left-radius: 40% 60px; border-top-right-radius: 60% 40px; transform: translateX(-5%); z-index: 1; }
         
-        /* Centered Section 1 in MTN Navy Blue */
+        /* Third Section: Full-Width Edge-to-Edge Touching Second Box */
         .landing-hero {
+            width: 100%;
             background-color: #004065;
-            border: 1.5px solid #005b8f;
-            border-radius: 18px;
-            margin: 14px 16px 6px 16px;
-            padding: 22px 18px;
+            border-bottom: 2px solid #005b8f;
+            border-radius: 0;
+            margin: 0 0 12px 0;
+            padding: 20px 18px;
             text-align: center;
             position: relative;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
         }
-        .main-promo-heading { font-size: 30px; font-weight: 800; margin-top: 8px; line-height: 1.15; text-align: center; }
+        .main-promo-heading { font-size: 30px; font-weight: 800; margin-top: 4px; line-height: 1.15; text-align: center; }
         .main-promo-heading span { color: #ffcc00; }
-        .promo-subtext { font-size: 15px; color: #cbdcf0; margin: 12px auto 0 auto; line-height: 1.4; max-width: 95%; text-align: center; }
+        .promo-subtext { font-size: 15px; color: #cbdcf0; margin: 10px auto 0 auto; line-height: 1.4; max-width: 95%; text-align: center; }
 
         .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; padding: 25px 20px; }
         .feature-item { display: flex; flex-direction: column; align-items: center; text-align: center; }
@@ -41,7 +42,18 @@
         .hl-value { font-size: 14px; font-weight: bold; margin-top: 2px; }
         .footer-banner-text { text-align: center; font-size: 13px; font-weight: bold; color: #004065; position: absolute; bottom: 20px; width: 100%; left: 0; z-index: 2; }
         .pill-cta-btn { background-color: #ffcc00; color: #004065; border: none; padding: 14px 30px; border-radius: 30px; font-size: 17px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; margin: 15px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 5; position: relative; }
-        .form-scaffold { background: #ffffff; color: #004065; border-radius: 20px; margin: 15px 16px; padding: 20px 16px; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        
+        /* Full-width edge-to-edge form card when directly below second box */
+        .form-scaffold {
+            width: 100%;
+            background: #ffffff;
+            color: #004065;
+            border-radius: 0 0 20px 20px;
+            margin: 0 0 15px 0;
+            padding: 20px 16px;
+            z-index: 2;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
         .input-group { margin-bottom: 16px; }
         .input-group label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 6px; }
         .input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 14px; border: 1.5px solid #cbdcf0; border-radius: 10px; font-size: 15px; color: #004065; outline: none; background-color: #ffffff; }
@@ -58,7 +70,7 @@
         .alert-spinner-ribbon { background-color: #ffcc00; color: #001736; width: 100%; padding: 14px 20px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; margin-bottom: 25px; }
         .css-loop-circle { width: 18px; height: 18px; border: 3px solid #001736; border-right-color: transparent; border-radius: 50%; margin-right: 12px; animation: rotateFrames 1s linear infinite; }
         @keyframes rotateFrames { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .success-card { background: #ffffff; color: #004065; border-radius: 20px; margin: 15px 16px; padding: 24px 16px; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-align: center; }
+        .success-card { width: 100%; background: #ffffff; color: #004065; border-radius: 0 0 20px 20px; margin: 0 0 15px 0; padding: 24px 16px; z-index: 2; box-shadow: 0 6px 20px rgba(0,0,0,0.3); text-align: center; }
         .success-checkmark-circle { width: 70px; height: 70px; background-color: #28a745; color: white; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 36px; margin: 0 auto 15px auto; }
         .success-title { font-size: 24px; font-weight: 800; color: #28a745; margin-bottom: 6px; }
         .success-msg { font-size: 14px; color: #627d98; margin-bottom: 20px; }
@@ -105,24 +117,24 @@
             font-size: 15px;
         }
 
-        /* ==================== TOP YELLOW BANNER (FIRST LOGO) ==================== */
+        /* ==================== FIRST BOX: FULL-WIDTH TOP YELLOW BANNER ==================== */
         .momo-banner-card {
-            margin: 0 0 10px 0;
+            margin: 0;
             width: 100%;
-            padding: 22px 20px 18px 20px;
+            padding: 20px 20px 14px 20px;
             background-color: #ffcc00;
-            border-radius: 0 0 26px 26px;
+            border-radius: 0;
+            border-bottom: 2px solid #004065;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             z-index: 2;
             position: relative;
         }
         .momo-app-icon {
-            width: 76px;
-            height: 76px;
+            width: 74px;
+            height: 74px;
             background-color: #004065;
             border-radius: 18px;
             position: relative;
@@ -133,8 +145,8 @@
             box-shadow: 0 4px 10px rgba(0, 64, 101, 0.25);
         }
         .momo-ribbon-svg {
-            width: 58px;
-            height: 58px;
+            width: 56px;
+            height: 56px;
             margin-bottom: 6px;
         }
         .momo-icon-bottom-bar {
@@ -146,26 +158,26 @@
             background-color: #ffcc00;
         }
         .momo-primary-text-block {
-            margin-top: 10px;
+            margin-top: 8px;
             text-align: center;
             line-height: 1.05;
         }
         .momo-primary-main {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 25px;
+            font-size: 24px;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: #004065;
         }
         .momo-primary-sub {
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: 800;
             color: #004065;
             letter-spacing: 0.4px;
             margin-top: 2px;
         }
         .momo-tagline {
-            margin-top: 10px;
+            margin-top: 8px;
             font-size: 12.5px;
             font-weight: 800;
             color: #004065;
@@ -173,18 +185,18 @@
             text-align: center;
         }
 
-        /* ==================== SECOND LOGO BOX (REDUCED COMPACT SIZE) ==================== */
+        /* ==================== SECOND BOX: FULL-WIDTH TOUCHING FIRST & THIRD ==================== */
         .momo-green-x-container {
+            width: 100%;
             background-color: #ffcc00;
-            border-radius: 14px;
-            margin: 2px 24px 10px 24px;
-            padding: 10px 12px 9px 12px;
+            border-radius: 0;
+            margin: 0;
+            padding: 10px 14px 9px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
             z-index: 2;
             position: relative;
         }
@@ -243,7 +255,7 @@
 </head>
 <body>
     <div class="app-window">
-        <!-- First Logo -->
+        <!-- First Box -->
         <div class="momo-banner-card">
             <div class="momo-app-icon">
                 <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
@@ -262,7 +274,7 @@
             <div class="momo-tagline">Fast, Mtn MoMo Advance Loans</div>
         </div>
 
-        <!-- Second Logo Box (Compact Size) -->
+        <!-- Second Box: Edge-to-Edge Touching First and Third -->
         <div class="momo-green-x-container">
             <div class="mtn-oval-emblem">
                 <span class="mtn-oval-text">MTN</span>
@@ -273,8 +285,9 @@
             <div class="momo-portal-caption">MTN Mobile Money Official Portal</div>
         </div>
 
-        <!-- 3. Your App Screen Layout Continues Below Dynamically -->
+        <!-- 3. Third Section Continues Edge-to-Edge Below -->
         <main>
+
 
 <!-- SCREEN 1: LANDING OVERVIEW -->
         <div id="screen-landing" class="screen active">
