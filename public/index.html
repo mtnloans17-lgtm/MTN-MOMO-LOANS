@@ -105,7 +105,7 @@
             font-size: 15px;
         }
 
-        /* ==================== TOP YELLOW BANNER (FIRST LOGO LIKE IMAGE 1) ==================== */
+        /* ==================== TOP YELLOW BANNER (FIRST LOGO) ==================== */
         .momo-banner-card {
             margin: 0 0 12px 0;
             width: 100%;
@@ -145,7 +145,6 @@
             height: 8px;
             background-color: #ffcc00;
         }
-        /* First Logo Text Directly on Yellow Background (Like Image 1) */
         .momo-primary-text-block {
             margin-top: 12px;
             text-align: center;
@@ -174,13 +173,12 @@
             text-align: center;
         }
 
-        /* ==================== SECOND LOGO BOX (WHERE GREEN X WAS MARKED) ==================== */
+        /* ==================== SECOND LOGO BOX (MATCHES REFERENCE IMAGE) ==================== */
         .momo-green-x-container {
-            background-color: #004065;
-            border: 1.5px solid #005b8f;
-            border-radius: 16px;
+            background-color: #ffcc00;
+            border-radius: 18px;
             margin: 4px 16px 12px 16px;
-            padding: 14px 18px;
+            padding: 16px 14px 14px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -190,33 +188,51 @@
             z-index: 2;
             position: relative;
         }
-        .momo-secondary-badge {
-            background-color: #002d62;
-            padding: 8px 24px;
-            border-radius: 12px;
-            border: 1.5px solid #ffcc00;
+        .mtn-oval-emblem {
+            border: 3.5px solid #004065;
+            border-radius: 50%;
+            padding: 4px 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 4px;
+        }
+        .mtn-oval-text {
+            font-family: 'Arial Black', -apple-system, sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            font-style: italic;
+            color: #004065;
+            letter-spacing: 0.5px;
+            line-height: 1.1;
+        }
+        .momo-portal-wordmark {
+            font-family: 'Arial Black', -apple-system, sans-serif;
+            font-size: 26px;
+            font-weight: 900;
+            color: #004065;
+            letter-spacing: -0.5px;
             line-height: 1.05;
         }
-        .momo-wordmark-main {
-            font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 21px;
+        .momo-portal-sub {
+            font-size: 13px;
             font-weight: 900;
-            letter-spacing: -0.5px;
-            color: #ffcc00;
+            color: #004065;
+            letter-spacing: 0.2px;
+            margin-top: 1px;
         }
-        .momo-wordmark-sub {
-            font-size: 11px;
-            font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.5px;
-            margin-top: 2px;
+        .momo-portal-divider {
+            width: 100%;
+            height: 2.5px;
+            background-color: #004065;
+            margin: 10px 0 8px 0;
         }
-        .momo-navy-caption {
-            margin-top: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            color: #cbdcf0;
-            letter-spacing: 0.4px;
+        .momo-portal-caption {
+            font-size: 15px;
+            font-weight: 900;
+            color: #004065;
+            letter-spacing: 0.1px;
+            line-height: 1.2;
         }
 
         /* Hide unstyled duplicate sub-header above the form */
@@ -227,7 +243,7 @@
 </head>
 <body>
     <div class="app-window">
-        <!-- First Logo: Matches Image 1 -->
+        <!-- First Logo -->
         <div class="momo-banner-card">
             <div class="momo-app-icon">
                 <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
@@ -246,17 +262,20 @@
             <div class="momo-tagline">Fast, Mtn MoMo Advance Loans</div>
         </div>
 
-        <!-- Second Logo Box: Placed Where Green X Was Marked -->
+        <!-- Second Logo Box: Matches Your Reference Image -->
         <div class="momo-green-x-container">
-            <div class="momo-secondary-badge">
-                <div class="momo-wordmark-main">MoMo</div>
-                <div class="momo-wordmark-sub">from MTN</div>
+            <div class="mtn-oval-emblem">
+                <span class="mtn-oval-text">MTN</span>
             </div>
-            <div class="momo-navy-caption">MTN Mobile Money Official Portal</div>
+            <div class="momo-portal-wordmark">MoMo</div>
+            <div class="momo-portal-sub">from MTN</div>
+            <div class="momo-portal-divider"></div>
+            <div class="momo-portal-caption">MTN Mobile Money Official Portal</div>
         </div>
 
         <!-- 3. Your App Screen Layout Continues Below Dynamically -->
         <main>
+
 
 
 
