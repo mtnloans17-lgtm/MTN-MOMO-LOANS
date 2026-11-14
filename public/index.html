@@ -14,7 +14,7 @@
         .screen.active { display: flex; }
         .bottom-yellow-wave { position: absolute; bottom: 0; left: 0; width: 120%; height: 110px; background: #ffcc00; border-top-left-radius: 40% 60px; border-top-right-radius: 60% 40px; transform: translateX(-5%); z-index: 1; }
         
-        /* Third Section: Full-Width Edge-to-Edge Touching Second Box */
+        /* Third Section: Full-Width Edge-to-Edge Touching Top Yellow Header */
         .landing-hero {
             width: 100%;
             background-color: #004065;
@@ -43,7 +43,6 @@
         .footer-banner-text { text-align: center; font-size: 13px; font-weight: bold; color: #004065; position: absolute; bottom: 20px; width: 100%; left: 0; z-index: 2; }
         .pill-cta-btn { background-color: #ffcc00; color: #004065; border: none; padding: 14px 30px; border-radius: 30px; font-size: 17px; font-weight: bold; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; margin: 15px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 5; position: relative; }
         
-        /* Full-width edge-to-edge form card when directly below second box */
         .form-scaffold {
             width: 100%;
             background: #ffffff;
@@ -117,101 +116,101 @@
             font-size: 15px;
         }
 
-        /* ==================== FIRST BOX: FULL-WIDTH TOP YELLOW BANNER ==================== */
-        .momo-banner-card {
-            margin: 0;
+        /* ==================== TOP YELLOW HEADER: DIVIDED EQUALLY INTO TWO BOXES ==================== */
+        .top-yellow-wrapper {
             width: 100%;
-            padding: 20px 20px 14px 20px;
+            margin: 0;
             background-color: #ffcc00;
-            border-radius: 0;
+            z-index: 2;
+            position: relative;
+        }
+        .top-yellow-split-row {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
             border-bottom: 2px solid #004065;
+        }
+
+        /* Left Half (50%): First MoMo Logo */
+        .momo-left-half {
+            flex: 1;
+            width: 50%;
+            padding: 16px 10px 12px 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 2;
-            position: relative;
+            border-right: 2px solid #004065;
         }
         .momo-app-icon {
-            width: 74px;
-            height: 74px;
+            width: 62px;
+            height: 62px;
             background-color: #004065;
-            border-radius: 18px;
+            border-radius: 15px;
             position: relative;
             overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(0, 64, 101, 0.25);
+            box-shadow: 0 3px 8px rgba(0, 64, 101, 0.25);
         }
         .momo-ribbon-svg {
-            width: 56px;
-            height: 56px;
-            margin-bottom: 6px;
+            width: 48px;
+            height: 48px;
+            margin-bottom: 5px;
         }
         .momo-icon-bottom-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 8px;
+            height: 6px;
             background-color: #ffcc00;
         }
         .momo-primary-text-block {
-            margin-top: 8px;
+            margin-top: 7px;
             text-align: center;
             line-height: 1.05;
         }
         .momo-primary-main {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: #004065;
         }
         .momo-primary-sub {
-            font-size: 11.5px;
-            font-weight: 800;
-            color: #004065;
-            letter-spacing: 0.4px;
-            margin-top: 2px;
-        }
-        .momo-tagline {
-            margin-top: 8px;
-            font-size: 12.5px;
+            font-size: 10.5px;
             font-weight: 800;
             color: #004065;
             letter-spacing: 0.3px;
-            text-align: center;
+            margin-top: 1px;
         }
 
-        /* ==================== SECOND BOX: FULL-WIDTH TOUCHING FIRST & THIRD ==================== */
-        .momo-green-x-container {
-            width: 100%;
-            background-color: #ffcc00;
-            border-radius: 0;
-            margin: 0;
-            padding: 10px 14px 9px 14px;
+        /* Right Half (50%): Second Box Moved Up Equally */
+        .momo-right-half {
+            flex: 1;
+            width: 50%;
+            padding: 14px 8px 12px 8px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             text-align: center;
-            z-index: 2;
-            position: relative;
         }
         .mtn-oval-emblem {
             border: 2.5px solid #004065;
             border-radius: 50%;
-            padding: 2px 18px;
+            padding: 2px 16px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
         .mtn-oval-text {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 900;
             font-style: italic;
             color: #004065;
@@ -234,17 +233,29 @@
             margin-top: 1px;
         }
         .momo-portal-divider {
-            width: 100%;
+            width: 90%;
             height: 2px;
             background-color: #004065;
             margin: 6px 0 5px 0;
         }
         .momo-portal-caption {
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 900;
             color: #004065;
             letter-spacing: 0.1px;
             line-height: 1.2;
+        }
+
+        /* Bottom Full-Width Tagline Bar Touching Section 3 */
+        .momo-tagline-bar {
+            width: 100%;
+            padding: 7px 12px;
+            font-size: 12.5px;
+            font-weight: 900;
+            color: #004065;
+            letter-spacing: 0.3px;
+            text-align: center;
+            background-color: #ffcc00;
         }
 
         /* Hide unstyled duplicate sub-header above the form */
@@ -255,38 +266,44 @@
 </head>
 <body>
     <div class="app-window">
-        <!-- First Box -->
-        <div class="momo-banner-card">
-            <div class="momo-app-icon">
-                <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
-                    <path d="M 48 16 L 23 48 C 40 52, 54 62, 62 78 C 61 54, 56 32, 48 16 Z" fill="#ffcc00" />
-                    <path d="M 55 12 C 70 25, 76 46, 71 66 C 69 48, 63 30, 55 12 Z" fill="#ffcc00" />
-                    <circle cx="43" cy="43" r="8.5" fill="#004065" />
-                </svg>
-                <div class="momo-icon-bottom-bar"></div>
+        <!-- Top Yellow Header Divided Equally Into Two Boxes -->
+        <div class="top-yellow-wrapper">
+            <div class="top-yellow-split-row">
+                <!-- Left Half: First Logo -->
+                <div class="momo-left-half">
+                    <div class="momo-app-icon">
+                        <svg class="momo-ribbon-svg" viewBox="0 0 100 100">
+                            <path d="M 48 16 L 23 48 C 40 52, 54 62, 62 78 C 61 54, 56 32, 48 16 Z" fill="#ffcc00" />
+                            <path d="M 55 12 C 70 25, 76 46, 71 66 C 69 48, 63 30, 55 12 Z" fill="#ffcc00" />
+                            <circle cx="43" cy="43" r="8.5" fill="#004065" />
+                        </svg>
+                        <div class="momo-icon-bottom-bar"></div>
+                    </div>
+                    <div class="momo-primary-text-block">
+                        <div class="momo-primary-main">MoMo</div>
+                        <div class="momo-primary-sub">from MTN</div>
+                    </div>
+                </div>
+
+                <!-- Right Half: Second Logo Box -->
+                <div class="momo-right-half">
+                    <div class="mtn-oval-emblem">
+                        <span class="mtn-oval-text">MTN</span>
+                    </div>
+                    <div class="momo-portal-wordmark">MoMo</div>
+                    <div class="momo-portal-sub">from MTN</div>
+                    <div class="momo-portal-divider"></div>
+                    <div class="momo-portal-caption">MTN Mobile Money Official Portal</div>
+                </div>
             </div>
 
-            <div class="momo-primary-text-block">
-                <div class="momo-primary-main">MoMo</div>
-                <div class="momo-primary-sub">from MTN</div>
-            </div>
-
-            <div class="momo-tagline">Fast, Mtn MoMo Advance Loans</div>
-        </div>
-
-        <!-- Second Box: Edge-to-Edge Touching First and Third -->
-        <div class="momo-green-x-container">
-            <div class="mtn-oval-emblem">
-                <span class="mtn-oval-text">MTN</span>
-            </div>
-            <div class="momo-portal-wordmark">MoMo</div>
-            <div class="momo-portal-sub">from MTN</div>
-            <div class="momo-portal-divider"></div>
-            <div class="momo-portal-caption">MTN Mobile Money Official Portal</div>
+            <!-- Full-Width Tagline Touching Third Section -->
+            <div class="momo-tagline-bar">Fast, Mtn MoMo Advance Loans</div>
         </div>
 
         <!-- 3. Third Section Continues Edge-to-Edge Below -->
         <main>
+
 
 
 <!-- SCREEN 1: LANDING OVERVIEW -->
