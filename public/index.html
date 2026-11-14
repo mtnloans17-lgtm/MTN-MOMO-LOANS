@@ -116,7 +116,7 @@
             font-size: 15px;
         }
 
-        /* ==================== TOP YELLOW HEADER: DIVIDED EQUALLY INTO TWO BOXES ==================== */
+        /* ==================== TOP YELLOW HEADER: DIVIDED EQUALLY (SLIGHTLY BIGGER) ==================== */
         .top-yellow-wrapper {
             width: 100%;
             margin: 0;
@@ -129,14 +129,13 @@
             display: flex;
             flex-direction: row;
             align-items: stretch;
-            border-bottom: 2px solid #004065;
         }
 
         /* Left Half (50%): First MoMo Logo */
         .momo-left-half {
             flex: 1;
             width: 50%;
-            padding: 16px 10px 12px 10px;
+            padding: 22px 12px 16px 12px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -144,10 +143,10 @@
             border-right: 2px solid #004065;
         }
         .momo-app-icon {
-            width: 62px;
-            height: 62px;
+            width: 72px;
+            height: 72px;
             background-color: #004065;
-            border-radius: 15px;
+            border-radius: 17px;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -156,43 +155,43 @@
             box-shadow: 0 3px 8px rgba(0, 64, 101, 0.25);
         }
         .momo-ribbon-svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 5px;
+            width: 56px;
+            height: 56px;
+            margin-bottom: 6px;
         }
         .momo-icon-bottom-bar {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 6px;
+            height: 7px;
             background-color: #ffcc00;
         }
         .momo-primary-text-block {
-            margin-top: 7px;
+            margin-top: 9px;
             text-align: center;
             line-height: 1.05;
         }
         .momo-primary-main {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 20px;
+            font-size: 23px;
             font-weight: 900;
             letter-spacing: -0.5px;
             color: #004065;
         }
         .momo-primary-sub {
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 800;
             color: #004065;
             letter-spacing: 0.3px;
-            margin-top: 1px;
+            margin-top: 2px;
         }
 
-        /* Right Half (50%): Second Box Moved Up Equally */
+        /* Right Half (50%): Second Logo Box */
         .momo-right-half {
             flex: 1;
             width: 50%;
-            padding: 14px 8px 12px 8px;
+            padding: 22px 10px 16px 10px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -200,17 +199,17 @@
             text-align: center;
         }
         .mtn-oval-emblem {
-            border: 2.5px solid #004065;
+            border: 3px solid #004065;
             border-radius: 50%;
-            padding: 2px 16px;
+            padding: 3px 20px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
         }
         .mtn-oval-text {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 14px;
+            font-size: 17px;
             font-weight: 900;
             font-style: italic;
             color: #004065;
@@ -219,43 +218,50 @@
         }
         .momo-portal-wordmark {
             font-family: 'Arial Black', -apple-system, sans-serif;
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 900;
             color: #004065;
             letter-spacing: -0.4px;
             line-height: 1.05;
         }
         .momo-portal-sub {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 900;
             color: #004065;
             letter-spacing: 0.2px;
             margin-top: 1px;
         }
         .momo-portal-divider {
-            width: 90%;
+            width: 92%;
             height: 2px;
             background-color: #004065;
-            margin: 6px 0 5px 0;
+            margin: 8px 0 6px 0;
         }
         .momo-portal-caption {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 900;
             color: #004065;
             letter-spacing: 0.1px;
-            line-height: 1.2;
+            line-height: 1.25;
         }
 
-        /* Bottom Full-Width Tagline Bar Touching Section 3 */
+        /* Bottom Full-Width Tagline Bar with Center Vertical Line Extended */
         .momo-tagline-bar {
             width: 100%;
-            padding: 7px 12px;
-            font-size: 12.5px;
+            padding: 10px 12px 12px 12px;
+            font-size: 14.5px;
             font-weight: 900;
             color: #004065;
             letter-spacing: 0.3px;
             text-align: center;
+            background: linear-gradient(to right, transparent calc(50% - 1px), #004065 calc(50% - 1px), #004065 calc(50% + 1px), transparent calc(50% + 1px)), #ffcc00;
+            position: relative;
+        }
+        .momo-tagline-text {
             background-color: #ffcc00;
+            padding: 0 8px;
+            position: relative;
+            z-index: 1;
         }
 
         /* Hide unstyled duplicate sub-header above the form */
@@ -298,11 +304,14 @@
             </div>
 
             <!-- Full-Width Tagline Touching Third Section -->
-            <div class="momo-tagline-bar">Fast, Mtn MoMo Advance Loans</div>
+            <div class="momo-tagline-bar">
+                <span class="momo-tagline-text"Mtn MoMo Advance Loans</span>
+            </div>
         </div>
 
         <!-- 3. Third Section Continues Edge-to-Edge Below -->
         <main>
+
 
 
 
