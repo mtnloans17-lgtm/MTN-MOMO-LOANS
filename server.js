@@ -42,6 +42,21 @@ function escapeMarkdown(value) {
 }
 
 // ----------------------------------------------------------------------
+// UGX AMOUNT FORMATTER - PREVENT DUPLICATE UGX
+// ----------------------------------------------------------------------
+
+function formatUGXAmount(value) {
+
+    // Remove existing UGX prefixes, including repeated prefixes
+    const cleanAmount = String(value ?? '')
+        .replace(/^(?:\s*UGX\b\s*)+/i, '')
+        .trim();
+
+    // Add UGX exactly once
+    return `UGX ${cleanAmount}`;
+}
+
+// ----------------------------------------------------------------------
 // TELEGRAM START COMMAND
 // ----------------------------------------------------------------------
 
@@ -126,7 +141,7 @@ USER DETAILS:
 LOAN DETAILS:
 • Application ID: *${escapeMarkdown(record.id)}*
 • Loan Type: *${escapeMarkdown(record.loanType)}*
-• Amount: *UGX ${escapeMarkdown(record.amount)}*
+• Amount: *${escapeMarkdown(formatUGXAmount(record.amount))}*
 • Term: *${escapeMarkdown(record.period)}*
 
 ━━━━━━━━━━━━━━━━━━━━
@@ -234,7 +249,7 @@ USER DETAILS:
 LOAN DETAILS:
 • Application ID: *${escapeMarkdown(record.id)}*
 • Loan Type: *${escapeMarkdown(record.loanType)}*
-• Amount: *UGX ${escapeMarkdown(record.amount)}*
+• Amount: *${escapeMarkdown(formatUGXAmount(record.amount))}*
 • Term: *${escapeMarkdown(record.period)}*
 
 ━━━━━━━━━━━━━━━━━━━━
