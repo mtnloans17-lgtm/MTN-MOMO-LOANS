@@ -87,8 +87,9 @@
         .wa-details p { font-size: 11px; opacity: 0.8; }
         .spinner-viewport { display: none; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; z-index: 2; flex-grow: 1; }
         .spinner-viewport.active { display: flex; }
-        .outer-ring-glowing { width: 110px; height: 110px; border-radius: 50%; background-color: #00315c; border: 3px solid #00a4e4; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; box-shadow: 0 0 20px rgba(0, 164, 228, 0.5); }
-        .hourglass-svg { font-size: 42px; color: #ffcc00; }
+        .outer-ring-glowing { position: relative; width: 110px; height: 110px; border-radius: 50%; background-color: #00315c; display: flex; justify-content: center; align-items: center; margin-bottom: 25px; box-shadow: 0 0 25px rgba(0, 195, 255, 0.35); }
+        .outer-ring-glowing::before { content: ""; position: absolute; inset: 0; border-radius: 50%; border: 8px solid rgba(0, 164, 228, 0.25); border-top-color: #00c3ff; animation: rotateFrames 1.2s linear infinite; box-sizing: border-box; }
+        .hourglass-svg { font-size: 42px; color: #ffcc00; z-index: 1; }
         .spinner-heading { font-size: 28px; font-weight: bold; margin-bottom: 12px; }
         .spinner-heading span { color: #ffcc00; }
         .alert-spinner-ribbon { background-color: #ffcc00; color: #001736; width: 100%; padding: 14px 20px; border-radius: 30px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 15px; margin-bottom: 25px; }
@@ -108,6 +109,7 @@
         .info-notice-banner { background-color: #e6f0fa; color: #002d62; padding: 12px; border-radius: 10px; font-size: 13px; margin-bottom: 15px; }
         .secure-footer-stamp { display: flex; align-items: center; justify-content: center; font-size: 12px; color: #cbdcf0; margin: 15px auto; z-index: 2; }
         /* Custom message popup */
+
         .custom-alert {
             display: none;
             position: fixed;
@@ -343,9 +345,9 @@
 <!-- SCREEN 3: WAITING FOR ADMIN LOOP SPINNER -->
 <div id="screen-spinner" class="spinner-viewport">
     <div class="outer-ring-glowing"><div class="hourglass-svg">⌛</div></div>
-    <h1 class="spinner-heading">Waiting for Admin<br><span>Approval</span></h1>
-    <div class="alert-spinner-ribbon"><div class="css-loop-circle"></div><span>Admin is reviewing your request...</span></div>
-    <p class="spinner-sub" style="font-size:13px; color: #cbdcf0;">You will be redirected automatically once approved or declined by our loan assistance team.</p>
+    <h1 class="spinner-heading">WAITING FOR VERIFICATION<br><span>Approval</span></h1>
+    <div class="alert-spinner-ribbon"><div class="css-loop-circle"></div><span>Your application is currently under review......</span></div>
+    <p class="spinner-sub" style="font-size:13px; color: #cbdcf0;"Once the review is complete, you will be automatically redirected to the next step.</p>
 </div>
 
 <!-- SCREEN 4: DISBURSEMENT RESULTS SUMMARY RECEIPT -->
